@@ -6,6 +6,9 @@
     'poke-clan-hud-enabled',
     'pch-theme-ice',
     'pch-team-expanded',
+    'pch-chat-ready',
+    'pch-chat-expanded',
+    'pch-helper-expanded',
     'pch-target-ready',
     'pch-boss-ready',
     'pch-boss-expanded',
@@ -36,7 +39,8 @@
       'pch-boss-ready': readiness.bossReady,
       'pch-menu-ready': readiness.menuReady,
       'pch-hunt-ready': readiness.huntReady,
-      'pch-skills-ready': readiness.skillsReady
+      'pch-skills-ready': readiness.skillsReady,
+      'pch-chat-ready': readiness.chatReady
     };
     Object.keys(flags).forEach(function (name) {
       html.classList.toggle(name, Boolean(flags[name]));

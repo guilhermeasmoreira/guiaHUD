@@ -179,7 +179,7 @@ test('manifest keeps the game match and permissions narrow', function () {
 });
 
 test('action bridge forwards commands to the original game buttons', function () {
-  const clicks = { inventory: 0, move: 0, reset: 0, boss: 0 };
+  const clicks = { inventory: 0, move: 0, more: 0, reset: 0, confirm: 0, boss: 0 };
   const classes = new Set();
   const classList = {
     contains: function (name) { return classes.has(name); },
@@ -197,6 +197,10 @@ test('action bridge forwards commands to the original game buttons', function ()
   move.click = function () { clicks.move += 1; };
   const reset = element('');
   reset.click = function () { clicks.reset += 1; };
+  const more = element('', { attributes: { 'aria-expanded': 'false' } });
+  more.click = function () { clicks.more += 1; more.setAttribute('aria-expanded', 'true'); };
+  const confirm = element('');
+  confirm.click = function () { clicks.confirm += 1; };
   const boss = element('');
   boss.click = function () { clicks.boss += 1; };
   const menuRoot = element('', {
@@ -204,7 +208,9 @@ test('action bridge forwards commands to the original game buttons', function ()
   });
   const elements = new Map([
     ['#pio-main-menu', menuRoot],
+    ['#ha-btnMore', more],
     ['#ha-mZero', reset],
+    ['#ha-cYes', confirm],
     ['#shiny-global-next', boss]
   ]);
   const document = {
@@ -224,7 +230,7 @@ test('action bridge forwards commands to the original game buttons', function ()
   assert.equal(actions.activateMove('0:bite'), true);
   assert.equal(actions.resetHunt(), true);
   assert.equal(actions.toggleBoss(), true);
-  assert.deepEqual(clicks, { inventory: 1, move: 1, reset: 1, boss: 1 });
+  assert.deepEqual(clicks, { inventory: 1, move: 1, more: 1, reset: 1, confirm: 1, boss: 1 });
   assert.equal(classes.has('pch-hunt-expanded'), true);
   assert.equal(classes.has('pch-boss-expanded'), true);
 });
@@ -292,6 +298,6 @@ test('profile and Hunt Analyzer controls expand their original game panels', fun
   assert.equal(actions.togglePlayerTeam(), true);
   assert.equal(htmlClasses.has('pch-team-expanded'), true);
   assert.equal(actions.resetHunt(), true);
-  assert.deepEqual(clicks, { team: 1, huntExpand: 1, reset: 1 });
+  assert.deepEqual(clicks, { team: 1, huntExpand: 0, reset: 1 });
   assert.equal(htmlClasses.has('pch-hunt-expanded'), true);
 });

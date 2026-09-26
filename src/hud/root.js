@@ -20,7 +20,8 @@
 
     const huntSlot = dom.create('div', 'pch-hunt-slot');
     const skillsSlot = dom.create('div', 'pch-skills-slot');
-    shell.append(topLeft, menuSlot, settingsButton, huntSlot, skillsSlot);
+    const chatSlot = dom.create('div', 'pch-chat-slot');
+    shell.append(topLeft, menuSlot, settingsButton, huntSlot, skillsSlot, chatSlot);
     host.append(shell);
     global.document.documentElement.append(host);
 
@@ -29,6 +30,7 @@
     const menu = app.modules.mainMenu.mount(menuSlot, actions);
     const hunt = app.modules.huntAnalyzer.mount(huntSlot, actions);
     const skills = app.modules.skillsBar.mount(skillsSlot, actions);
+    const chat = app.modules.chatPill.mount(chatSlot, actions);
     const settingsPanel = app.modules.settingsPanel.mount(shell, initialSettings, handlers);
     settingsButton.addEventListener('click', function () { settingsPanel.open(); });
 
@@ -43,8 +45,9 @@
       const menuReady = menu.update(state);
       const huntReady = hunt.update(state);
       const skillsReady = skills.update(state);
+      const chatReady = chat.update(state);
       settingsPanel.update(currentSettings);
-      return { targetReady, teamExpanded, bossReady, menuReady, huntReady, skillsReady };
+      return { targetReady, teamExpanded, bossReady, menuReady, huntReady, skillsReady, chatReady };
     }
 
     update(initialState, initialSettings);

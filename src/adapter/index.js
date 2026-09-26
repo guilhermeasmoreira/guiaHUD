@@ -159,6 +159,32 @@
     });
   }
 
+  function readChat() {
+    const root = dom.query(selectors.chat.root);
+    const minimized = Boolean(root && (
+      root.classList.contains('minimized') ||
+      root.classList.contains('is-minimized') ||
+      root.getAttribute('data-rh-folded') === 'true'
+    ));
+    return {
+      available: Boolean(root),
+      minimized: minimized,
+      onlineCount: metric(selectors.chat.onlineCount, null)
+    };
+  }
+
+  function readHelper() {
+    const root = dom.query(selectors.helper.root);
+    return {
+      available: Boolean(root),
+      minimized: Boolean(root && (
+        root.classList.contains('collapsed') ||
+        root.getAttribute('aria-expanded') === 'false' ||
+        root.getAttribute('data-rh-folded') === 'true'
+      ))
+    };
+  }
+
   function readMenu() {
     const root = dom.query(selectors.menu.root) || dom.query(selectors.menu.legacyRoot);
     const scopes = root ? [root, global.document] : [global.document];
@@ -167,6 +193,7 @@
     const seenElements = new Set();
 
     [
+      { type: 'menu', selector: selectors.menu.visibleAction, attribute: 'data-menu-id' },
       { type: 'client', selector: selectors.menu.clientAction, attribute: 'data-client-action' },
       { type: 'system', selector: selectors.menu.systemOpen, attribute: 'data-system-open' }
     ].forEach(function (source) {
@@ -179,10 +206,8 @@
         const identity = source.type + ':' + key;
         if (seen.has(identity)) return;
         seen.add(identity);
-        const style = global.getComputedStyle ? global.getComputedStyle(element) : null;
-        const hidden = Boolean(element.hidden || (style && (style.display === 'none' || style.visibility === 'hidden')));
         const disabled = Boolean(element.disabled || element.getAttribute('aria-disabled') === 'true');
-        if (hidden || disabled) return;
+        if (disabled) return;
         actions.push({
           type: source.type,
           key: key,
@@ -206,7 +231,9 @@
       hunt: readHunt(),
       boss: readBoss(),
       skills: readSkills(),
-      menu: readMenu()
+      menu: readMenu(),
+      chat: readChat(),
+      helper: readHelper()
     };
     state.compatibility = {
       target: Boolean(dom.query(selectors.target.root) || dom.query(selectors.target.legacyRoot)),
@@ -214,7 +241,9 @@
       hunt: state.hunt.available,
       boss: state.boss.available,
       skills: state.skills.available,
-      menu: state.menu.available
+      menu: state.menu.available,
+      chat: state.chat.available,
+      helper: state.helper.available
     };
     return state;
   }
@@ -227,7 +256,9 @@
       dom.query(selectors.hunt.root),
       dom.query(selectors.boss.root),
       dom.query(selectors.skills.root),
-      dom.query(selectors.menu.root)
+      dom.query(selectors.menu.root),
+      dom.query(selectors.chat.root),
+      dom.query(selectors.helper.root)
     ].filter(Boolean);
   }
 

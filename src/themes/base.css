@@ -48,7 +48,8 @@
 #poke-clan-hud-root .pch-menu-slot,
 #poke-clan-hud-root .pch-settings-trigger,
 #poke-clan-hud-root .pch-hunt-slot,
-#poke-clan-hud-root .pch-skills-slot {
+#poke-clan-hud-root .pch-skills-slot,
+#poke-clan-hud-root .pch-chat-slot {
   position: fixed;
   pointer-events: none;
 }
@@ -67,7 +68,8 @@
 #poke-clan-hud-root .pch-main-menu,
 #poke-clan-hud-root .pch-settings-trigger,
 #poke-clan-hud-root .pch-hunt-card,
-#poke-clan-hud-root .pch-skills-bar {
+#poke-clan-hud-root .pch-skills-bar,
+#poke-clan-hud-root .pch-chat-pill {
   pointer-events: auto;
 }
 
@@ -491,6 +493,35 @@
   font-variant-numeric: tabular-nums;
 }
 
+#poke-clan-hud-root .pch-chat-slot {
+  right: 12px;
+  bottom: 12px;
+}
+
+#poke-clan-hud-root .pch-chat-pill {
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid var(--pch-border);
+  border-radius: 10px;
+  background: var(--pch-surface);
+  box-shadow: var(--pch-shadow);
+  cursor: pointer;
+}
+
+#poke-clan-hud-root .pch-chat-label {
+  color: var(--pch-primary);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+#poke-clan-hud-root .pch-chat-status {
+  color: var(--pch-muted);
+  font-size: 9px;
+}
+
 #poke-clan-hud-root .pch-settings-backdrop {
   position: fixed;
   inset: 0;
@@ -588,6 +619,14 @@ html.poke-clan-hud-enabled.pch-boss-ready:not(.pch-boss-expanded) #shiny-global-
 html.poke-clan-hud-enabled.pch-menu-ready #pio-main-menu,
 html.poke-clan-hud-enabled.pch-skills-ready #pokemon-skills-window,
 html.poke-clan-hud-enabled.pch-hunt-ready:not(.pch-hunt-expanded) #ha-panel {
+  display: none !important;
+}
+
+html.poke-clan-hud-enabled.pch-chat-ready:not(.pch-chat-expanded) #game-chat {
+  display: none !important;
+}
+
+html.poke-clan-hud-enabled.pch-chat-expanded #poke-clan-hud-root .pch-chat-pill {
   display: none !important;
 }
 

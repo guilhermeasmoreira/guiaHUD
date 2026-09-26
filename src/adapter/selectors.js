@@ -50,11 +50,17 @@
     chat: {
       root: '#game-chat',
       handle: '#game-chat-handle',
-      onlineCount: '#chat-online-members-count'
+      onlineCount: '#chat-online-members-count',
+      minimize: '#minimize-chat'
+    },
+    helper: {
+      root: '#auto-helper-panel',
+      minimize: '#minimize-auto-helper'
     },
     menu: {
       root: '#pio-main-menu',
       legacyRoot: '.unified-client-actions.mainbar',
+      visibleAction: '#pio-main-menu [data-menu-id]',
       clientAction: '[data-client-action]',
       systemOpen: '[data-system-open]'
     }

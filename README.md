@@ -2,6 +2,8 @@
 
 Chrome Manifest V3 extension that presents a compact Ice themed HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
+Version 0.2 adds integration with the current `data-menu-id` menu, a compact chat pill, Ice styling for Chat and Auto Helper, native team expansion, and the complete Hunt Analyzer reset flow.
+
 ## Load in Chrome
 
 1. Open Chrome's Extensions page and enable Developer mode.

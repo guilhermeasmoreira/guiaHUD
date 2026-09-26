@@ -32,6 +32,15 @@
     return clickByAttribute(root, selectors.menu.systemOpen, 'data-system-open', action);
   }
 
+  function menuAction(action) {
+    return clickByAttribute(
+      dom.query(selectors.menu.root) || global.document,
+      selectors.menu.visibleAction,
+      'data-menu-id',
+      action
+    );
+  }
+
   function isTeamExpanded(root) {
     if (!root || !root.classList) return false;
     return !root.classList.contains('collapsed') && !root.classList.contains('is-minimized');
@@ -64,6 +73,19 @@
       if (type === 'client' && key === 'hunt-analyzer') {
         global.document.documentElement.classList.add('pch-hunt-expanded');
       }
+      if (type === 'client' && key === 'auto-helper') {
+        const helper = dom.query(selectors.helper.root);
+        const toggle = dom.query(selectors.helper.minimize);
+        if (helper && toggle && (
+          helper.classList.contains('collapsed') ||
+          helper.getAttribute('aria-expanded') === 'false'
+        )) {
+          toggle.click();
+          global.document.documentElement.classList.add('pch-helper-expanded');
+          return true;
+        }
+      }
+      if (type === 'menu') return menuAction(key);
       return type === 'system' ? systemAction(key) : clientAction(key);
     },
     togglePlayerTeam: function () {
@@ -89,14 +111,14 @@
     resetHunt: function () {
       const root = dom.query(selectors.hunt.root);
       global.document.documentElement.classList.add('pch-hunt-expanded');
-      if (root && !isHuntExpanded(root)) {
-        const expand = dom.query(selectors.hunt.expand);
-        if (expand && !disabled(expand)) expand.click();
-      }
       const currentRoot = dom.query(selectors.hunt.root) || root || global.document;
+      const more = dom.query('#ha-btnMore');
+      if (more && more.getAttribute('aria-expanded') !== 'true') more.click();
       const element = findHuntResetControl(currentRoot);
       if (!element || disabled(element)) return false;
       element.click();
+      const confirm = dom.query('#ha-cYes');
+      if (confirm && !disabled(confirm)) confirm.click();
       return true;
     },
     toggleHuntDetails: function () {
@@ -115,6 +137,25 @@
       });
       if (!element || element.disabled || element.getAttribute('aria-disabled') === 'true') return false;
       element.click();
+      return true;
+    },
+    toggleChat: function () {
+      const root = dom.query(selectors.chat.root);
+      const control = dom.query(selectors.chat.minimize);
+      if (!root || !control || disabled(control)) return false;
+      const html = global.document.documentElement;
+      const currentlyShown = html.classList.contains('pch-chat-expanded');
+      if (currentlyShown) {
+        if (!root.classList.contains('minimized') && !root.classList.contains('is-minimized')) {
+          control.click();
+        }
+        html.classList.remove('pch-chat-expanded');
+      } else {
+        if (root.classList.contains('minimized') || root.classList.contains('is-minimized')) {
+          control.click();
+        }
+        html.classList.add('pch-chat-expanded');
+      }
       return true;
     }
   };
