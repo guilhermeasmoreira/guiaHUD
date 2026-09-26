@@ -1,5 +1,7 @@
 # Poké Idle Clan HUD
 
+Visual references for the planned Fogo, Malefic, and Gelo themes are saved in [design/README.md](design/README.md). The current extension still uses Padrão minimalista.
+
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
 Version 0.4 adds a fully custom, expandable team selector with the game's Pokémon sprites, HP, level, and active-state feedback. It also applies the minimal theme's scrollbar to the skills row and every other scrollable game surface while the HUD is enabled.
