@@ -10,7 +10,13 @@
       summary: '#pokemon-team-bar .player-summary',
       teamList: '#pokemon-team-bar .team-list',
       teamToggle: '#pokemon-team-bar .team-minimize',
-      teamSlots: '#pokemon-team-bar .team-slot'
+      teamSlots: '#pokemon-team-bar .team-slot',
+      teamSprite: '.pokemon-sprite',
+      teamName: '.pokemon-name',
+      teamLevel: '.pokemon-level',
+      teamHpText: '.status-bar.hp .status-label',
+      teamHpFill: '.status-bar.hp .status-fill',
+      teamExpFill: '.status-bar.exp .status-fill'
     },
     target: {
       root: '#reference-hud [data-rh-panel="target"]',

@@ -111,6 +111,15 @@
   background: var(--pch-hover);
 }
 
+#poke-clan-hud-root .pch-player-chevron {
+  width: 16px;
+  flex: 0 0 16px;
+  color: var(--pch-primary);
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+}
+
 #poke-clan-hud-root .pch-player-name,
 #poke-clan-hud-root .pch-target-name {
   overflow: hidden;
@@ -134,6 +143,112 @@
   margin-top: 6px;
   padding-top: 6px;
   border-top: 1px solid var(--pch-divider);
+}
+
+#poke-clan-hud-root .pch-team-panel {
+  display: grid;
+  max-height: min(388px, calc(100vh - 130px));
+  gap: 5px;
+  margin-top: 8px;
+  padding-top: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid var(--pch-divider);
+}
+
+#poke-clan-hud-root .pch-team-pokemon {
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 7px;
+  border: 1px solid var(--pch-border-soft);
+  border-radius: 8px;
+  background: var(--pch-control);
+  color: var(--pch-text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+
+#poke-clan-hud-root .pch-team-pokemon:hover {
+  border-color: var(--pch-border);
+  background: var(--pch-hover);
+}
+
+#poke-clan-hud-root .pch-team-pokemon.is-active {
+  border-color: var(--pch-positive);
+  background: color-mix(in srgb, var(--pch-positive) 10%, var(--pch-control));
+  cursor: default;
+  opacity: 1;
+}
+
+#poke-clan-hud-root .pch-team-sprite {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--pch-border-soft);
+  border-radius: 8px;
+  background: var(--pch-track);
+  color: var(--pch-muted);
+}
+
+#poke-clan-hud-root .pch-team-sprite img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+#poke-clan-hud-root .pch-team-copy {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 5px;
+}
+
+#poke-clan-hud-root .pch-team-name-row,
+#poke-clan-hud-root .pch-team-hp-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+}
+
+#poke-clan-hud-root .pch-team-name {
+  overflow: hidden;
+  flex: 1;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-team-level,
+#poke-clan-hud-root .pch-team-hp-value {
+  color: var(--pch-muted);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-team-hp-track {
+  height: 4px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--pch-track);
+}
+
+#poke-clan-hud-root .pch-team-hp-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pch-primary), var(--pch-positive));
+  transition: width 140ms linear;
 }
 
 #poke-clan-hud-root .pch-target-copy {
@@ -470,6 +585,35 @@
   display: flex;
   gap: 4px;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-gutter: stable;
+  padding-bottom: 3px;
+}
+
+#poke-clan-hud-root,
+#poke-clan-hud-root * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--pch-primary) var(--pch-track);
+}
+
+#poke-clan-hud-root ::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+#poke-clan-hud-root ::-webkit-scrollbar-track {
+  border-radius: 99px;
+  background: var(--pch-track);
+}
+
+#poke-clan-hud-root ::-webkit-scrollbar-thumb {
+  border: 2px solid var(--pch-track);
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--pch-primary), var(--pch-positive));
+}
+
+#poke-clan-hud-root ::-webkit-scrollbar-thumb:hover {
+  background: var(--pch-focus);
 }
 
 #poke-clan-hud-root .pch-skill-button {
@@ -662,6 +806,7 @@
 
 html.poke-clan-hud-enabled.pch-target-ready #reference-hud [data-rh-panel="target"],
 html.poke-clan-hud-enabled.pch-target-ready #target-card,
+html.poke-clan-hud-enabled.pch-player-ready #pokemon-team-bar,
 html.poke-clan-hud-enabled.pch-boss-ready:not(.pch-boss-expanded) #shiny-global-next,
 html.poke-clan-hud-enabled.pch-menu-ready #pio-main-menu,
 html.poke-clan-hud-enabled.pch-skills-ready #pokemon-skills-window,
@@ -681,12 +826,6 @@ html.poke-clan-hud-enabled.pch-chat-ready .chat-restore {
 
 html.poke-clan-hud-enabled.pch-chat-expanded #poke-clan-hud-root .pch-chat-pill {
   display: none !important;
-}
-
-html.poke-clan-hud-enabled.pch-team-expanded #pokemon-team-bar {
-  top: 56px !important;
-  z-index: 2147483647 !important;
-  pointer-events: auto !important;
 }
 
 @media (max-width: 900px) {

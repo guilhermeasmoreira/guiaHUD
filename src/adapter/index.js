@@ -4,6 +4,42 @@
   const dom = app.modules.dom;
   const parse = app.modules.parse;
   const selectors = app.modules.selectors;
+  const spriteCache = new WeakMap();
+
+  function spriteData(canvas) {
+    if (!canvas || typeof canvas.toDataURL !== 'function') return null;
+    if (spriteCache.has(canvas)) return spriteCache.get(canvas);
+    try {
+      const value = canvas.toDataURL('image/png');
+      spriteCache.set(canvas, value);
+      return value;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function readTeam() {
+    return dom.queryAll(selectors.player.teamSlots).map(function (slot) {
+      const sprite = slot.querySelector(selectors.player.teamSprite);
+      const hpText = dom.readText(selectors.player.teamHpText, slot);
+      const hp = parse.parseHp(hpText);
+      const hpFill = slot.querySelector(selectors.player.teamHpFill);
+      const expFill = slot.querySelector(selectors.player.teamExpFill);
+      const name = sprite && sprite.getAttribute('aria-label') ||
+        dom.readText(selectors.player.teamName, slot) || 'Pokémon';
+      return {
+        uid: slot.getAttribute('data-poke-uid'),
+        name: name,
+        level: parse.parseLevel(dom.readText(selectors.player.teamLevel, slot)),
+        hp: hp.hp,
+        maxHp: hp.maxHp,
+        hpPercent: hpFill ? parse.parsePercent(hpFill.style.width) : null,
+        expPercent: expFill ? parse.parsePercent(expFill.style.width) : null,
+        active: slot.classList.contains('is-active') || slot.classList.contains('active'),
+        sprite: spriteData(sprite)
+      };
+    }).filter(function (pokemon) { return Boolean(pokemon.uid); });
+  }
 
   function readPlayer() {
     const root = dom.query(selectors.player.root);
@@ -18,7 +54,8 @@
       name: name || null,
       level: parsed.level,
       activePokemonName: parsed.activePokemonName,
-      teamExpanded: Boolean(root && !minimized)
+      teamExpanded: Boolean(root && !minimized),
+      team: readTeam()
     };
   }
 

@@ -6,7 +6,7 @@
     'poke-clan-hud-enabled',
     'pch-theme-minimal',
     'pch-theme-ice',
-    'pch-team-expanded',
+    'pch-player-ready',
     'pch-chat-ready',
     'pch-chat-expanded',
     'pch-helper-expanded',
@@ -35,8 +35,8 @@
   function applyReadiness(readiness) {
     const html = global.document.documentElement;
     const flags = {
+      'pch-player-ready': readiness.playerReady,
       'pch-target-ready': readiness.targetReady,
-      'pch-team-expanded': readiness.teamExpanded,
       'pch-boss-ready': readiness.bossReady,
       'pch-menu-ready': readiness.menuReady,
       'pch-hunt-ready': readiness.huntReady,

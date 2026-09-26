@@ -46,15 +46,15 @@
       shell.dataset.theme = currentSettings.theme === 'ice' ? 'minimal' : (currentSettings.theme || 'minimal');
       shell.dataset.compact = String(currentSettings.compact !== false);
       const profileState = profile.update(state);
+      const playerReady = profileState.playerReady;
       const targetReady = profileState.targetReady;
-      const teamExpanded = profileState.teamExpanded;
       const bossReady = boss.update(state);
       const menuReady = menu.update(state);
       const huntReady = hunt.update(state);
       const skillsReady = skills.update(state);
       const chatReady = chat.update(state);
       settingsPanel.update(currentSettings);
-      return { targetReady, teamExpanded, bossReady, menuReady, huntReady, skillsReady, chatReady };
+      return { playerReady, targetReady, bossReady, menuReady, huntReady, skillsReady, chatReady };
     }
 
     update(initialState, initialSettings);

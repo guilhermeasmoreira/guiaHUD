@@ -2,7 +2,7 @@
 
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
-Version 0.3 adds the current `data-menu-id` menu with minimal icons and Diamonds, a single compact chat control, native team expansion in both directions, the complete Hunt Analyzer reset flow, and persistent draggable HUD widgets.
+Version 0.4 adds a fully custom, expandable team selector with the game's Pokémon sprites, HP, level, and active-state feedback. It also applies the minimal theme's scrollbar to the skills row and every other scrollable game surface while the HUD is enabled.
 
 ## Load in Chrome
 
@@ -17,7 +17,8 @@ The extension only matches the game page and requests the storage permission for
 
 - Confirm the top menu becomes a compact command bar and **Helper** opens the game's original Auto Helper.
 - Confirm the compact chat control opens and closes the original themed chat without leaving a duplicate control.
-- Click the player name to reveal the original team controls, select another Pokémon, then confirm the active name updates in the compact profile.
+- Confirm the original trainer/team panel is hidden. Click the trainer name in the compact profile, check the minimal Pokémon list and sprites, select another Pokémon, then confirm the list closes and the active name updates.
+- Confirm horizontal and vertical scrollbars use the minimal style, especially the skills row and the expanded Pokémon list.
 - Confirm skill cooldown values appear and update using the game's own cooldown display.
 - Click **Zerar** in Hunt Analyzer; the original analyzer opens as needed, and its own confirmation control completes the reset.
 - Confirm target, Boss, and Hunt Analyzer values continue updating during play.

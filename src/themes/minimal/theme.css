@@ -19,6 +19,32 @@
   --pch-enable-bg: #082238;
 }
 
+html.poke-clan-hud-enabled.pch-theme-minimal,
+html.poke-clan-hud-enabled.pch-theme-minimal * {
+  scrollbar-width: thin;
+  scrollbar-color: #60d9f7 rgba(3, 17, 31, .9);
+}
+
+html.poke-clan-hud-enabled.pch-theme-minimal ::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+html.poke-clan-hud-enabled.pch-theme-minimal ::-webkit-scrollbar-track {
+  border-radius: 99px;
+  background: rgba(3, 17, 31, .9);
+}
+
+html.poke-clan-hud-enabled.pch-theme-minimal ::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(3, 17, 31, .9);
+  border-radius: 99px;
+  background: linear-gradient(90deg, #52cce9, #4fe0b0);
+}
+
+html.poke-clan-hud-enabled.pch-theme-minimal ::-webkit-scrollbar-thumb:hover {
+  background: #a3efff;
+}
+
 html.poke-clan-hud-enabled.pch-theme-minimal #game-chat {
   border: 1px solid rgba(112, 218, 255, .38) !important;
   border-radius: 10px !important;

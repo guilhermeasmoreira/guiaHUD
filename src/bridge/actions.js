@@ -99,6 +99,14 @@
       global.document.documentElement.classList.toggle('pch-team-expanded', isTeamExpanded(nextRoot));
       return true;
     },
+    activatePokemon: function (uid) {
+      const slot = dom.queryAll(selectors.player.teamSlots).find(function (candidate) {
+        return candidate.getAttribute('data-poke-uid') === uid;
+      });
+      if (!slot || disabled(slot)) return false;
+      slot.click();
+      return true;
+    },
     toggleBoss: function () {
       const element = dom.query(selectors.boss.root);
       if (!element) return false;
