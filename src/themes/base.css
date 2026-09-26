@@ -248,6 +248,22 @@
   white-space: nowrap;
 }
 
+#poke-clan-hud-root .pch-menu-action,
+#poke-clan-hud-root .pch-menu-list-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#poke-clan-hud-root .pch-menu-icon {
+  width: 14px;
+  flex: 0 0 14px;
+  color: var(--pch-primary);
+  font-size: 13px;
+  line-height: 1;
+  text-align: center;
+}
+
 #poke-clan-hud-root .pch-menu-action:hover,
 #poke-clan-hud-root .pch-menu-more:hover,
 #poke-clan-hud-root .pch-menu-list-action:hover,
@@ -522,6 +538,37 @@
   font-size: 9px;
 }
 
+#poke-clan-hud-root .pch-drag-handle {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 20;
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--pch-border);
+  border-radius: 7px;
+  background: var(--pch-surface-strong);
+  color: var(--pch-muted);
+  cursor: grab;
+  opacity: .42;
+  pointer-events: auto;
+  touch-action: none;
+  transition: opacity 120ms ease, color 120ms ease;
+}
+
+#poke-clan-hud-root .pch-drag-handle:hover,
+#poke-clan-hud-root .is-dragging .pch-drag-handle {
+  color: var(--pch-primary);
+  opacity: 1;
+}
+
+#poke-clan-hud-root .is-dragging .pch-drag-handle {
+  cursor: grabbing;
+}
+
 #poke-clan-hud-root .pch-settings-backdrop {
   position: fixed;
   inset: 0;
@@ -624,6 +671,12 @@ html.poke-clan-hud-enabled.pch-hunt-ready:not(.pch-hunt-expanded) #ha-panel {
 
 html.poke-clan-hud-enabled.pch-chat-ready:not(.pch-chat-expanded) #game-chat {
   display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html.poke-clan-hud-enabled.pch-chat-ready .chat-restore {
+  display: none !important;
 }
 
 html.poke-clan-hud-enabled.pch-chat-expanded #poke-clan-hud-root .pch-chat-pill {
@@ -631,13 +684,9 @@ html.poke-clan-hud-enabled.pch-chat-expanded #poke-clan-hud-root .pch-chat-pill 
 }
 
 html.poke-clan-hud-enabled.pch-team-expanded #pokemon-team-bar {
+  top: 56px !important;
   z-index: 2147483647 !important;
   pointer-events: auto !important;
-}
-
-html.poke-clan-hud-enabled.pch-team-expanded #poke-clan-hud-root .pch-profile-card {
-  visibility: hidden;
-  pointer-events: none;
 }
 
 @media (max-width: 900px) {

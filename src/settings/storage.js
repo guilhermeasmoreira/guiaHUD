@@ -10,7 +10,9 @@
     }
     return new Promise(function (resolve) {
       global.chrome.storage.local.get(key, function (result) {
-        resolve(Object.assign({}, defaults, result && result[key] || {}));
+        const loaded = Object.assign({}, defaults, result && result[key] || {});
+        if (loaded.theme === 'ice') loaded.theme = 'minimal';
+        resolve(loaded);
       });
     });
   }

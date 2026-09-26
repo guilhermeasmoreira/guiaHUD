@@ -12,12 +12,15 @@
     button.append(label, status);
     parent.append(button);
 
-    button.addEventListener('click', function () { actions.toggleChat(); });
+    button.addEventListener('click', function () {
+      if (!actions.toggleChat()) return;
+      button.hidden = global.document.documentElement.classList.contains('pch-chat-expanded');
+    });
 
     function update(state) {
       const chat = state.chat || {};
       if (chat.minimized) global.document.documentElement.classList.remove('pch-chat-expanded');
-      button.hidden = !chat.available;
+      button.hidden = !chat.available || global.document.documentElement.classList.contains('pch-chat-expanded');
       dom.setText(status, chat.onlineCount ? '• ' + chat.onlineCount + ' ONLINE' : '• GERAL', '• GERAL');
       return Boolean(chat.available);
     }

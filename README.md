@@ -1,8 +1,8 @@
 # Poké Idle Clan HUD
 
-Chrome Manifest V3 extension that presents a compact Ice themed HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
+Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
-Version 0.2 adds integration with the current `data-menu-id` menu, a compact chat pill, Ice styling for Chat and Auto Helper, native team expansion, and the complete Hunt Analyzer reset flow.
+Version 0.3 adds the current `data-menu-id` menu with minimal icons and Diamonds, a single compact chat control, native team expansion in both directions, the complete Hunt Analyzer reset flow, and persistent draggable HUD widgets.
 
 ## Load in Chrome
 
@@ -16,7 +16,7 @@ The extension only matches the game page and requests the storage permission for
 ## Manual regression checklist
 
 - Confirm the top menu becomes a compact command bar and **Helper** opens the game's original Auto Helper.
-- Confirm the chat keeps working and receives the Ice theme styling.
+- Confirm the compact chat control opens and closes the original themed chat without leaving a duplicate control.
 - Click the player name to reveal the original team controls, select another Pokémon, then confirm the active name updates in the compact profile.
 - Confirm skill cooldown values appear and update using the game's own cooldown display.
 - Click **Zerar** in Hunt Analyzer; the original analyzer opens as needed, and its own confirmation control completes the reset.
@@ -28,7 +28,7 @@ The extension only matches the game page and requests the storage permission for
 - src/state: normalized state store.
 - src/bridge: clicks original game controls for menu, skills, boss, and Hunt Analyzer actions.
 - src/hud: compact profile/target, boss, analyzer, menu, and skills components.
-- src/themes: shared layout and the Ice theme.
+- src/themes: shared layout and the Padrão minimalista theme.
 - src/settings: extension-owned preferences and enable/disable controls.
 - tests: parser and adapter tests using a small fixture-like DOM.
 

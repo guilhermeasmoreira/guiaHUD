@@ -1,4 +1,4 @@
-#poke-clan-hud-root .pch-shell[data-theme="ice"] {
+#poke-clan-hud-root .pch-shell[data-theme="minimal"] {
   --pch-text: #eef9ff;
   --pch-muted: #a7c8dc;
   --pch-primary: #7ee5ff;
@@ -19,7 +19,7 @@
   --pch-enable-bg: #082238;
 }
 
-html.poke-clan-hud-enabled.pch-theme-ice #game-chat {
+html.poke-clan-hud-enabled.pch-theme-minimal #game-chat {
   border: 1px solid rgba(112, 218, 255, .38) !important;
   border-radius: 10px !important;
   background-color: rgba(4, 23, 42, .94) !important;
@@ -28,19 +28,19 @@ html.poke-clan-hud-enabled.pch-theme-ice #game-chat {
   backdrop-filter: blur(12px);
 }
 
-html.poke-clan-hud-enabled.pch-theme-ice #game-chat .chat-topbar,
-html.poke-clan-hud-enabled.pch-theme-ice #game-chat .chat-tabs,
-html.poke-clan-hud-enabled.pch-theme-ice #game-chat .chat-composer {
+html.poke-clan-hud-enabled.pch-theme-minimal #game-chat .chat-topbar,
+html.poke-clan-hud-enabled.pch-theme-minimal #game-chat .chat-tabs,
+html.poke-clan-hud-enabled.pch-theme-minimal #game-chat .chat-composer {
   background: rgba(8, 34, 57, .92) !important;
   border-color: rgba(112, 218, 255, .2) !important;
 }
 
-html.poke-clan-hud-enabled.pch-theme-ice #game-chat button {
+html.poke-clan-hud-enabled.pch-theme-minimal #game-chat button {
   border-color: rgba(112, 218, 255, .24);
   color: #eef9ff;
 }
 
-html.poke-clan-hud-enabled.pch-theme-ice #auto-helper-panel {
+html.poke-clan-hud-enabled.pch-theme-minimal #auto-helper-panel {
   border: 1px solid rgba(112, 218, 255, .42) !important;
   border-radius: 11px !important;
   background: linear-gradient(145deg, rgba(7, 34, 58, .97), rgba(2, 17, 32, .97)) !important;
@@ -49,12 +49,12 @@ html.poke-clan-hud-enabled.pch-theme-ice #auto-helper-panel {
   backdrop-filter: blur(12px);
 }
 
-html.poke-clan-hud-enabled.pch-theme-ice #auto-helper-panel .auto-helper-head {
+html.poke-clan-hud-enabled.pch-theme-minimal #auto-helper-panel .auto-helper-head {
   border-bottom-color: rgba(112, 218, 255, .2) !important;
   background: rgba(10, 48, 76, .74) !important;
 }
 
-html.poke-clan-hud-enabled.pch-theme-ice #auto-helper-panel button,
-html.poke-clan-hud-enabled.pch-theme-ice #auto-helper-panel select {
+html.poke-clan-hud-enabled.pch-theme-minimal #auto-helper-panel button,
+html.poke-clan-hud-enabled.pch-theme-minimal #auto-helper-panel select {
   border-color: rgba(112, 218, 255, .26) !important;
 }

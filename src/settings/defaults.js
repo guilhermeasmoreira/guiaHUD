@@ -4,7 +4,7 @@
 
   app.modules.settingsDefaults = {
     enabled: true,
-    theme: 'ice',
+    theme: 'minimal',
     compact: true
   };
 })(globalThis);

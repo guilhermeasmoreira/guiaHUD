@@ -8,8 +8,18 @@
     { type: 'client', key: 'profile', label: 'Perfil' },
     { type: 'client', key: 'map', label: 'Mapa' },
     { type: 'client', key: 'auto-helper', label: 'Auto Helper' },
-    { type: 'client', key: 'hunt-analyzer', label: 'Hunt' }
+    { type: 'client', key: 'hunt-analyzer', label: 'Hunt' },
+    { type: 'system', key: 'diamond-shop', label: 'Diamantes' }
   ];
+
+  const icons = {
+    inventory: '▣',
+    profile: '◎',
+    map: '⌖',
+    'auto-helper': '◇',
+    'hunt-analyzer': '◷',
+    'diamond-shop': '◆'
+  };
 
   const shortLabels = {
     'health': 'Centro Pokémon',
@@ -36,14 +46,17 @@
     return shortLabels[action.key] || action.label;
   }
 
-  function actionButton(action, primary) {
+  function actionButton(action, primary, forcedLabel) {
     const button = dom.create('button', primary ? 'pch-menu-action' : 'pch-menu-list-action');
     button.type = 'button';
     button.dataset.actionType = action.type;
     button.dataset.actionKey = action.key;
     button.title = action.label;
     button.setAttribute('aria-label', action.label);
-    dom.setText(button, displayLabel(action), '');
+    const icon = dom.create('span', 'pch-menu-icon', icons[action.key] || '·');
+    icon.setAttribute('aria-hidden', 'true');
+    const label = dom.create('span', 'pch-menu-label', forcedLabel || displayLabel(action));
+    button.append(icon, label);
     if (action.notification) button.classList.add('has-notification');
     return button;
   }
@@ -90,8 +103,7 @@
         const item = byId.get(definition.type + ':' + definition.key);
         if (!item) return;
         const action = Object.assign({}, item, { label: item.label || definition.label });
-        const button = actionButton(action, true);
-        dom.setText(button, definition.label, '');
+        const button = actionButton(action, true, definition.label);
         primary.append(button);
       });
 

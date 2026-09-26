@@ -32,11 +32,18 @@
     const skills = app.modules.skillsBar.mount(skillsSlot, actions);
     const chat = app.modules.chatPill.mount(chatSlot, actions);
     const settingsPanel = app.modules.settingsPanel.mount(shell, initialSettings, handlers);
+    app.modules.draggable.mount({
+      perfil: topLeft,
+      menu: menuSlot,
+      hunt: huntSlot,
+      habilidades: skillsSlot,
+      chat: chatSlot
+    });
     settingsButton.addEventListener('click', function () { settingsPanel.open(); });
 
     function update(state, settings) {
       const currentSettings = settings || initialSettings || {};
-      shell.dataset.theme = currentSettings.theme || 'ice';
+      shell.dataset.theme = currentSettings.theme === 'ice' ? 'minimal' : (currentSettings.theme || 'minimal');
       shell.dataset.compact = String(currentSettings.compact !== false);
       const profileState = profile.update(state);
       const targetReady = profileState.targetReady;

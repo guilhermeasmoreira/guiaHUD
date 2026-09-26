@@ -25,9 +25,9 @@
     const themeText = dom.create('span', '', 'Tema');
     const theme = dom.create('select', 'pch-select');
     theme.setAttribute('aria-label', 'Tema da HUD');
-    const ice = dom.create('option', '', 'Gelo');
-    ice.value = 'ice';
-    theme.append(ice);
+    const minimal = dom.create('option', '', 'Padrão minimalista');
+    minimal.value = 'minimal';
+    theme.append(minimal);
     themeLabel.append(themeText, theme);
 
     const compactLabel = dom.create('label', 'pch-setting-row');
@@ -36,7 +36,7 @@
     compact.type = 'checkbox';
     compactLabel.append(compactText, compact);
 
-    const note = dom.create('p', 'pch-settings-note', 'Mais temas e opções de layout serão adicionados depois da validação do MVP.');
+    const note = dom.create('p', 'pch-settings-note', 'Arraste os controles pontilhados para posicionar os elementos. As posições ficam salvas neste navegador.');
     const disable = dom.create('button', 'pch-danger-button', 'Desativar HUD');
     disable.type = 'button';
 
@@ -47,7 +47,7 @@
     let settings = Object.assign({}, initialSettings);
     function sync(nextSettings) {
       settings = Object.assign({}, settings, nextSettings || {});
-      theme.value = settings.theme || 'ice';
+      theme.value = settings.theme === 'ice' ? 'minimal' : (settings.theme || 'minimal');
       compact.checked = settings.compact !== false;
     }
 
@@ -65,7 +65,7 @@
     };
     global.document.addEventListener('keydown', onKeydown);
     theme.addEventListener('change', function () {
-      settings.theme = theme.value || 'ice';
+      settings.theme = theme.value || 'minimal';
       if (handlers && handlers.onChange) handlers.onChange(Object.assign({}, settings));
     });
     compact.addEventListener('change', function () {
