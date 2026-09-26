@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Poké Idle Clan HUD",
+  "version": "0.1.0",
+  "description": "A compact, clan-themed HUD for Poké Idle Online.",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://pokeidle.online/game/*"],
+      "run_at": "document_idle",
+      "css": [
+        "src/themes/base.css",
+        "src/themes/ice/theme.css"
+      ],
+      "js": [
+        "src/utils/dom.js",
+        "src/utils/parse.js",
+        "src/adapter/selectors.js",
+        "src/adapter/index.js",
+        "src/state/store.js",
+        "src/bridge/actions.js",
+        "src/settings/defaults.js",
+        "src/settings/storage.js",
+        "src/settings/panel.js",
+        "src/hud/profile-target.js",
+        "src/hud/boss-pill.js",
+        "src/hud/hunt-analyzer.js",
+        "src/hud/main-menu.js",
+        "src/hud/skills-bar.js",
+        "src/hud/root.js",
+        "src/content/lifecycle.js",
+        "src/content/bootstrap.js"
+      ]
+    }
+  ]
+}

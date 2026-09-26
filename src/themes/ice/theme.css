@@ -1,0 +1,20 @@
+#poke-clan-hud-root .pch-shell[data-theme="ice"] {
+  --pch-text: #eef9ff;
+  --pch-muted: #a7c8dc;
+  --pch-primary: #7ee5ff;
+  --pch-positive: #4fe0b0;
+  --pch-danger: #ff8ca9;
+  --pch-notice: #ffd66e;
+  --pch-focus: #c0f3ff;
+  --pch-border: rgba(112, 218, 255, .3);
+  --pch-border-soft: rgba(112, 218, 255, .18);
+  --pch-divider: rgba(124, 207, 241, .16);
+  --pch-track: rgba(4, 17, 32, .85);
+  --pch-surface: rgba(4, 23, 42, .9);
+  --pch-surface-strong: rgba(5, 26, 48, .97);
+  --pch-control: rgba(12, 43, 67, .86);
+  --pch-hover: rgba(77, 188, 229, .14);
+  --pch-shadow: 0 8px 25px rgba(0, 8, 22, .34), inset 0 1px rgba(205, 246, 255, .07);
+  --pch-radius: 10px;
+  --pch-enable-bg: #082238;
+}

@@ -1,0 +1,612 @@
+#poke-clan-hud-root,
+#poke-clan-hud-root * {
+  box-sizing: border-box;
+}
+
+#poke-clan-hud-root {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  isolation: isolate;
+  color: var(--pch-text, #edf7ff);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+#poke-clan-hud-root [hidden] {
+  display: none !important;
+}
+
+#poke-clan-hud-root .pch-shell {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  color: var(--pch-text, #edf7ff);
+}
+
+#poke-clan-hud-root button,
+#poke-clan-hud-enable,
+#poke-clan-hud-root select {
+  font: inherit;
+}
+
+#poke-clan-hud-root button {
+  color: inherit;
+}
+
+#poke-clan-hud-root button:focus-visible,
+#poke-clan-hud-enable:focus-visible,
+#poke-clan-hud-root select:focus-visible,
+#poke-clan-hud-root input:focus-visible {
+  outline: 2px solid var(--pch-focus, #8beaff);
+  outline-offset: 2px;
+}
+
+#poke-clan-hud-root .pch-top-left,
+#poke-clan-hud-root .pch-menu-slot,
+#poke-clan-hud-root .pch-settings-trigger,
+#poke-clan-hud-root .pch-hunt-slot,
+#poke-clan-hud-root .pch-skills-slot {
+  position: fixed;
+  pointer-events: none;
+}
+
+#poke-clan-hud-root .pch-top-left {
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  max-width: min(440px, calc(100vw - 24px));
+}
+
+#poke-clan-hud-root .pch-profile-slot,
+#poke-clan-hud-root .pch-boss-slot,
+#poke-clan-hud-root .pch-main-menu,
+#poke-clan-hud-root .pch-settings-trigger,
+#poke-clan-hud-root .pch-hunt-card,
+#poke-clan-hud-root .pch-skills-bar {
+  pointer-events: auto;
+}
+
+#poke-clan-hud-root .pch-card {
+  border: 1px solid var(--pch-border);
+  border-radius: var(--pch-radius, 12px);
+  background: var(--pch-surface);
+  box-shadow: var(--pch-shadow);
+  backdrop-filter: blur(12px);
+}
+
+#poke-clan-hud-root .pch-profile-card {
+  width: min(332px, calc(100vw - 24px));
+  padding: 8px 10px;
+}
+
+#poke-clan-hud-root .pch-player-line,
+#poke-clan-hud-root .pch-target-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+#poke-clan-hud-root .pch-player-name,
+#poke-clan-hud-root .pch-target-name {
+  overflow: hidden;
+  color: var(--pch-text);
+  font-size: 12px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-player-meta,
+#poke-clan-hud-root .pch-target-meta {
+  overflow: hidden;
+  color: var(--pch-muted);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-target-line {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--pch-divider);
+}
+
+#poke-clan-hud-root .pch-target-copy {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 6px;
+}
+
+#poke-clan-hud-root .pch-target-hp {
+  display: flex;
+  width: 108px;
+  flex: 0 0 108px;
+  align-items: center;
+  gap: 6px;
+}
+
+#poke-clan-hud-root .pch-hp-track {
+  height: 5px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--pch-track);
+}
+
+#poke-clan-hud-root .pch-hp-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pch-primary), var(--pch-positive));
+  transition: width 140ms linear;
+}
+
+#poke-clan-hud-root .pch-hp-text {
+  color: var(--pch-muted);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-boss-pill {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 9px;
+  border: 1px solid var(--pch-border);
+  border-radius: 9px;
+  background: var(--pch-surface);
+  box-shadow: var(--pch-shadow);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-boss-label {
+  color: var(--pch-primary);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+#poke-clan-hud-root .pch-boss-time {
+  font-variant-numeric: tabular-nums;
+}
+
+#poke-clan-hud-root .pch-menu-slot {
+  top: 10px;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+#poke-clan-hud-root .pch-main-menu {
+  position: relative;
+  display: flex;
+  min-height: 46px;
+  max-width: min(750px, calc(100vw - 110px));
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid var(--pch-border);
+  border-radius: 12px;
+  background: var(--pch-surface);
+  box-shadow: var(--pch-shadow);
+  backdrop-filter: blur(12px);
+}
+
+#poke-clan-hud-root .pch-menu-primary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#poke-clan-hud-root .pch-menu-action,
+#poke-clan-hud-root .pch-menu-more,
+#poke-clan-hud-root .pch-menu-list-action,
+#poke-clan-hud-root .pch-text-button,
+#poke-clan-hud-root .pch-icon-button,
+#poke-clan-hud-root .pch-settings-trigger {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+#poke-clan-hud-root .pch-menu-action,
+#poke-clan-hud-root .pch-menu-more {
+  min-height: 32px;
+  padding: 0 9px;
+  color: var(--pch-text);
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-menu-action:hover,
+#poke-clan-hud-root .pch-menu-more:hover,
+#poke-clan-hud-root .pch-menu-list-action:hover,
+#poke-clan-hud-root .pch-text-button:hover,
+#poke-clan-hud-root .pch-icon-button:hover {
+  border-color: var(--pch-border);
+  background: var(--pch-hover);
+}
+
+#poke-clan-hud-root .has-notification {
+  position: relative;
+}
+
+#poke-clan-hud-root .has-notification::after {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pch-notice);
+  content: "";
+}
+
+#poke-clan-hud-root .pch-menu-popover {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 50%;
+  display: grid;
+  width: min(640px, calc(100vw - 24px));
+  max-height: min(58vh, 430px);
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 9px;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--pch-border);
+  border-radius: 12px;
+  background: var(--pch-surface-strong);
+  box-shadow: var(--pch-shadow);
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+#poke-clan-hud-root .pch-menu-group-title {
+  margin: 0 0 5px;
+  color: var(--pch-primary);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+#poke-clan-hud-root .pch-menu-group-items {
+  display: grid;
+  gap: 3px;
+}
+
+#poke-clan-hud-root .pch-menu-list-action {
+  width: 100%;
+  padding: 6px 7px;
+  text-align: left;
+}
+
+#poke-clan-hud-root .pch-settings-trigger {
+  top: 11px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-color: var(--pch-border);
+  background: var(--pch-surface);
+  box-shadow: var(--pch-shadow);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+#poke-clan-hud-root .pch-hunt-slot {
+  bottom: 66px;
+  left: 12px;
+  width: min(330px, calc(100vw - 24px));
+}
+
+#poke-clan-hud-root .pch-hunt-card {
+  padding: 9px 10px;
+}
+
+#poke-clan-hud-root .pch-hunt-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#poke-clan-hud-root .pch-hunt-title-block {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 8px;
+}
+
+#poke-clan-hud-root .pch-hunt-title {
+  color: var(--pch-primary);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .1em;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-hunt-time {
+  color: var(--pch-muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-hunt-controls {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+#poke-clan-hud-root .pch-text-button,
+#poke-clan-hud-root .pch-icon-button {
+  min-height: 25px;
+  padding: 2px 6px;
+  color: var(--pch-muted);
+  font-size: 9px;
+}
+
+#poke-clan-hud-root .pch-metrics-row,
+#poke-clan-hud-root .pch-counts-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+#poke-clan-hud-root .pch-metrics-row {
+  margin-top: 8px;
+}
+
+#poke-clan-hud-root .pch-counts-row {
+  margin-top: 7px;
+  padding-top: 6px;
+  border-top: 1px solid var(--pch-divider);
+}
+
+#poke-clan-hud-root .pch-metric {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+#poke-clan-hud-root .pch-metric-label {
+  overflow: hidden;
+  color: var(--pch-muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-metric-value {
+  overflow: hidden;
+  color: var(--pch-text);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-count {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 4px;
+}
+
+#poke-clan-hud-root .pch-skills-slot {
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#poke-clan-hud-root .pch-skills-bar {
+  display: flex;
+  max-width: min(760px, calc(100vw - 24px));
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid var(--pch-border);
+  border-radius: 12px;
+  background: var(--pch-surface);
+  box-shadow: var(--pch-shadow);
+  backdrop-filter: blur(12px);
+}
+
+#poke-clan-hud-root .pch-skills-title {
+  padding: 0 5px;
+  color: var(--pch-primary);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+#poke-clan-hud-root .pch-skills-moves {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+#poke-clan-hud-root .pch-skill-button {
+  display: flex;
+  min-width: 70px;
+  min-height: 34px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3px 7px;
+  border: 1px solid var(--pch-border-soft);
+  border-radius: 8px;
+  background: var(--pch-control);
+  cursor: pointer;
+}
+
+#poke-clan-hud-root .pch-skill-button:disabled {
+  cursor: default;
+  opacity: .56;
+}
+
+#poke-clan-hud-root .pch-skill-button.is-ready {
+  border-color: var(--pch-positive);
+}
+
+#poke-clan-hud-root .pch-skill-name {
+  max-width: 112px;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#poke-clan-hud-root .pch-skill-cooldown {
+  color: var(--pch-muted);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+#poke-clan-hud-root .pch-settings-backdrop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 9, 20, .58);
+  pointer-events: auto;
+}
+
+#poke-clan-hud-root .pch-settings-panel {
+  width: min(360px, 100%);
+  padding: 16px;
+  border: 1px solid var(--pch-border);
+  border-radius: 14px;
+  background: var(--pch-surface-strong);
+  box-shadow: var(--pch-shadow);
+  pointer-events: auto;
+}
+
+#poke-clan-hud-root .pch-settings-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+
+#poke-clan-hud-root .pch-settings-heading h2 {
+  margin: 0;
+  font-size: 14px;
+}
+
+#poke-clan-hud-root .pch-setting-row {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--pch-divider);
+}
+
+#poke-clan-hud-root .pch-select {
+  min-width: 120px;
+  padding: 5px 8px;
+  border: 1px solid var(--pch-border);
+  border-radius: 7px;
+  background: var(--pch-control);
+  color: var(--pch-text);
+}
+
+#poke-clan-hud-root .pch-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--pch-primary);
+}
+
+#poke-clan-hud-root .pch-settings-note {
+  color: var(--pch-muted);
+  font-size: 10px;
+}
+
+#poke-clan-hud-root .pch-danger-button,
+#poke-clan-hud-enable {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--pch-danger);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--pch-danger);
+  cursor: pointer;
+}
+
+#poke-clan-hud-enable {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2147483647;
+  background: var(--pch-enable-bg, #082238);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, .35);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  color: #d9f7ff;
+  pointer-events: auto;
+}
+
+#poke-clan-hud-root .pch-shell[data-compact="false"] .pch-profile-card,
+#poke-clan-hud-root .pch-shell[data-compact="false"] .pch-hunt-card {
+  padding: 12px 14px;
+}
+
+html.poke-clan-hud-enabled.pch-target-ready #reference-hud [data-rh-panel="target"],
+html.poke-clan-hud-enabled.pch-target-ready #target-card,
+html.poke-clan-hud-enabled.pch-boss-ready:not(.pch-boss-expanded) #shiny-global-next,
+html.poke-clan-hud-enabled.pch-menu-ready #pio-main-menu,
+html.poke-clan-hud-enabled.pch-skills-ready #pokemon-skills-window,
+html.poke-clan-hud-enabled.pch-hunt-ready:not(.pch-hunt-expanded) #ha-panel {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  #poke-clan-hud-root .pch-menu-slot {
+    top: 56px;
+    left: 12px;
+    transform: none;
+  }
+
+  #poke-clan-hud-root .pch-main-menu {
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+  }
+
+  #poke-clan-hud-root .pch-hunt-slot {
+    bottom: 60px;
+  }
+}
+
+@media (max-width: 560px) {
+  #poke-clan-hud-root .pch-top-left {
+    right: 54px;
+    max-width: none;
+  }
+
+  #poke-clan-hud-root .pch-profile-card {
+    width: min(290px, calc(100vw - 90px));
+  }
+
+  #poke-clan-hud-root .pch-boss-slot {
+    display: none;
+  }
+
+  #poke-clan-hud-root .pch-skills-bar {
+    max-width: calc(100vw - 16px);
+  }
+}
