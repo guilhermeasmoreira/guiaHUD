@@ -48,26 +48,22 @@ test('adapter normalizes live player, target, hunt, boss, skills, and menu value
     attributes: { 'data-client-action': 'map', title: 'Mapa' },
     classes: ['available']
   });
+  const cooldownOverlay = element('', {
+    classes: ['cooldown-overlay'],
+    attributes: { 'data-cooldown': '7s' }
+  });
+  const moveSlot = element('', {
+    lists: { '.cooldown-number, .cooldown-overlay': [cooldownOverlay] }
+  });
   const move = element('', {
     attributes: {
       'data-move-key': '0:bite',
       'data-move-name': 'Bite',
       'data-move-type': 'dark'
     },
-    classes: ['move-ready', 'is-cooldown'],
-    children: {
-      '.cooldown-number, .cooldown-overlay': element('', {
-        classes: ['cooldown-overlay'],
-        attributes: { 'data-cooldown': '7s' }
-      })
-    },
-    lists: {
-      '.cooldown-number, .cooldown-overlay': [element('', {
-        classes: ['cooldown-overlay'],
-        attributes: { 'data-cooldown': '7s' }
-      })]
-    }
+    classes: ['move-ready', 'is-cooldown']
   });
+  move.closest = function (selector) { return selector === '.move-slot' ? moveSlot : null; };
   const menuRoot = element('', {
     lists: {
       '[data-client-action]': [menuInventory, menuMap],

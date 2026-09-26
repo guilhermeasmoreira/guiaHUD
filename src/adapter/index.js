@@ -89,11 +89,12 @@
   }
 
   function readCooldown(move) {
-    const overlays = move.querySelectorAll
-      ? dom.queryAll('.cooldown-number, .cooldown-overlay', move)
+    const slot = move.closest ? move.closest('.move-slot') || move : move;
+    const overlays = slot.querySelectorAll
+      ? dom.queryAll('.cooldown-number, .cooldown-overlay', slot)
       : [];
-    const firstOverlay = move.querySelector
-      ? move.querySelector('.cooldown-number, .cooldown-overlay')
+    const firstOverlay = slot.querySelector
+      ? slot.querySelector('.cooldown-number, .cooldown-overlay')
       : null;
     if (firstOverlay && overlays.indexOf(firstOverlay) === -1) overlays.unshift(firstOverlay);
 
@@ -111,6 +112,10 @@
 
     ['data-cooldown', 'data-cooldown-seconds', 'data-cd', 'data-remaining', 'aria-label', 'title']
       .forEach(function (attribute) { candidates.push(move.getAttribute(attribute)); });
+    if (slot !== move) {
+      ['data-cooldown', 'data-cooldown-seconds', 'data-cd', 'data-remaining', 'aria-label', 'title']
+        .forEach(function (attribute) { candidates.push(slot.getAttribute(attribute)); });
+    }
     for (const candidate of candidates) {
       const parsed = cooldownText(candidate);
       if (parsed) return parsed;
@@ -133,6 +138,8 @@
         cooldown: cooldown,
         disabled: Boolean(element.disabled || element.getAttribute('aria-disabled') === 'true'),
         coolingDown: element.classList.contains('is-cooldown') ||
+          Boolean(element.closest && element.closest('.move-slot') &&
+            element.closest('.move-slot').classList.contains('is-cooldown')) ||
           Boolean(cooldown && !/^0+(?:[.,]0+)?(?:\s*(?:ms|s|seg(?:undos?)?|m|min(?:utos?)?))?$/i.test(cooldown)),
         ready: element.classList.contains('move-ready')
       };
