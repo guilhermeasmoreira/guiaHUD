@@ -169,7 +169,9 @@ test('manifest keeps the game match and permissions narrow', function () {
   assert.deepEqual(manifest.content_scripts[0].matches, ['https://pokeidle.online/game/*']);
   const scripts = manifest.content_scripts[0].js;
   assert.ok(scripts.indexOf('src/adapter/selectors.js') < scripts.indexOf('src/adapter/index.js'));
+  assert.ok(scripts.indexOf('src/hud/icons.js') < scripts.indexOf('src/hud/main-menu.js'));
   assert.ok(scripts.indexOf('src/content/lifecycle.js') < scripts.indexOf('src/content/bootstrap.js'));
+  assert.ok(manifest.content_scripts[0].css.includes('src/themes/malefic/theme.css'));
   scripts.forEach(function (script) {
     assert.equal(fs.existsSync(path.join(__dirname, '..', script)), true, script + ' is missing');
   });

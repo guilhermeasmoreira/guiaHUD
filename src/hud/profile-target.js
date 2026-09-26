@@ -2,6 +2,7 @@
   const app = global.PokeClanHUD = global.PokeClanHUD || {};
   app.modules = app.modules || {};
   const dom = app.modules.dom;
+  const icons = app.modules.icons;
 
   function mount(parent, actions) {
     const card = dom.create('section', 'pch-card pch-profile-card');
@@ -12,6 +13,7 @@
     player.setAttribute('aria-expanded', 'false');
     player.setAttribute('aria-label', 'Abrir equipe para trocar o Pokémon ativo');
     const playerName = dom.create('strong', 'pch-player-name', 'Treinador');
+    player.prepend(icons.create('crest'));
     const playerMeta = dom.create('span', 'pch-player-meta');
     const playerChevron = dom.create('span', 'pch-player-chevron', '⌄');
     playerChevron.setAttribute('aria-hidden', 'true');

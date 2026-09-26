@@ -1,10 +1,10 @@
 # Poké Idle Clan HUD
 
-Visual references for the planned Fogo, Malefic, and Gelo themes are saved in [design/README.md](design/README.md). The current extension still uses Padrão minimalista.
+Visual references for Fogo, Malefic, and Gelo are saved in [design/README.md](design/README.md). Malefic is available in settings; Fogo and Gelo remain design references.
 
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
-Version 0.4 adds a fully custom, expandable team selector with the game's Pokémon sprites, HP, level, and active-state feedback. It also applies the minimal theme's scrollbar to the skills row and every other scrollable game surface while the HUD is enabled.
+Version 0.5 adds the selectable Malefic theme with violet framed panels, vector icons, green accents and themed scrollbars. Version 0.4 added a custom expandable Pokémon selector with the game's sprites.
 
 ## Load in Chrome
 
@@ -21,6 +21,7 @@ The extension only matches the game page and requests the storage permission for
 - Confirm the compact chat control opens and closes the original themed chat without leaving a duplicate control.
 - Confirm the original trainer/team panel is hidden. Click the trainer name in the compact profile, check the minimal Pokémon list and sprites, select another Pokémon, then confirm the list closes and the active name updates.
 - Confirm horizontal and vertical scrollbars use the minimal style, especially the skills row and the expanded Pokémon list.
+- In the gear menu select **Malefic**. Check the purple frames, iconography, green HP and stat accents, Hunt Analyzer at the upper right, chat at the lower left, and that all controls still work. Dragged widget positions from earlier versions take precedence; double-click a dotted drag control to reset its widget position.
 - Confirm skill cooldown values appear and update using the game's own cooldown display.
 - Click **Zerar** in Hunt Analyzer; the original analyzer opens as needed, and its own confirmation control completes the reset.
 - Confirm target, Boss, and Hunt Analyzer values continue updating during play.
@@ -31,7 +32,7 @@ The extension only matches the game page and requests the storage permission for
 - src/state: normalized state store.
 - src/bridge: clicks original game controls for menu, skills, boss, and Hunt Analyzer actions.
 - src/hud: compact profile/target, boss, analyzer, menu, and skills components.
-- src/themes: shared layout and the Padrão minimalista theme.
+- src/themes: shared layout, Padrão minimalista, and Malefic themes.
 - src/settings: extension-owned preferences and enable/disable controls.
 - tests: parser and adapter tests using a small fixture-like DOM.
 

@@ -2,6 +2,7 @@
   const app = global.PokeClanHUD = global.PokeClanHUD || {};
   app.modules = app.modules || {};
   const dom = app.modules.dom;
+  const icons = app.modules.icons;
 
   function mount(parent, actions) {
     const button = dom.create('button', 'pch-boss-pill');
@@ -9,7 +10,7 @@
     button.setAttribute('aria-label', 'Abrir detalhes do Boss Global');
     const label = dom.create('span', 'pch-boss-label', 'BOSS');
     const time = dom.create('strong', 'pch-boss-time', '--:--:--');
-    button.append(label, time);
+    button.append(icons.create('boss'), label, time);
     parent.append(button);
     button.addEventListener('click', function () { actions.toggleBoss(); });
 

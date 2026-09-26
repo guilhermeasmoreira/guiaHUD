@@ -28,6 +28,9 @@
     const minimal = dom.create('option', '', 'Padrão minimalista');
     minimal.value = 'minimal';
     theme.append(minimal);
+    const malefic = dom.create('option', '', 'Malefic');
+    malefic.value = 'malefic';
+    theme.append(malefic);
     themeLabel.append(themeText, theme);
 
     const compactLabel = dom.create('label', 'pch-setting-row');

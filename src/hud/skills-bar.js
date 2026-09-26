@@ -2,13 +2,14 @@
   const app = global.PokeClanHUD = global.PokeClanHUD || {};
   app.modules = app.modules || {};
   const dom = app.modules.dom;
+  const icons = app.modules.icons;
 
   function mount(parent, actions) {
     const bar = dom.create('nav', 'pch-skills-bar');
     bar.setAttribute('aria-label', 'Habilidades do Pokémon ativo');
     const title = dom.create('span', 'pch-skills-title', 'Skills');
     const moves = dom.create('div', 'pch-skills-moves');
-    bar.append(title, moves);
+    bar.append(icons.create('skills'), title, moves);
     parent.append(bar);
 
     let currentSignature = '';

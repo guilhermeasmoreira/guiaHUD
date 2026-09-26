@@ -2,6 +2,7 @@
   const app = global.PokeClanHUD = global.PokeClanHUD || {};
   app.modules = app.modules || {};
   const dom = app.modules.dom;
+  const icons = app.modules.icons;
 
   function mount(parent, actions) {
     const button = dom.create('button', 'pch-chat-pill');
@@ -9,7 +10,7 @@
     button.setAttribute('aria-label', 'Abrir ou minimizar o chat geral');
     const label = dom.create('strong', 'pch-chat-label', 'CHAT');
     const status = dom.create('span', 'pch-chat-status', 'GERAL');
-    button.append(label, status);
+    button.append(icons.create('chat'), label, status);
     parent.append(button);
 
     button.addEventListener('click', function () {

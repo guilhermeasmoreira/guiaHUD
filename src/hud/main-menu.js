@@ -2,6 +2,7 @@
   const app = global.PokeClanHUD = global.PokeClanHUD || {};
   app.modules = app.modules || {};
   const dom = app.modules.dom;
+  const iconFactory = app.modules.icons;
 
   const primaryDefinitions = [
     { type: 'client', key: 'inventory', label: 'Bolsa' },
@@ -55,6 +56,11 @@
     button.setAttribute('aria-label', action.label);
     const icon = dom.create('span', 'pch-menu-icon', icons[action.key] || '·');
     icon.setAttribute('aria-hidden', 'true');
+    const themeIcon = {
+      inventory: 'inventory', profile: 'profile', map: 'map',
+      'auto-helper': 'helper', 'hunt-analyzer': 'hunt', 'diamond-shop': 'diamond'
+    }[action.key];
+    if (themeIcon) icon.append(iconFactory.create(themeIcon));
     const label = dom.create('span', 'pch-menu-label', forcedLabel || displayLabel(action));
     button.append(icon, label);
     if (action.notification) button.classList.add('has-notification');
@@ -66,6 +72,7 @@
     nav.setAttribute('aria-label', 'Menu compacto do jogo');
     const primary = dom.create('div', 'pch-menu-primary');
     const moreButton = dom.create('button', 'pch-menu-more', 'Mais');
+    moreButton.prepend(iconFactory.create('more'));
     moreButton.type = 'button';
     moreButton.setAttribute('aria-expanded', 'false');
     const popover = dom.create('div', 'pch-menu-popover');

@@ -43,7 +43,7 @@
 
     function update(state, settings) {
       const currentSettings = settings || initialSettings || {};
-      shell.dataset.theme = currentSettings.theme === 'ice' ? 'minimal' : (currentSettings.theme || 'minimal');
+      shell.dataset.theme = currentSettings.theme === 'malefic' ? 'malefic' : 'minimal';
       shell.dataset.compact = String(currentSettings.compact !== false);
       const profileState = profile.update(state);
       const playerReady = profileState.playerReady;

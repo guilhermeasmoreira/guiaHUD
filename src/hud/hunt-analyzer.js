@@ -2,6 +2,7 @@
   const app = global.PokeClanHUD = global.PokeClanHUD || {};
   app.modules = app.modules || {};
   const dom = app.modules.dom;
+  const icons = app.modules.icons;
 
   function metric(label, className) {
     const item = dom.create('div', 'pch-metric ' + (className || ''));
@@ -18,6 +19,7 @@
     const heading = dom.create('div', 'pch-hunt-heading');
     const titleBlock = dom.create('div', 'pch-hunt-title-block');
     const title = dom.create('strong', 'pch-hunt-title', 'HUNT ANALYZER');
+    titleBlock.append(icons.create('spark'));
     const time = dom.create('span', 'pch-hunt-time', 'Tempo: —');
     titleBlock.append(title, time);
     const controls = dom.create('div', 'pch-hunt-controls');

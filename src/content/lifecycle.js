@@ -5,6 +5,7 @@
   const htmlClasses = [
     'poke-clan-hud-enabled',
     'pch-theme-minimal',
+    'pch-theme-malefic',
     'pch-theme-ice',
     'pch-player-ready',
     'pch-chat-ready',
@@ -52,6 +53,7 @@
     const theme = settings && settings.theme || 'minimal';
     global.document.documentElement.classList.remove('pch-theme-ice');
     global.document.documentElement.classList.toggle('pch-theme-minimal', theme === 'minimal' || theme === 'ice');
+    global.document.documentElement.classList.toggle('pch-theme-malefic', theme === 'malefic');
   }
 
   function render() {
