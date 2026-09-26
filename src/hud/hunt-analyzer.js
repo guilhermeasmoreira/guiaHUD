@@ -48,7 +48,7 @@
     let detailsOpen = false;
     details.addEventListener('click', function () {
       if (!actions.toggleHuntDetails()) return;
-      detailsOpen = !detailsOpen;
+      detailsOpen = global.document.documentElement.classList.contains('pch-hunt-expanded');
       dom.setText(details, detailsOpen ? 'Fechar detalhes' : 'Detalhes', '');
       details.setAttribute('aria-expanded', String(detailsOpen));
     });

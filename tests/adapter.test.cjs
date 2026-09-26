@@ -129,3 +129,54 @@ test('manifest keeps the game match and permissions narrow', function () {
     assert.equal(fs.existsSync(path.join(__dirname, '..', style)), true, style + ' is missing');
   });
 });
+
+test('action bridge forwards commands to the original game buttons', function () {
+  const clicks = { inventory: 0, move: 0, reset: 0, boss: 0 };
+  const classes = new Set();
+  const classList = {
+    contains: function (name) { return classes.has(name); },
+    add: function (name) { classes.add(name); },
+    toggle: function (name, force) {
+      if (force) classes.add(name);
+      else classes.delete(name);
+    }
+  };
+  const inventory = element('Inventário', {
+    attributes: { 'data-client-action': 'inventory' }
+  });
+  inventory.click = function () { clicks.inventory += 1; };
+  const move = element('', { attributes: { 'data-move-key': '0:bite' } });
+  move.click = function () { clicks.move += 1; };
+  const reset = element('');
+  reset.click = function () { clicks.reset += 1; };
+  const boss = element('');
+  boss.click = function () { clicks.boss += 1; };
+  const menuRoot = element('', {
+    lists: { '[data-client-action]': [inventory], '[data-system-open]': [] }
+  });
+  const elements = new Map([
+    ['#pio-main-menu', menuRoot],
+    ['#ha-mZero', reset],
+    ['#shiny-global-next', boss]
+  ]);
+  const document = {
+    documentElement: { classList: classList },
+    querySelector: function (selector) { return elements.get(selector) || null; },
+    querySelectorAll: function (selector) {
+      return selector === '#pokemon-moves [data-move-key]' ? [move] : [];
+    }
+  };
+  const context = vm.createContext({ document: document });
+  context.globalThis = context;
+  ['src/utils/dom.js', 'src/adapter/selectors.js', 'src/bridge/actions.js']
+    .forEach(function (file) { loadModule(file, context); });
+
+  const actions = context.PokeClanHUD.modules.actions;
+  assert.equal(actions.openMenuAction('client', 'inventory'), true);
+  assert.equal(actions.activateMove('0:bite'), true);
+  assert.equal(actions.resetHunt(), true);
+  assert.equal(actions.toggleBoss(), true);
+  assert.deepEqual(clicks, { inventory: 1, move: 1, reset: 1, boss: 1 });
+  assert.equal(classes.has('pch-hunt-expanded'), true);
+  assert.equal(classes.has('pch-boss-expanded'), true);
+});
