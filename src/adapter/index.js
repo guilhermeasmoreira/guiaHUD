@@ -6,14 +6,19 @@
   const selectors = app.modules.selectors;
 
   function readPlayer() {
+    const root = dom.query(selectors.player.root);
     const name = dom.readText(selectors.player.name);
     const summary = dom.readText(selectors.player.summary);
     const parsed = parse.parsePlayerSummary(summary);
+    const minimized = Boolean(root && root.classList && (
+      root.classList.contains('collapsed') || root.classList.contains('is-minimized')
+    ));
     return {
-      available: Boolean(dom.query(selectors.player.root)),
+      available: Boolean(root),
       name: name || null,
       level: parsed.level,
-      activePokemonName: parsed.activePokemonName
+      activePokemonName: parsed.activePokemonName,
+      teamExpanded: Boolean(root && !minimized)
     };
   }
 
@@ -71,11 +76,52 @@
     };
   }
 
+  function cooldownText(value) {
+    const text = String(value || '').replace(/^['"]|['"]$/g, '').trim();
+    if (!text || /^(none|normal|initial)$/i.test(text)) return null;
+    const match = text.match(/(?:\d{1,2}:)?\d{1,2}(?:[.,]\d+)?\s*(?:ms|s|seg(?:undos?)?|m|min(?:utos?)?)?/i);
+    if (!match) return null;
+    const valueText = match[0].trim();
+    const hasUnit = /(?:ms|s|seg(?:undos?)?|m|min(?:utos?)?)/i.test(valueText);
+    const labeled = /(cooldown|recarga|restante|remaining)/i.test(text);
+    if (!hasUnit && !labeled && text !== valueText) return null;
+    return valueText;
+  }
+
+  function readCooldown(move) {
+    const overlays = move.querySelectorAll
+      ? dom.queryAll('.cooldown-number, .cooldown-overlay', move)
+      : [];
+    const firstOverlay = move.querySelector
+      ? move.querySelector('.cooldown-number, .cooldown-overlay')
+      : null;
+    if (firstOverlay && overlays.indexOf(firstOverlay) === -1) overlays.unshift(firstOverlay);
+
+    const candidates = [];
+    overlays.forEach(function (overlay) {
+      candidates.push(overlay.textContent, overlay.innerText);
+      ['data-cooldown', 'data-cooldown-seconds', 'data-remaining', 'aria-label', 'title']
+        .forEach(function (attribute) { candidates.push(overlay.getAttribute(attribute)); });
+      if (global.getComputedStyle) {
+        ['::before', '::after'].forEach(function (pseudo) {
+          try { candidates.push(global.getComputedStyle(overlay, pseudo).content); } catch (_) {}
+        });
+      }
+    });
+
+    ['data-cooldown', 'data-cooldown-seconds', 'data-cd', 'data-remaining', 'aria-label', 'title']
+      .forEach(function (attribute) { candidates.push(move.getAttribute(attribute)); });
+    for (const candidate of candidates) {
+      const parsed = cooldownText(candidate);
+      if (parsed) return parsed;
+    }
+    return null;
+  }
+
   function readSkills() {
     const root = dom.query(selectors.skills.root);
     const moves = dom.queryAll(selectors.skills.moves).map(function (element) {
-      const cooldown = element.querySelector('.cooldown-number, .cooldown-overlay');
-      const cooldownText = cooldown ? String(cooldown.textContent || '').trim() : '';
+      const cooldown = readCooldown(element);
       const name = element.getAttribute('data-move-name') ||
         element.getAttribute('aria-label') ||
         element.getAttribute('title') ||
@@ -84,10 +130,10 @@
         key: element.getAttribute('data-move-key'),
         name: name || 'Move',
         type: element.getAttribute('data-move-type') || null,
-        cooldown: cooldownText || null,
+        cooldown: cooldown,
         disabled: Boolean(element.disabled || element.getAttribute('aria-disabled') === 'true'),
         coolingDown: element.classList.contains('is-cooldown') ||
-          Boolean(cooldownText && cooldownText !== '0'),
+          Boolean(cooldown && !/^0+(?:[.,]0+)?(?:\s*(?:ms|s|seg(?:undos?)?|m|min(?:utos?)?))?$/i.test(cooldown)),
         ready: element.classList.contains('move-ready')
       };
     }).filter(function (move) { return Boolean(move.key); });
@@ -107,16 +153,20 @@
   }
 
   function readMenu() {
-    const root = dom.query(selectors.menu.root);
-    const searchRoot = root || global.document;
+    const root = dom.query(selectors.menu.root) || dom.query(selectors.menu.legacyRoot);
+    const scopes = root ? [root, global.document] : [global.document];
     const actions = [];
     const seen = new Set();
+    const seenElements = new Set();
 
     [
       { type: 'client', selector: selectors.menu.clientAction, attribute: 'data-client-action' },
       { type: 'system', selector: selectors.menu.systemOpen, attribute: 'data-system-open' }
     ].forEach(function (source) {
-      dom.queryAll(source.selector, searchRoot).forEach(function (element) {
+      scopes.forEach(function (scope) {
+        dom.queryAll(source.selector, scope).forEach(function (element) {
+        if (seenElements.has(element)) return;
+        seenElements.add(element);
         const key = element.getAttribute(source.attribute);
         if (!key) return;
         const identity = source.type + ':' + key;
@@ -135,10 +185,11 @@
             element.classList.contains('vote-active') ||
             element.classList.contains('vote-available')
         });
+        });
       });
     });
 
-    return { available: Boolean(root), actions: actions };
+    return { available: Boolean(root && actions.length), actions: actions };
   }
 
   function read() {

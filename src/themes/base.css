@@ -93,6 +93,22 @@
   min-width: 0;
 }
 
+#poke-clan-hud-root .pch-player-toggle {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+#poke-clan-hud-root .pch-player-toggle:hover {
+  border-radius: 6px;
+  background: var(--pch-hover);
+}
+
 #poke-clan-hud-root .pch-player-name,
 #poke-clan-hud-root .pch-target-name {
   overflow: hidden;
@@ -573,6 +589,16 @@ html.poke-clan-hud-enabled.pch-menu-ready #pio-main-menu,
 html.poke-clan-hud-enabled.pch-skills-ready #pokemon-skills-window,
 html.poke-clan-hud-enabled.pch-hunt-ready:not(.pch-hunt-expanded) #ha-panel {
   display: none !important;
+}
+
+html.poke-clan-hud-enabled.pch-team-expanded #pokemon-team-bar {
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+}
+
+html.poke-clan-hud-enabled.pch-team-expanded #poke-clan-hud-root .pch-profile-card {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {

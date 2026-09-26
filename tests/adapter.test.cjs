@@ -12,10 +12,22 @@ function element(text, options) {
     textContent: text || '',
     style: settings.style || {},
     disabled: Boolean(settings.disabled),
+    id: settings.id || '',
     hidden: false,
-    classList: { contains: function (name) { return classes.has(name); } },
+    classList: {
+      contains: function (name) { return classes.has(name); },
+      add: function (name) { classes.add(name); },
+      remove: function (name) { classes.delete(name); },
+      toggle: function (name, force) {
+        const enabled = force == null ? !classes.has(name) : Boolean(force);
+        if (enabled) classes.add(name);
+        else classes.delete(name);
+        return enabled;
+      }
+    },
     isConnected: true,
     getAttribute: function (name) { return attributes[name] == null ? null : attributes[name]; },
+    setAttribute: function (name, value) { attributes[name] = String(value); },
     querySelector: function (selector) { return settings.children && settings.children[selector] || null; },
     querySelectorAll: function (selector) { return settings.lists && settings.lists[selector] || []; },
     getBoundingClientRect: function () { return { width: 20, height: 10 }; },
@@ -42,7 +54,19 @@ test('adapter normalizes live player, target, hunt, boss, skills, and menu value
       'data-move-name': 'Bite',
       'data-move-type': 'dark'
     },
-    classes: ['move-ready']
+    classes: ['move-ready', 'is-cooldown'],
+    children: {
+      '.cooldown-number, .cooldown-overlay': element('', {
+        classes: ['cooldown-overlay'],
+        attributes: { 'data-cooldown': '7s' }
+      })
+    },
+    lists: {
+      '.cooldown-number, .cooldown-overlay': [element('', {
+        classes: ['cooldown-overlay'],
+        attributes: { 'data-cooldown': '7s' }
+      })]
+    }
   });
   const menuRoot = element('', {
     lists: {
@@ -52,7 +76,7 @@ test('adapter normalizes live player, target, hunt, boss, skills, and menu value
   });
 
   const elements = new Map([
-    ['#pokemon-team-bar', element('')],
+    ['#pokemon-team-bar', element('', { classes: ['collapsed'] })],
     ['#pokemon-team-bar .player-name', element('KTo')],
     ['#pokemon-team-bar .player-summary', element('Nível 230 • Shiny Tyranitar')],
     ['#reference-hud', element('')],
@@ -100,6 +124,7 @@ test('adapter normalizes live player, target, hunt, boss, skills, and menu value
   assert.equal(state.player.name, 'KTo');
   assert.equal(state.player.level, 230);
   assert.equal(state.player.activePokemonName, 'Shiny Tyranitar');
+  assert.equal(state.player.teamExpanded, false);
   assert.equal(state.target.name, 'Aerodactyl');
   assert.equal(state.target.hp, 3297);
   assert.equal(state.target.maxHp, 4000);
@@ -109,10 +134,37 @@ test('adapter normalizes live player, target, hunt, boss, skills, and menu value
   assert.equal(state.boss.time, '00:39:50');
   assert.equal(state.skills.moves[0].key, '0:bite');
   assert.equal(state.skills.moves[0].ready, true);
+  assert.equal(state.skills.moves[0].cooldown, '7s');
   assert.deepEqual(
     Array.from(state.menu.actions, function (action) { return action.key; }),
     ['inventory', 'map']
   );
+});
+
+test('menu adapter discovers actions exposed outside the top menu root', function () {
+  const autoHelper = element('Auto Helper', {
+    attributes: { 'data-client-action': 'auto-helper', title: 'Auto Helper' }
+  });
+  const menuRoot = element('', { lists: { '[data-client-action]': [], '[data-system-open]': [] } });
+  const elements = new Map([['#pio-main-menu', menuRoot]]);
+  const document = {
+    querySelector: function (selector) { return elements.get(selector) || null; },
+    querySelectorAll: function (selector) {
+      if (selector === '[data-client-action]') return [autoHelper];
+      return [];
+    }
+  };
+  const context = vm.createContext({
+    document: document,
+    getComputedStyle: function () { return { display: 'block', visibility: 'visible' }; }
+  });
+  context.globalThis = context;
+  ['src/utils/dom.js', 'src/utils/parse.js', 'src/adapter/selectors.js', 'src/adapter/index.js']
+    .forEach(function (file) { loadModule(file, context); });
+
+  const state = context.PokeClanHUD.modules.adapter.read();
+  assert.equal(state.menu.available, true);
+  assert.deepEqual(Array.from(state.menu.actions, function (action) { return action.key; }), ['auto-helper']);
 });
 
 test('manifest keeps the game match and permissions narrow', function () {
@@ -179,4 +231,71 @@ test('action bridge forwards commands to the original game buttons', function ()
   assert.deepEqual(clicks, { inventory: 1, move: 1, reset: 1, boss: 1 });
   assert.equal(classes.has('pch-hunt-expanded'), true);
   assert.equal(classes.has('pch-boss-expanded'), true);
+});
+
+test('profile and Hunt Analyzer controls expand their original game panels', function () {
+  const clicks = { team: 0, huntExpand: 0, reset: 0 };
+  const teamClasses = new Set(['collapsed']);
+  const huntClasses = new Set(['collapsed']);
+  const teamRoot = element('', { classes: ['collapsed'] });
+  const teamToggle = element('');
+  teamToggle.click = function () {
+    clicks.team += 1;
+    teamClasses.delete('collapsed');
+    teamRoot.classList.remove('collapsed');
+  };
+  teamRoot.querySelector = function (selector) { return selector === '.team-minimize' ? teamToggle : null; };
+
+  const huntRoot = element('', { classes: ['collapsed'] });
+  const expand = element('');
+  const reset = element('');
+  expand.click = function () {
+    clicks.huntExpand += 1;
+    huntClasses.delete('collapsed');
+    huntClasses.add('client-open');
+    huntRoot.classList.remove('collapsed');
+    huntRoot.classList.add('client-open');
+  };
+  reset.click = function () { clicks.reset += 1; };
+  huntRoot.querySelector = function (selector) {
+    if (selector === '#ha-btnExp') return expand;
+    if (selector === '#ha-mZero') return reset;
+    return null;
+  };
+
+  const htmlClasses = new Set();
+  const document = {
+    documentElement: {
+      classList: {
+        contains: function (name) { return htmlClasses.has(name); },
+        add: function (name) { htmlClasses.add(name); },
+        remove: function (name) { htmlClasses.delete(name); },
+        toggle: function (name, force) {
+          const enabled = force == null ? !htmlClasses.has(name) : Boolean(force);
+          if (enabled) htmlClasses.add(name);
+          else htmlClasses.delete(name);
+          return enabled;
+        }
+      }
+    },
+    querySelector: function (selector) {
+      if (selector === '#pokemon-team-bar') return teamRoot;
+      if (selector === '#pokemon-team-bar .team-minimize') return teamToggle;
+      if (selector === '#ha-panel') return huntRoot;
+      if (selector === '#ha-btnExp') return expand;
+      return null;
+    },
+    querySelectorAll: function () { return []; }
+  };
+  const context = vm.createContext({ document: document });
+  context.globalThis = context;
+  ['src/utils/dom.js', 'src/adapter/selectors.js', 'src/bridge/actions.js']
+    .forEach(function (file) { loadModule(file, context); });
+
+  const actions = context.PokeClanHUD.modules.actions;
+  assert.equal(actions.togglePlayerTeam(), true);
+  assert.equal(htmlClasses.has('pch-team-expanded'), true);
+  assert.equal(actions.resetHunt(), true);
+  assert.deepEqual(clicks, { team: 1, huntExpand: 1, reset: 1 });
+  assert.equal(htmlClasses.has('pch-hunt-expanded'), true);
 });

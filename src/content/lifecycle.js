@@ -4,6 +4,8 @@
 
   const htmlClasses = [
     'poke-clan-hud-enabled',
+    'pch-theme-ice',
+    'pch-team-expanded',
     'pch-target-ready',
     'pch-boss-ready',
     'pch-boss-expanded',
@@ -30,6 +32,7 @@
     const html = global.document.documentElement;
     const flags = {
       'pch-target-ready': readiness.targetReady,
+      'pch-team-expanded': readiness.teamExpanded,
       'pch-boss-ready': readiness.bossReady,
       'pch-menu-ready': readiness.menuReady,
       'pch-hunt-ready': readiness.huntReady,
@@ -38,6 +41,11 @@
     Object.keys(flags).forEach(function (name) {
       html.classList.toggle(name, Boolean(flags[name]));
     });
+  }
+
+  function applyTheme() {
+    const theme = settings && settings.theme || 'ice';
+    global.document.documentElement.classList.toggle('pch-theme-ice', theme === 'ice');
   }
 
   function render() {
@@ -82,6 +90,7 @@
 
   function updateSettings(nextSettings) {
     settings = Object.assign({}, settings, nextSettings || {});
+    applyTheme();
     app.modules.settingsStorage.save(settings);
     if (hud && currentState) applyReadiness(hud.update(currentState, settings));
   }
@@ -105,6 +114,7 @@
       }
 
       global.document.documentElement.classList.add('poke-clan-hud-enabled');
+      applyTheme();
       applyReadiness(hud.update(currentState, settings));
       store.subscribe(render);
       adapter.observe(function (nextState) {

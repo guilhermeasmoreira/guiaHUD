@@ -24,7 +24,7 @@
     host.append(shell);
     global.document.documentElement.append(host);
 
-    const profile = app.modules.profileTarget.mount(profileSlot);
+    const profile = app.modules.profileTarget.mount(profileSlot, actions);
     const boss = app.modules.bossPill.mount(bossSlot, actions);
     const menu = app.modules.mainMenu.mount(menuSlot, actions);
     const hunt = app.modules.huntAnalyzer.mount(huntSlot, actions);
@@ -36,13 +36,15 @@
       const currentSettings = settings || initialSettings || {};
       shell.dataset.theme = currentSettings.theme || 'ice';
       shell.dataset.compact = String(currentSettings.compact !== false);
-      const targetReady = profile.update(state).targetReady;
+      const profileState = profile.update(state);
+      const targetReady = profileState.targetReady;
+      const teamExpanded = profileState.teamExpanded;
       const bossReady = boss.update(state);
       const menuReady = menu.update(state);
       const huntReady = hunt.update(state);
       const skillsReady = skills.update(state);
       settingsPanel.update(currentSettings);
-      return { targetReady, bossReady, menuReady, huntReady, skillsReady };
+      return { targetReady, teamExpanded, bossReady, menuReady, huntReady, skillsReady };
     }
 
     update(initialState, initialSettings);

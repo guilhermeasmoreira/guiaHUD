@@ -3,14 +3,18 @@
   app.modules = app.modules || {};
   const dom = app.modules.dom;
 
-  function mount(parent) {
+  function mount(parent, actions) {
     const card = dom.create('section', 'pch-card pch-profile-card');
     card.setAttribute('aria-label', 'Perfil e alvo');
 
-    const player = dom.create('div', 'pch-player-line');
+    const player = dom.create('button', 'pch-player-line pch-player-toggle');
+    player.type = 'button';
+    player.setAttribute('aria-expanded', 'false');
+    player.setAttribute('aria-label', 'Abrir equipe para trocar o Pokémon ativo');
     const playerName = dom.create('strong', 'pch-player-name', 'Treinador');
     const playerMeta = dom.create('span', 'pch-player-meta');
     player.append(playerName, playerMeta);
+    player.addEventListener('click', function () { actions.togglePlayerTeam(); });
 
     const target = dom.create('div', 'pch-target-line');
     target.hidden = true;
@@ -38,6 +42,10 @@
       if (profile.level != null) playerDetails.push('Nv. ' + profile.level);
       if (profile.activePokemonName) playerDetails.push(profile.activePokemonName);
       dom.setText(playerMeta, playerDetails.join(' · '), '');
+      player.setAttribute('aria-expanded', String(Boolean(profile.teamExpanded)));
+      player.setAttribute('aria-label', profile.teamExpanded
+        ? 'Equipe aberta. Use o controle do jogo para fechá-la.'
+        : 'Abrir equipe para trocar o Pokémon ativo');
 
       const targetReady = Boolean(currentTarget.visible && currentTarget.name);
       target.hidden = !targetReady;
@@ -53,7 +61,10 @@
           ? currentTarget.hp / currentTarget.maxHp * 100
           : 0;
       hpFill.style.width = Math.max(0, Math.min(100, percent)) + '%';
-      return { targetReady: targetReady && (hasHp || currentTarget.level != null || Boolean(currentTarget.name)) };
+      return {
+        targetReady: targetReady && (hasHp || currentTarget.level != null || Boolean(currentTarget.name)),
+        teamExpanded: Boolean(profile.teamExpanded)
+      };
     }
 
     return { update };

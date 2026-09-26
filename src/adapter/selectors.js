@@ -7,7 +7,10 @@
     player: {
       root: '#pokemon-team-bar',
       name: '#pokemon-team-bar .player-name',
-      summary: '#pokemon-team-bar .player-summary'
+      summary: '#pokemon-team-bar .player-summary',
+      teamList: '#pokemon-team-bar .team-list',
+      teamToggle: '#pokemon-team-bar .team-minimize',
+      teamSlots: '#pokemon-team-bar .team-slot'
     },
     target: {
       root: '#reference-hud [data-rh-panel="target"]',
@@ -43,6 +46,11 @@
       root: '#pokemon-skills-window',
       list: '#pokemon-moves',
       moves: '#pokemon-moves [data-move-key]'
+    },
+    chat: {
+      root: '#game-chat',
+      handle: '#game-chat-handle',
+      onlineCount: '#chat-online-members-count'
     },
     menu: {
       root: '#pio-main-menu',

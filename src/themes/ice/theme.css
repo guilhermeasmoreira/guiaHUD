@@ -18,3 +18,17 @@
   --pch-radius: 10px;
   --pch-enable-bg: #082238;
 }
+
+html.poke-clan-hud-enabled.pch-theme-ice #game-chat {
+  border: 1px solid rgba(112, 218, 255, .38) !important;
+  border-radius: 10px !important;
+  background-color: rgba(4, 23, 42, .94) !important;
+  box-shadow: 0 8px 25px rgba(0, 8, 22, .34), inset 0 1px rgba(205, 246, 255, .07) !important;
+  color: #eef9ff !important;
+  backdrop-filter: blur(12px);
+}
+
+html.poke-clan-hud-enabled.pch-theme-ice #game-chat button {
+  border-color: rgba(112, 218, 255, .24);
+  color: #eef9ff;
+}

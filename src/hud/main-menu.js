@@ -7,7 +7,7 @@
     { type: 'client', key: 'inventory', label: 'Bolsa' },
     { type: 'client', key: 'profile', label: 'Perfil' },
     { type: 'client', key: 'map', label: 'Mapa' },
-    { type: 'client', key: 'auto-helper', label: 'Helper' },
+    { type: 'client', key: 'auto-helper', label: 'Auto Helper' },
     { type: 'client', key: 'hunt-analyzer', label: 'Hunt' }
   ];
 

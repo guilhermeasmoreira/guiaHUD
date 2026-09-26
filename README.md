@@ -5,11 +5,20 @@ Chrome Manifest V3 extension that presents a compact Ice themed HUD for Poké Id
 ## Load in Chrome
 
 1. Open Chrome's Extensions page and enable Developer mode.
-2. Choose Load unpacked and select this repository folder.
+2. Choose Load unpacked and select the repository root folder, the one containing `manifest.json` (not `src`).
 3. Open https://pokeidle.online/game/.
 4. Use the gear button to change the compact setting or disable the HUD. When disabled, the small Ativar HUD button restores it without reloading.
 
-The extension only matches the game page and requests the storage permission for its own settings.
+The extension only matches the game page and requests the storage permission for its own settings. After pulling an update, click **Reload** on the extension in `chrome://extensions/`, then refresh the game tab.
+
+## Manual regression checklist
+
+- Confirm the top menu becomes a compact command bar and **Helper** opens the game's original Auto Helper.
+- Confirm the chat keeps working and receives the Ice theme styling.
+- Click the player name to reveal the original team controls, select another Pokémon, then confirm the active name updates in the compact profile.
+- Confirm skill cooldown values appear and update using the game's own cooldown display.
+- Click **Zerar** in Hunt Analyzer; the original analyzer opens as needed, and its own confirmation control completes the reset.
+- Confirm target, Boss, and Hunt Analyzer values continue updating during play.
 
 ## Structure
 
