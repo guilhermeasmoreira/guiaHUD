@@ -37,9 +37,10 @@ test('theme switches update the document class without leaving the prior theme a
   context.globalThis = context;
   load('src/content/lifecycle.js', context);
   context.PokeClanHUD.modules.lifecycle.enable();
-  for (const theme of ['ice', 'fire', 'stone', 'dragon', 'malefic', 'minimal']) {
+  const themes = ['ice', 'fire', 'stone', 'dragon', 'naturia', 'gardestrike', 'psycraft', 'rainbolt', 'malefic', 'minimal'];
+  for (const theme of themes) {
     handlers.onChange({ theme });
-    const active = ['ice', 'fire', 'stone', 'dragon', 'malefic', 'minimal']
+    const active = themes
       .filter((name) => classes.has('pch-theme-' + name));
     assert.deepEqual(active, [theme]);
   }
@@ -48,7 +49,7 @@ test('theme switches update the document class without leaving the prior theme a
 test('every selectable theme has a packaged stylesheet', () => {
   const manifest = require('../manifest.json');
   const css = manifest.content_scripts[0].css;
-  for (const theme of ['ice', 'fire', 'stone', 'dragon']) {
+  for (const theme of ['ice', 'fire', 'stone', 'dragon', 'naturia', 'gardestrike', 'psycraft', 'rainbolt']) {
     const file = `src/themes/${theme}/theme.css`;
     assert.ok(css.includes(file), `${theme} missing from manifest`);
     assert.ok(fs.existsSync(path.join(__dirname, '..', file)));

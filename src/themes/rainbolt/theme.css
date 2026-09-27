@@ -1,0 +1,32 @@
+/* Rainbolt: graphite and vivid yellow electrical accents. */
+#poke-clan-hud-root .pch-shell[data-theme="rainbolt"] {
+  --pch-primary: #ffdb5c;
+  --pch-accent-light: #fff3aa;
+  --pch-positive: #f5e77a;
+  --pch-positive-dark: #c9a52c;
+  --pch-edge: #d0aa3e;
+  --pch-edge-soft: #7e6b39;
+  --pch-edge-shadow: #4c421f;
+  --pch-glow: #ffdb5c66;
+  --pch-panel-bg: linear-gradient(180deg, rgba(38, 37, 29, .98), rgba(18, 21, 25, .98));
+  --pch-panel-solid: #1b2023;
+  --pch-control-bg: #30302b;
+  --pch-hover-bg: #f5d4542b;
+  --pch-muted: #d4d0b6;
+  --pch-notice: #ffdf66;
+}
+
+html.poke-clan-hud-enabled.pch-theme-rainbolt {
+  --pch-native-accent: #d0aa3e;
+  --pch-native-glow: #ffdb5c66;
+  --pch-native-surface: #1b2023;
+  --pch-native-head: #30312c;
+  --pch-native-control: #3c3d34;
+  --pch-native-divider: #867640;
+  --pch-native-text: #fff9e4;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="rainbolt"] .pch-hunt-title,
+#poke-clan-hud-root .pch-shell[data-theme="rainbolt"] .pch-boss-label {
+  color: #ffe886;
+}

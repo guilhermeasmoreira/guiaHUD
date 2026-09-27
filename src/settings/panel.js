@@ -32,10 +32,14 @@
     malefic.value = 'malefic';
     theme.append(malefic);
     [
-      ['ice', 'Gelo'],
-      ['fire', 'Fogo'],
-      ['stone', 'Pedra'],
-      ['dragon', 'Dragão']
+      ['ice', 'Seavell'],
+      ['fire', 'Volcanic'],
+      ['stone', 'Orebound'],
+      ['dragon', 'Wingeon'],
+      ['naturia', 'Naturia (Planta/Inseto)'],
+      ['gardestrike', 'GardeStrike (Lutador)'],
+      ['psycraft', 'Psycraft (Psíquico)'],
+      ['rainbolt', 'Rainbolt (Elétrico)']
     ].forEach(function ([value, label]) {
       const option = dom.create('option', '', label);
       option.value = value;

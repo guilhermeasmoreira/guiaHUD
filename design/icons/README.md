@@ -5,13 +5,13 @@ Onze SVGs originais em `64 × 64`, criados a partir da folha de referência envi
 | Clan | Arquivo | HUD atual |
 | --- | --- | --- |
 | Fogo | `fire.svg` | Sim |
-| Elétrico | `electric.svg` | Reservado |
+| Elétrico | `electric.svg` | Sim (Rainbolt) |
 | Pedra | `stone.svg` | Sim |
-| Planta/Inseto | `leaf.svg` | Reservado |
-| Lutador | `fighter.svg` | Reservado |
+| Planta/Inseto | `leaf.svg` | Sim (Naturia) |
+| Lutador | `fighter.svg` | Sim (GardeStrike) |
 | Metal | `metal.svg` | Reservado |
 | Dragão | `dragon.svg` | Sim |
-| Psíquico | `psychic.svg` | Reservado |
+| Psíquico | `psychic.svg` | Sim (Psycraft) |
 | Água | `water.svg` | Reservado |
 | Malefic | `malefic.svg` | Sim |
 | Gelo | `ice.svg` | Sim |

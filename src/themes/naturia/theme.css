@@ -1,0 +1,32 @@
+/* Naturia: forest black, leaf green and a restrained lime highlight. */
+#poke-clan-hud-root .pch-shell[data-theme="naturia"] {
+  --pch-primary: #9be86a;
+  --pch-accent-light: #d5ffab;
+  --pch-positive: #76d98f;
+  --pch-positive-dark: #2f9d60;
+  --pch-edge: #6dbb61;
+  --pch-edge-soft: #3c7547;
+  --pch-edge-shadow: #23452d;
+  --pch-glow: #73d15b5a;
+  --pch-panel-bg: linear-gradient(180deg, rgba(16, 42, 26, .98), rgba(6, 22, 17, .98));
+  --pch-panel-solid: #0a2017;
+  --pch-control-bg: #183829;
+  --pch-hover-bg: #93dc5d29;
+  --pch-muted: #b9d1b9;
+  --pch-notice: #d7de73;
+}
+
+html.poke-clan-hud-enabled.pch-theme-naturia {
+  --pch-native-accent: #6dbb61;
+  --pch-native-glow: #73d15b5a;
+  --pch-native-surface: #0a2017;
+  --pch-native-head: #183d29;
+  --pch-native-control: #204631;
+  --pch-native-divider: #447951;
+  --pch-native-text: #f0ffe9;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="naturia"] .pch-hunt-title,
+#poke-clan-hud-root .pch-shell[data-theme="naturia"] .pch-boss-label {
+  color: #b8f092;
+}

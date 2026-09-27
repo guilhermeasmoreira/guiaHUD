@@ -11,7 +11,8 @@
     return new Promise(function (resolve) {
       global.chrome.storage.local.get(key, function (result) {
         const loaded = Object.assign({}, defaults, result && result[key] || {});
-        if (!['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon'].includes(loaded.theme)) {
+        if (!['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon',
+          'naturia', 'gardestrike', 'psycraft', 'rainbolt'].includes(loaded.theme)) {
           loaded.theme = 'minimal';
         }
         resolve(loaded);

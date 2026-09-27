@@ -4,7 +4,8 @@
   const dom = app.modules.dom;
   const icons = app.modules.icons;
   const clanIcons = app.modules.clanIcons;
-  const clans = ['fire', 'stone', 'dragon', 'malefic', 'ice'];
+  const clans = ['fire', 'stone', 'dragon', 'malefic', 'ice',
+    'leaf', 'fighter', 'psychic', 'electric'];
 
   function mount(parent, actions) {
     const card = dom.create('section', 'pch-card pch-profile-card');

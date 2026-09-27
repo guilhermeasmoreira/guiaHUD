@@ -1,0 +1,32 @@
+/* Psycraft: midnight violet and the reference's luminous psychic eye. */
+#poke-clan-hud-root .pch-shell[data-theme="psycraft"] {
+  --pch-primary: #e39af7;
+  --pch-accent-light: #f8d7ff;
+  --pch-positive: #d5b1ff;
+  --pch-positive-dark: #8e67c9;
+  --pch-edge: #a569ca;
+  --pch-edge-soft: #62477f;
+  --pch-edge-shadow: #34294f;
+  --pch-glow: #c27be966;
+  --pch-panel-bg: linear-gradient(180deg, rgba(34, 23, 55, .98), rgba(14, 13, 30, .98));
+  --pch-panel-solid: #171329;
+  --pch-control-bg: #2b2040;
+  --pch-hover-bg: #d088ee2b;
+  --pch-muted: #cbb9d9;
+  --pch-notice: #efb5f6;
+}
+
+html.poke-clan-hud-enabled.pch-theme-psycraft {
+  --pch-native-accent: #a569ca;
+  --pch-native-glow: #c27be966;
+  --pch-native-surface: #171329;
+  --pch-native-head: #2b1e43;
+  --pch-native-control: #38294e;
+  --pch-native-divider: #754e91;
+  --pch-native-text: #f9efff;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="psycraft"] .pch-hunt-title,
+#poke-clan-hud-root .pch-shell[data-theme="psycraft"] .pch-boss-label {
+  color: #eab2fa;
+}

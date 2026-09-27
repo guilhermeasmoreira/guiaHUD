@@ -44,7 +44,8 @@
     function update(state, settings) {
       const currentSettings = settings || initialSettings || {};
       const theme = currentSettings.theme;
-      shell.dataset.theme = ['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon'].includes(theme)
+      shell.dataset.theme = ['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon',
+        'naturia', 'gardestrike', 'psycraft', 'rainbolt'].includes(theme)
         ? theme : 'minimal';
       shell.dataset.compact = String(currentSettings.compact !== false);
       const profileState = profile.update(state);

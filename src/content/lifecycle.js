@@ -10,6 +10,10 @@
     'pch-theme-fire',
     'pch-theme-stone',
     'pch-theme-dragon',
+    'pch-theme-naturia',
+    'pch-theme-gardestrike',
+    'pch-theme-psycraft',
+    'pch-theme-rainbolt',
     'pch-player-ready',
     'pch-chat-ready',
     'pch-chat-expanded',
@@ -67,9 +71,11 @@
 
   function applyTheme() {
     const theme = settings && settings.theme || 'minimal';
-    ['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon'].forEach(function (name) {
+    const themes = ['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon',
+      'naturia', 'gardestrike', 'psycraft', 'rainbolt'];
+    themes.forEach(function (name) {
       global.document.documentElement.classList.toggle('pch-theme-' + name,
-        name === theme || name === 'minimal' && !['malefic', 'ice', 'fire', 'stone', 'dragon'].includes(theme));
+        name === theme || name === 'minimal' && !themes.includes(theme));
     });
   }
 

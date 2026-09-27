@@ -1,0 +1,32 @@
+/* GardeStrike: dark leather and warm fist-orange. */
+#poke-clan-hud-root .pch-shell[data-theme="gardestrike"] {
+  --pch-primary: #efa16a;
+  --pch-accent-light: #ffd4aa;
+  --pch-positive: #f3bf7d;
+  --pch-positive-dark: #bd7445;
+  --pch-edge: #bd754b;
+  --pch-edge-soft: #754a39;
+  --pch-edge-shadow: #4b2d24;
+  --pch-glow: #e28e5359;
+  --pch-panel-bg: linear-gradient(180deg, rgba(46, 28, 24, .98), rgba(20, 17, 19, .98));
+  --pch-panel-solid: #211a1a;
+  --pch-control-bg: #392722;
+  --pch-hover-bg: #e89a652b;
+  --pch-muted: #d4b8ab;
+  --pch-notice: #f1c77d;
+}
+
+html.poke-clan-hud-enabled.pch-theme-gardestrike {
+  --pch-native-accent: #bd754b;
+  --pch-native-glow: #e28e5359;
+  --pch-native-surface: #211a1a;
+  --pch-native-head: #38251f;
+  --pch-native-control: #432d25;
+  --pch-native-divider: #805541;
+  --pch-native-text: #fff2e6;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="gardestrike"] .pch-hunt-title,
+#poke-clan-hud-root .pch-shell[data-theme="gardestrike"] .pch-boss-label {
+  color: #ffc092;
+}
