@@ -1,4 +1,4 @@
-/* Elemental themes share the compact layout and use CSS borders, not image frames. */
+/* Elemental themes share compact panels with a thin, theme-colored neon edge. */
 #poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"], [data-theme="naturia"], [data-theme="gardestrike"], [data-theme="psycraft"], [data-theme="rainbolt"]) {
   --pch-text: #f7f7fb;
   --pch-muted: #bec6d2;
@@ -12,7 +12,8 @@
   --pch-focus: var(--pch-accent-light);
   --pch-surface: var(--pch-panel-bg);
   --pch-surface-strong: var(--pch-panel-solid);
-  --pch-shadow: 0 0 0 1px var(--pch-edge-shadow), 0 0 13px var(--pch-glow), 0 7px 20px #0009;
+  --pch-shadow: 0 0 0 1px var(--pch-edge-shadow), 0 0 9px var(--pch-glow), 0 0 18px var(--pch-glow), 0 7px 20px #0009;
+  --pch-neon-edge: linear-gradient(130deg, var(--pch-accent-light), var(--pch-edge) 28%, var(--pch-edge-soft) 52%, var(--pch-primary) 78%, var(--pch-edge-soft));
   --pch-radius: 6px;
   --pch-track: var(--pch-panel-solid);
 }
@@ -28,9 +29,9 @@
 
 #poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"], [data-theme="naturia"], [data-theme="gardestrike"], [data-theme="psycraft"], [data-theme="rainbolt"])
   :is(.pch-profile-card, .pch-boss-pill, .pch-main-menu, .pch-hunt-card, .pch-skills-bar, .pch-chat-pill, .pch-settings-panel, .pch-settings-trigger) {
-  border: 1px solid var(--pch-edge);
+  border: 1px solid transparent;
   border-radius: 6px;
-  background: var(--pch-panel-bg);
+  background: var(--pch-panel-bg) padding-box, var(--pch-neon-edge) border-box;
   box-shadow: var(--pch-shadow);
   backdrop-filter: blur(10px);
 }
@@ -127,8 +128,9 @@
 
 #poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"], [data-theme="naturia"], [data-theme="gardestrike"], [data-theme="psycraft"], [data-theme="rainbolt"]) .pch-menu-popover {
   z-index: 5;
-  border-color: var(--pch-edge);
-  background: var(--pch-panel-solid);
+  border-color: transparent;
+  background: linear-gradient(var(--pch-panel-solid), var(--pch-panel-solid)) padding-box,
+    var(--pch-neon-edge) border-box;
 }
 
 #poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"], [data-theme="naturia"], [data-theme="gardestrike"], [data-theme="psycraft"], [data-theme="rainbolt"]) .pch-hunt-slot {
@@ -206,10 +208,12 @@ html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone,
 html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone, .pch-theme-dragon, .pch-theme-naturia, .pch-theme-gardestrike, .pch-theme-psycraft, .pch-theme-rainbolt)
   :is(#game-chat, #auto-helper-panel, #ha-panel) {
   --rh-frame: none !important;
-  border: 1px solid var(--pch-native-accent) !important;
+  border: 1px solid transparent !important;
   border-radius: 6px !important;
-  background-color: var(--pch-native-surface) !important;
-  background-image: none !important;
+  background: linear-gradient(var(--pch-native-surface), var(--pch-native-surface)) padding-box,
+    linear-gradient(130deg, color-mix(in srgb, var(--pch-native-accent) 65%, white),
+      var(--pch-native-divider) 48%, var(--pch-native-accent) 78%,
+      color-mix(in srgb, var(--pch-native-accent) 75%, white)) border-box !important;
   box-shadow: 0 0 12px var(--pch-native-glow) !important;
   color: var(--pch-native-text) !important;
 }
@@ -245,9 +249,12 @@ html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone,
 html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone, .pch-theme-dragon, .pch-theme-naturia, .pch-theme-gardestrike, .pch-theme-psycraft, .pch-theme-rainbolt)
   :is(.pch-native-mail, .pch-native-zoom, .pch-native-shortcut) {
   --rh-frame: none !important;
-  border: 1px solid var(--pch-native-accent) !important;
+  border: 1px solid transparent !important;
   border-radius: 5px !important;
-  background-color: var(--pch-native-surface) !important;
+  background: linear-gradient(var(--pch-native-surface), var(--pch-native-surface)) padding-box,
+    linear-gradient(130deg, color-mix(in srgb, var(--pch-native-accent) 65%, white),
+      var(--pch-native-divider) 48%, var(--pch-native-accent) 78%,
+      color-mix(in srgb, var(--pch-native-accent) 75%, white)) border-box !important;
   box-shadow: 0 0 8px var(--pch-native-glow) !important;
   color: var(--pch-native-text) !important;
 }
