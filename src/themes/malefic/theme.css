@@ -41,6 +41,7 @@
   border-radius: 4px;
   background: var(--pch-surface);
   box-shadow: var(--pch-shadow);
+  filter: drop-shadow(0 0 5px rgba(192, 70, 246, .5));
   clip-path: polygon(13px 0, calc(100% - 13px) 0, 100% 13px, 100% calc(100% - 13px), calc(100% - 13px) 100%, 13px 100%, 0 calc(100% - 13px), 0 13px);
 }
 
@@ -54,7 +55,12 @@
   position: absolute;
   inset: 3px;
   z-index: 0;
-  border: 1px solid rgba(166, 69, 215, .48);
+  border: 1px solid rgba(207, 97, 251, .82);
+  background:
+    linear-gradient(135deg, transparent 39%, #e68aff 45%, #e68aff 52%, transparent 58%) left top / 20px 20px no-repeat,
+    linear-gradient(225deg, transparent 39%, #e68aff 45%, #e68aff 52%, transparent 58%) right top / 20px 20px no-repeat,
+    linear-gradient(45deg, transparent 39%, #a43fdb 45%, #a43fdb 52%, transparent 58%) left bottom / 20px 20px no-repeat,
+    linear-gradient(315deg, transparent 39%, #a43fdb 45%, #a43fdb 52%, transparent 58%) right bottom / 20px 20px no-repeat;
   clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
   content: "";
   pointer-events: none;
@@ -76,7 +82,7 @@
   padding: 9px 14px 8px 56px;
 }
 
-#poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-player-toggle > .pch-icon-crest {
+#poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-profile-card > .pch-icon-crest {
   position: absolute;
   top: 5px;
   left: 7px;
@@ -138,6 +144,17 @@
   gap: 2px;
   padding: 3px 9px;
   clip-path: none;
+  max-width: min(1020px, calc(100vw - 640px));
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-menu-primary {
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-menu-action {
+  flex: 0 0 auto;
 }
 
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-menu-slot {
@@ -165,6 +182,7 @@
 
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-menu-more {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   gap: 4px;
 }
@@ -326,11 +344,110 @@ html.poke-clan-hud-enabled.pch-theme-malefic ::-webkit-scrollbar-thumb {
 html.poke-clan-hud-enabled.pch-theme-malefic #game-chat,
 html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel,
 html.poke-clan-hud-enabled.pch-theme-malefic #ha-panel {
+  --rh-frame: none !important;
   border: 1px solid #994ac4 !important;
   border-radius: 5px !important;
   background: #0c0a1b !important;
   box-shadow: 0 0 13px rgba(167, 49, 222, .62), inset 0 1px rgba(226, 144, 255, .22) !important;
   color: #f6ecff !important;
+}
+
+/* The game's framed controls carry a blue SVG in an inline --rh-frame variable. */
+html.poke-clan-hud-enabled.pch-theme-malefic [style*="--rh-frame"]:not(#pokemon-team-bar) {
+  --rh-frame: none !important;
+  border-color: #9347bf !important;
+  background-color: #100b1f !important;
+  box-shadow: 0 0 0 1px #402057, 0 0 10px rgba(167, 53, 222, .58) !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic [style*="--rh-frame"]:not(#pokemon-team-bar)::before,
+html.poke-clan-hud-enabled.pch-theme-malefic [style*="--rh-frame"]:not(#pokemon-team-bar)::after {
+  background-image: none !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-mail,
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-zoom,
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-shortcut {
+  --rh-frame: none !important;
+  border: 1px solid #a451d1 !important;
+  border-radius: 4px !important;
+  background-color: #100a1e !important;
+  box-shadow: 0 0 0 1px #49215f, 0 0 10px rgba(191, 64, 230, .63), inset 0 1px rgba(239, 159, 255, .18) !important;
+  color: #f5eaff !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-mail::before,
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-mail::after,
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-zoom::before,
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-zoom::after {
+  background-image: none !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic .pch-native-zoom button {
+  border-color: #8c42b2 !important;
+  background-color: #1b102b !important;
+  color: #d474f7 !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat::before,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat::after,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel::before,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel::after {
+  background-image: none !important;
+  border-color: #9845c4 !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-panel,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-messages,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-composer,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-input-frame,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel .auto-helper-body,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel .helper-module {
+  border-color: #4c2961 !important;
+  background: #0d0a1b !important;
+  color: #f3eaff !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-topbar,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-tabs,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel .auto-helper-head,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel .auto-helper-compact {
+  border-color: #763897 !important;
+  background: #160e27 !important;
+  color: #f4e9ff !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-tab,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-view-menu-toggle,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-minimize,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-input,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-send,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel .helper-ball,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel select,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel input {
+  border-color: #79419d !important;
+  background-color: #140f24 !important;
+  color: #f4e9ff !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-tab.active,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-tab.is-active,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel .helper-ball.active {
+  border-color: #d562fa !important;
+  background-color: #361549 !important;
+  box-shadow: 0 0 7px rgba(197, 70, 238, .48) !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat #chat-send,
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel input:checked + span {
+  border-color: #53e7a4 !important;
+  background: #247553 !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel .auto-helper-logo,
+html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-online-indicator {
+  color: #c75af3 !important;
+  border-color: #b654dc !important;
 }
 
 html.poke-clan-hud-enabled.pch-theme-malefic #game-chat .chat-topbar,
@@ -356,6 +473,10 @@ html.poke-clan-hud-enabled.pch-theme-malefic #auto-helper-panel select {
 
   #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-hunt-slot {
     top: 132px;
+  }
+
+  #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-main-menu {
+    max-width: calc(100vw - 24px);
   }
 }
 

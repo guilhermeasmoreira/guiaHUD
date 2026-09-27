@@ -818,6 +818,10 @@ html.poke-clan-hud-enabled.pch-hunt-ready:not(.pch-hunt-expanded) #ha-panel {
   display: none !important;
 }
 
+html.poke-clan-hud-enabled.pch-hunt-ready.pch-hunt-expanded #poke-clan-hud-root .pch-hunt-card {
+  display: none !important;
+}
+
 html.poke-clan-hud-enabled.pch-chat-ready:not(.pch-chat-expanded) #game-chat {
   display: none !important;
   visibility: hidden !important;

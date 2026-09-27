@@ -27,6 +27,13 @@
   let currentState = null;
   let active = false;
 
+  function onNativeHuntClick(event) {
+    if (!active || !event.target || !event.target.closest) return;
+    if (event.target.closest('#minimize-hunt-analyzer')) {
+      global.document.documentElement.classList.remove('pch-hunt-expanded');
+    }
+  }
+
   function clearClasses() {
     htmlClasses.forEach(function (name) {
       global.document.documentElement.classList.remove(name);
@@ -84,12 +91,14 @@
 
   function disable() {
     active = false;
+    app.modules.nativePanels.stop();
     if (adapter) adapter.destroy();
     adapter = null;
     if (hud) hud.destroy();
     hud = null;
     store = null;
     clearClasses();
+    global.document.removeEventListener('click', onNativeHuntClick);
     removeRestoreButton();
     settings = Object.assign({}, settings || app.modules.settingsDefaults, { enabled: false });
     app.modules.settingsStorage.save(settings);
@@ -122,6 +131,8 @@
       }
 
       global.document.documentElement.classList.add('poke-clan-hud-enabled');
+      app.modules.nativePanels.start();
+      global.document.addEventListener('click', onNativeHuntClick);
       applyTheme();
       applyReadiness(hud.update(currentState, settings));
       store.subscribe(render);
@@ -131,12 +142,14 @@
       app.modules.settingsStorage.save(settings);
     } catch (error) {
       active = false;
+      app.modules.nativePanels.stop();
       if (adapter) adapter.destroy();
       adapter = null;
       if (hud) hud.destroy();
       hud = null;
       store = null;
       clearClasses();
+      global.document.removeEventListener('click', onNativeHuntClick);
       global.console.error('[Poké Idle Clan HUD] Não foi possível montar a interface.', error);
       showRestoreButton();
     }

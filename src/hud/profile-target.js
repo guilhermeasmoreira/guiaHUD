@@ -13,7 +13,6 @@
     player.setAttribute('aria-expanded', 'false');
     player.setAttribute('aria-label', 'Abrir equipe para trocar o Pokémon ativo');
     const playerName = dom.create('strong', 'pch-player-name', 'Treinador');
-    player.prepend(icons.create('crest'));
     const playerMeta = dom.create('span', 'pch-player-meta');
     const playerChevron = dom.create('span', 'pch-player-chevron', '⌄');
     playerChevron.setAttribute('aria-hidden', 'true');
@@ -38,7 +37,7 @@
     teamPanel.hidden = true;
     teamPanel.setAttribute('aria-label', 'Selecionar Pokémon ativo');
 
-    card.append(player, target, teamPanel);
+    card.append(icons.create('crest'), player, target, teamPanel);
     parent.append(card);
 
     let expanded = false;

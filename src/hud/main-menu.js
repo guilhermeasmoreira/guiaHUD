@@ -10,7 +10,11 @@
     { type: 'client', key: 'map', label: 'Mapa' },
     { type: 'client', key: 'auto-helper', label: 'Auto Helper' },
     { type: 'client', key: 'hunt-analyzer', label: 'Hunt' },
-    { type: 'system', key: 'diamond-shop', label: 'Diamantes' }
+    { type: 'system', key: 'diamond-shop', label: 'Diamantes' },
+    { type: 'client', key: 'health', label: 'Centro' },
+    { type: 'system', key: 'pokedex', label: 'Pokédex' },
+    { type: 'system', key: 'captures', label: 'Capturas' },
+    { type: 'client', key: 'player-market', label: 'Market' }
   ];
 
   const icons = {
@@ -19,7 +23,8 @@
     map: '⌖',
     'auto-helper': '◇',
     'hunt-analyzer': '◷',
-    'diamond-shop': '◆'
+    'diamond-shop': '◆',
+    health: '✚', pokedex: '▤', captures: '◉', 'player-market': '⌂'
   };
 
   const shortLabels = {
@@ -58,7 +63,8 @@
     icon.setAttribute('aria-hidden', 'true');
     const themeIcon = {
       inventory: 'inventory', profile: 'profile', map: 'map',
-      'auto-helper': 'helper', 'hunt-analyzer': 'hunt', 'diamond-shop': 'diamond'
+      'auto-helper': 'helper', 'hunt-analyzer': 'hunt', 'diamond-shop': 'diamond',
+      health: 'health', pokedex: 'pokedex', captures: 'captures', 'player-market': 'market'
     }[action.key];
     if (themeIcon) icon.append(iconFactory.create(themeIcon));
     const label = dom.create('span', 'pch-menu-label', forcedLabel || displayLabel(action));

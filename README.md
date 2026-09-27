@@ -4,7 +4,7 @@ Visual references for Fogo, Malefic, and Gelo are saved in [design/README.md](de
 
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
-Version 0.5 adds the selectable Malefic theme with violet framed panels, vector icons, green accents and themed scrollbars. Version 0.4 added a custom expandable Pokémon selector with the game's sprites.
+Version 0.5.1 refines Malefic's native game panels, keeps only one Hunt Analyzer visible, fixes the profile crest position, and expands the top menu. Version 0.4 added a custom expandable Pokémon selector with the game's sprites.
 
 ## Load in Chrome
 
@@ -23,7 +23,7 @@ The extension only matches the game page and requests the storage permission for
 - Confirm horizontal and vertical scrollbars use the minimal style, especially the skills row and the expanded Pokémon list.
 - In the gear menu select **Malefic**. Check the purple frames, iconography, green HP and stat accents, Hunt Analyzer at the upper right, chat at the lower left, and that all controls still work. Dragged widget positions from earlier versions take precedence; double-click a dotted drag control to reset its widget position.
 - Confirm skill cooldown values appear and update using the game's own cooldown display.
-- Click **Zerar** in Hunt Analyzer; the original analyzer opens as needed, and its own confirmation control completes the reset.
+- Click **Zerar** in Hunt Analyzer; the native reset and confirmation run without showing a second analyzer. **Detalhes** switches to the native analyzer; minimizing it restores the compact one.
 - Confirm target, Boss, and Hunt Analyzer values continue updating during play.
 
 ## Structure

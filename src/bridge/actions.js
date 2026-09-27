@@ -46,12 +46,6 @@
     return !root.classList.contains('collapsed') && !root.classList.contains('is-minimized');
   }
 
-  function isHuntExpanded(root) {
-    if (!root || !root.classList) return false;
-    if (root.classList.contains('client-open')) return true;
-    return !root.classList.contains('collapsed');
-  }
-
   function findHuntResetControl(root) {
     const direct = dom.query(selectors.hunt.reset) || dom.query(selectors.hunt.reset, root || global.document);
     if (direct) return direct;
@@ -71,7 +65,9 @@
   const actions = {
     openMenuAction: function (type, key) {
       if (type === 'client' && key === 'hunt-analyzer') {
-        global.document.documentElement.classList.add('pch-hunt-expanded');
+        const opened = clientAction(key);
+        if (opened) global.document.documentElement.classList.add('pch-hunt-expanded');
+        return opened;
       }
       if (type === 'client' && key === 'auto-helper') {
         const helper = dom.query(selectors.helper.root);
@@ -118,7 +114,6 @@
     },
     resetHunt: function () {
       const root = dom.query(selectors.hunt.root);
-      global.document.documentElement.classList.add('pch-hunt-expanded');
       const currentRoot = dom.query(selectors.hunt.root) || root || global.document;
       const more = dom.query('#ha-btnMore');
       if (more && more.getAttribute('aria-expanded') !== 'true') more.click();
@@ -130,13 +125,13 @@
       return true;
     },
     toggleHuntDetails: function () {
-      const html = global.document.documentElement;
       const root = dom.query(selectors.hunt.root);
-      const expanded = isHuntExpanded(root);
-      const control = dom.query(expanded ? selectors.hunt.minimize : selectors.hunt.expand);
-      if (!control) return false;
-      control.click();
-      html.classList.toggle('pch-hunt-expanded', isHuntExpanded(root) || !expanded);
+      if (!root) return false;
+      if (root.classList.contains('collapsed')) {
+        const restore = dom.query(selectors.hunt.minimize);
+        if (restore && !disabled(restore)) restore.click();
+      }
+      global.document.documentElement.classList.add('pch-hunt-expanded');
       return true;
     },
     activateMove: function (moveKey) {

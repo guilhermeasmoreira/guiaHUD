@@ -233,12 +233,12 @@ test('action bridge forwards commands to the original game buttons', function ()
   assert.equal(actions.resetHunt(), true);
   assert.equal(actions.toggleBoss(), true);
   assert.deepEqual(clicks, { inventory: 1, move: 1, more: 1, reset: 1, confirm: 1, boss: 1 });
-  assert.equal(classes.has('pch-hunt-expanded'), true);
+  assert.equal(classes.has('pch-hunt-expanded'), false);
   assert.equal(classes.has('pch-boss-expanded'), true);
 });
 
-test('profile and Hunt Analyzer controls expand their original game panels', function () {
-  const clicks = { team: 0, huntExpand: 0, reset: 0 };
+test('Hunt details opens the native panel while reset keeps the compact panel', function () {
+  const clicks = { team: 0, huntRestore: 0, reset: 0 };
   const teamClasses = new Set(['collapsed']);
   const huntClasses = new Set(['collapsed']);
   const teamRoot = element('', { classes: ['collapsed'] });
@@ -251,10 +251,10 @@ test('profile and Hunt Analyzer controls expand their original game panels', fun
   teamRoot.querySelector = function (selector) { return selector === '.team-minimize' ? teamToggle : null; };
 
   const huntRoot = element('', { classes: ['collapsed'] });
-  const expand = element('');
+  const restore = element('');
   const reset = element('');
-  expand.click = function () {
-    clicks.huntExpand += 1;
+  restore.click = function () {
+    clicks.huntRestore += 1;
     huntClasses.delete('collapsed');
     huntClasses.add('client-open');
     huntRoot.classList.remove('collapsed');
@@ -262,7 +262,7 @@ test('profile and Hunt Analyzer controls expand their original game panels', fun
   };
   reset.click = function () { clicks.reset += 1; };
   huntRoot.querySelector = function (selector) {
-    if (selector === '#ha-btnExp') return expand;
+    if (selector === '#minimize-hunt-analyzer') return restore;
     if (selector === '#ha-mZero') return reset;
     return null;
   };
@@ -286,7 +286,7 @@ test('profile and Hunt Analyzer controls expand their original game panels', fun
       if (selector === '#pokemon-team-bar') return teamRoot;
       if (selector === '#pokemon-team-bar .team-minimize') return teamToggle;
       if (selector === '#ha-panel') return huntRoot;
-      if (selector === '#ha-btnExp') return expand;
+      if (selector === '#minimize-hunt-analyzer') return restore;
       return null;
     },
     querySelectorAll: function () { return []; }
@@ -300,6 +300,9 @@ test('profile and Hunt Analyzer controls expand their original game panels', fun
   assert.equal(actions.togglePlayerTeam(), true);
   assert.equal(htmlClasses.has('pch-team-expanded'), true);
   assert.equal(actions.resetHunt(), true);
-  assert.deepEqual(clicks, { team: 1, huntExpand: 0, reset: 1 });
+  assert.deepEqual(clicks, { team: 1, huntRestore: 0, reset: 1 });
+  assert.equal(htmlClasses.has('pch-hunt-expanded'), false);
+  assert.equal(actions.toggleHuntDetails(), true);
+  assert.deepEqual(clicks, { team: 1, huntRestore: 1, reset: 1 });
   assert.equal(htmlClasses.has('pch-hunt-expanded'), true);
 });
