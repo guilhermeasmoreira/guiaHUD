@@ -393,6 +393,16 @@ html.poke-clan-hud-enabled.pch-theme-malefic nav.rh-mini[data-rh-panel="quick"] 
 html.poke-clan-hud-enabled.pch-theme-malefic #mailbox-floating-letter :is(.rh-mail-icon, em) {
   color: #f7edff !important;
 }
+
+/* The game's mailbox rule paints its own blue background after the shared frame rule. */
+html.poke-clan-hud-enabled.pch-theme-malefic #mailbox-floating-letter#mailbox-floating-letter {
+  border: 1px solid transparent !important;
+  border-radius: 5px !important;
+  background: linear-gradient(#100b1c, #100b1c) padding-box,
+    linear-gradient(130deg, #e7a0ff, #63377b 48%, #b847e4 78%, #f778b4) border-box !important;
+  box-shadow: 0 0 8px #a847d477 !important;
+  color: #f7edff !important;
+}
 html.poke-clan-hud-enabled.pch-theme-malefic,
 html.poke-clan-hud-enabled.pch-theme-malefic * {
   scrollbar-width: thin;

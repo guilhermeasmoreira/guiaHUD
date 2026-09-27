@@ -272,6 +272,18 @@ html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone,
   color: var(--pch-native-text) !important;
 }
 
+html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone, .pch-theme-dragon, .pch-theme-naturia, .pch-theme-gardestrike, .pch-theme-psycraft, .pch-theme-rainbolt)
+  #mailbox-floating-letter#mailbox-floating-letter {
+  border: 1px solid transparent !important;
+  border-radius: 5px !important;
+  background: linear-gradient(var(--pch-native-surface), var(--pch-native-surface)) padding-box,
+    linear-gradient(130deg, color-mix(in srgb, var(--pch-native-accent) 65%, white),
+      var(--pch-native-divider) 48%, var(--pch-native-accent) 78%,
+      color-mix(in srgb, var(--pch-native-accent) 75%, white)) border-box !important;
+  box-shadow: 0 0 8px var(--pch-native-glow) !important;
+  color: var(--pch-native-text) !important;
+}
+
 @media (max-width: 1100px) {
   #poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"], [data-theme="naturia"], [data-theme="gardestrike"], [data-theme="psycraft"], [data-theme="rainbolt"]) .pch-hunt-slot {
     top: 115px;

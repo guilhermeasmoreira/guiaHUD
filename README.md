@@ -8,6 +8,7 @@ Version 0.8.0 adds Naturia (Planta/Inseto), GardeStrike (Lutador), Psycraft (Ps√
 Version 0.8.1 unifies the clan symbols as thin outline SVGs inspired by the compact Seavell snowflake. The same themed symbol appears in the profile and skills bar. Reusable exports are in [design/icons](design/icons/README.md).
 Version 0.8.2 adds thin neon gradient borders to the HUD panels and known game panels in every theme, with rounded corners and a restrained glow.
 Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directly, suppresses their generated blue frames while the HUD is enabled, and shortens the four new theme labels in the selector.
+Version 0.8.4 gives the Mail control's theme rule priority over the game's own blue background and border declarations.
 
 ## Load in Chrome
 
