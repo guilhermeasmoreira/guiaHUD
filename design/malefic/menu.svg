@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 48" width="480" height="48" fill="none">
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="480" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#9943c5"/><stop offset=".5" stop-color="#d26cff"/><stop offset="1" stop-color="#8f3bbc"/></linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#18101f" stop-opacity=".97"/><stop offset="1" stop-color="#080912" stop-opacity=".97"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="2.2"/></filter>
+  </defs>
+  <path d="M15 8 25 5h197l18-4 18 4h195l12 4 12 13-9 17-14 5H27L7 38 2 24Z" fill="#7226a0" opacity=".6" filter="url(#glow)"/>
+  <path d="m15 8 11-3h196l18-4 18 4h195l12 4 12 13-9 17-14 5H27L7 38 2 24Z" fill="url(#dark)" stroke="url(#edge)" stroke-width="1.8"/>
+  <path d="M27 10h197l16-3 16 3h196l11 4 8 10-7 11-11 4H28L12 35 8 24l10-11Z" stroke="#78349d" stroke-width=".7"/>
+  <path d="m240 5 7 11-7 9-7-9Z" fill="#a639d9" stroke="#e38eff" stroke-width="1"/>
+  <path d="m240 9 3 6-3 4-3-4Z" fill="#53f0af"/>
+  <path d="m5 22 13-11 7-4-8 11-5 7 7 10-12-4ZM475 22l-13-11-7-4 8 11 5 7-7 10 12-4Z" fill="#4d206e" stroke="#bc60e8" stroke-width=".8"/>
+  <path d="M27 42h193m40 0h193" stroke="#c061ec" stroke-width="1" opacity=".65"/>
+</svg>

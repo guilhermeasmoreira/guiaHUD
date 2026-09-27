@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 86" width="720" height="86" fill="none">
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="720" y2="86" gradientUnits="userSpaceOnUse"><stop stop-color="#782d9e"/><stop offset=".36" stop-color="#bd60e8"/><stop offset=".7" stop-color="#8d3ab3"/><stop offset="1" stop-color="#c564ef"/></linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="0" y2="86" gradientUnits="userSpaceOnUse"><stop stop-color="#17101d" stop-opacity=".98"/><stop offset="1" stop-color="#080910" stop-opacity=".96"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="2.5"/></filter>
+  </defs>
+  <path d="m21 19 15-8h322l11-9 11 9h303l20 8 14 24-13 24-19 11H380l-11 6-11-6H36L18 69 3 44Z" fill="#76329d" opacity=".5" filter="url(#glow)"/>
+  <path d="m21 19 15-8h322l11-9 11 9h303l20 8 14 24-13 24-19 11H380l-11 6-11-6H36L18 69 3 44Z" fill="url(#dark)" stroke="url(#edge)" stroke-width="2"/>
+  <path d="m34 16 327-1 8-9 8 9h305l16 8 13 20-12 20-17 10H378l-9 6-9-6H37L22 65 9 44l13-20Z" stroke="#78369d" stroke-width=".8"/>
+  <path d="m369 5 10 12-10 12-10-12Z" fill="#8439af" stroke="#e186ff" stroke-width="1.2"/>
+  <path d="m369 10 5 7-5 6-5-6Z" fill="#d476f9"/>
+  <path d="m369 72 7 7-7 6-7-6Z" fill="#7b2fa3" stroke="#d978fa" stroke-width="1"/>
+  <path d="M72 69h283m29 0h298" stroke="#b44ce4" stroke-width="2" stroke-linecap="round"/>
+  <path d="m5 43 16-24 9-5-10 19-9 11 10 17 9 11-12-6ZM715 43l-16-24-9-5 10 19 9 11-10 17-9 11 12-6Z" fill="#532176" stroke="#bb5ded" stroke-width="1"/>
+  <path d="m17 62 6 10 9 4-7-11ZM703 62l-6 10-9 4 7-11Z" fill="#54eda9" stroke="#259d71" stroke-width="1"/>
+  <path d="m30 43 7-7-4 7 4 7ZM691 43l-7-7 4 7-4 7Z" fill="#ca6df0"/>
+  <path d="m42 36 5-16 8 6 6-10 7 15-4 10-6-4-5 11-5-12Z" fill="#421b61" stroke="#b24ae3" stroke-width="1.5"/>
+  <path d="m46 25 2 10 5-6 3 8 5-8-1 12-5 7-3-6-4 4-4-9Z" fill="#8f36bd"/>
+  <path d="m48 32 4 4-5 2Zm12 0-4 4 5 2Z" fill="#da83fb"/>
+</svg>
