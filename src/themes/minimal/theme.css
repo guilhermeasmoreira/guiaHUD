@@ -104,12 +104,23 @@ html.poke-clan-hud-enabled.pch-theme-minimal #auto-helper-panel select {
 }
 
 html.poke-clan-hud-enabled.pch-theme-minimal
-  :is(#ha-panel, .pch-native-mail, .pch-native-zoom, .pch-native-shortcut) {
+  :is(#ha-panel, #mailbox-floating-letter, nav.rh-mini[data-rh-panel="quick"],
+      .pch-native-mail, .pch-native-zoom, .pch-native-shortcut) {
   --rh-frame: none !important;
   border: 1px solid transparent !important;
   border-radius: 8px !important;
   background: linear-gradient(#071a30, #071a30) padding-box,
     linear-gradient(130deg, #b3f5ff, #328fb5 42%, #4fe0b0 78%, #a6efff) border-box !important;
   box-shadow: 0 0 10px rgba(77, 188, 229, .25) !important;
+  color: #eef9ff !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-minimal nav.rh-mini[data-rh-panel="quick"] button:not(.rh-drag-grip) {
+  border-color: rgba(112, 218, 255, .26) !important;
+  background-color: #0b2a45 !important;
+  color: #eef9ff !important;
+}
+
+html.poke-clan-hud-enabled.pch-theme-minimal #mailbox-floating-letter :is(.rh-mail-icon, em) {
   color: #eef9ff !important;
 }

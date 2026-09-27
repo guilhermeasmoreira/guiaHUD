@@ -36,10 +36,10 @@
       ['fire', 'Volcanic'],
       ['stone', 'Orebound'],
       ['dragon', 'Wingeon'],
-      ['naturia', 'Naturia (Planta/Inseto)'],
-      ['gardestrike', 'GardeStrike (Lutador)'],
-      ['psycraft', 'Psycraft (Psíquico)'],
-      ['rainbolt', 'Rainbolt (Elétrico)']
+      ['naturia', 'Naturia'],
+      ['gardestrike', 'GardeStrike'],
+      ['psycraft', 'Psycraft'],
+      ['rainbolt', 'Rainbolt']
     ].forEach(function ([value, label]) {
       const option = dom.create('option', '', label);
       option.value = value;

@@ -247,7 +247,8 @@ html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone,
 }
 
 html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone, .pch-theme-dragon, .pch-theme-naturia, .pch-theme-gardestrike, .pch-theme-psycraft, .pch-theme-rainbolt)
-  :is(.pch-native-mail, .pch-native-zoom, .pch-native-shortcut) {
+  :is(#mailbox-floating-letter, nav.rh-mini[data-rh-panel="quick"],
+      .pch-native-mail, .pch-native-zoom, .pch-native-shortcut) {
   --rh-frame: none !important;
   border: 1px solid transparent !important;
   border-radius: 5px !important;
@@ -260,9 +261,14 @@ html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone,
 }
 
 html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone, .pch-theme-dragon, .pch-theme-naturia, .pch-theme-gardestrike, .pch-theme-psycraft, .pch-theme-rainbolt)
-  .pch-native-zoom button {
+  :is(.pch-native-zoom button, nav.rh-mini[data-rh-panel="quick"] button:not(.rh-drag-grip)) {
   border-color: var(--pch-native-divider) !important;
   background-color: var(--pch-native-control) !important;
+  color: var(--pch-native-text) !important;
+}
+
+html.poke-clan-hud-enabled:is(.pch-theme-ice, .pch-theme-fire, .pch-theme-stone, .pch-theme-dragon, .pch-theme-naturia, .pch-theme-gardestrike, .pch-theme-psycraft, .pch-theme-rainbolt)
+  #mailbox-floating-letter :is(.rh-mail-icon, em) {
   color: var(--pch-native-text) !important;
 }
 

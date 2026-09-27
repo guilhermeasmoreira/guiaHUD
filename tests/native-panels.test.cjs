@@ -49,3 +49,27 @@ test('native panels are suppressed only while their replacement is active and re
   panels.stop();
   assert.equal(hunt.style.getPropertyValue('display'), 'flex');
 });
+
+test('native quick bar and mailbox are annotated regardless of their screen position', () => {
+  const quickClasses = new Set();
+  const mailClasses = new Set();
+  const node = (classes) => ({ classList: { add: (name) => classes.add(name) } });
+  const nodes = {
+    'nav.rh-mini[data-rh-panel="quick"]': [node(quickClasses)],
+    '#mailbox-floating-letter': [node(mailClasses)]
+  };
+  const context = {
+    document: { querySelectorAll: (selector) => nodes[selector] || [] },
+    PokeClanHUD: { modules: {} },
+    setInterval: () => 1,
+    clearInterval: () => {},
+    innerWidth: 1200
+  };
+  context.globalThis = context;
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/content/native-panels.js'), 'utf8'), context);
+  const panels = context.PokeClanHUD.modules.nativePanels;
+  panels.start();
+  assert.ok(quickClasses.has('pch-native-shortcut'));
+  assert.ok(mailClasses.has('pch-native-mail'));
+  panels.stop();
+});

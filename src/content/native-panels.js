@@ -66,6 +66,14 @@
   }
 
   function annotate() {
+    // The quick bar is a fixed <nav> on either side of the screen. Its
+    // individual buttons are not reliable position-based annotation targets.
+    global.document.querySelectorAll('nav.rh-mini[data-rh-panel="quick"]').forEach(function (bar) {
+      bar.classList.add('pch-native-shortcut');
+    });
+    global.document.querySelectorAll('#mailbox-floating-letter').forEach(function (mail) {
+      mail.classList.add('pch-native-mail');
+    });
     const controls = Array.from(global.document.querySelectorAll('button, [role="button"]'));
     controls.forEach(function (control) {
       if (control.closest('#poke-clan-hud-root')) return;

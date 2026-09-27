@@ -39,6 +39,17 @@
   pointer-events: none;
 }
 
+/* The game's generated blue SVG frame otherwise covers themed borders. */
+html.poke-clan-hud-enabled #mailbox-floating-letter::before,
+html.poke-clan-hud-enabled #mailbox-floating-letter::after,
+html.poke-clan-hud-enabled nav.rh-mini[data-rh-panel="quick"]::before,
+html.poke-clan-hud-enabled nav.rh-mini[data-rh-panel="quick"]::after {
+  content: none !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
 #poke-clan-hud-root button,
 #poke-clan-hud-enable,
 #poke-clan-hud-root select {

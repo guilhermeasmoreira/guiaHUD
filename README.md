@@ -7,6 +7,7 @@ Chrome Manifest V3 extension that presents the compact **Padrão minimalista** H
 Version 0.8.0 adds Naturia (Planta/Inseto), GardeStrike (Lutador), Psycraft (Psíquico), and Rainbolt (Elétrico). The former Gelo, Fogo, Pedra, and Dragão themes are now displayed as Seavell, Volcanic, Orebound, and Wingeon. Their internal IDs remain unchanged so saved preferences continue working. The compact HUD remains functional across themes; the chat, Auto Helper, and known native controls receive matching colors.
 Version 0.8.1 unifies the clan symbols as thin outline SVGs inspired by the compact Seavell snowflake. The same themed symbol appears in the profile and skills bar. Reusable exports are in [design/icons](design/icons/README.md).
 Version 0.8.2 adds thin neon gradient borders to the HUD panels and known game panels in every theme, with rounded corners and a restrained glow.
+Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directly, suppresses their generated blue frames while the HUD is enabled, and shortens the four new theme labels in the selector.
 
 ## Load in Chrome
 
