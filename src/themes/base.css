@@ -39,11 +39,11 @@
   pointer-events: none;
 }
 
-/* The game's generated blue SVG frame otherwise covers themed borders. */
-html.poke-clan-hud-enabled #mailbox-floating-letter::before,
-html.poke-clan-hud-enabled #mailbox-floating-letter::after,
-html.poke-clan-hud-enabled nav.rh-mini[data-rh-panel="quick"]::before,
-html.poke-clan-hud-enabled nav.rh-mini[data-rh-panel="quick"]::after {
+/* Clan themes suppress native SVG frames; minimal keeps the game's blue frame. */
+html.poke-clan-hud-enabled:not(.pch-theme-minimal) #mailbox-floating-letter::before,
+html.poke-clan-hud-enabled:not(.pch-theme-minimal) #mailbox-floating-letter::after,
+html.poke-clan-hud-enabled:not(.pch-theme-minimal) nav.rh-mini[data-rh-panel="quick"]::before,
+html.poke-clan-hud-enabled:not(.pch-theme-minimal) nav.rh-mini[data-rh-panel="quick"]::after {
   content: none !important;
   background: none !important;
   border: 0 !important;

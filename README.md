@@ -6,9 +6,10 @@ Chrome Manifest V3 extension that presents the compact **Padrão minimalista** H
 
 Version 0.8.0 adds Naturia (Planta/Inseto), GardeStrike (Lutador), Psycraft (Psíquico), and Rainbolt (Elétrico). The former Gelo, Fogo, Pedra, and Dragão themes are now displayed as Seavell, Volcanic, Orebound, and Wingeon. Their internal IDs remain unchanged so saved preferences continue working. The compact HUD remains functional across themes; the chat, Auto Helper, and known native controls receive matching colors.
 Version 0.8.1 unifies the clan symbols as thin outline SVGs inspired by the compact Seavell snowflake. The same themed symbol appears in the profile and skills bar. Reusable exports are in [design/icons](design/icons/README.md).
-Version 0.8.2 adds thin neon gradient borders to the HUD panels and known game panels in every theme, with rounded corners and a restrained glow.
-Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directly, suppresses their generated blue frames while the HUD is enabled, and shortens the four new theme labels in the selector.
+Version 0.8.2 adds thin neon gradient borders to the clan themes, with rounded corners and a restrained glow.
+Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directly in clan themes, suppresses their generated blue frames, and shortens the four new theme labels in the selector.
 Version 0.8.4 gives the Mail control's theme rule priority over the game's own blue background and border declarations.
+Version 0.8.5 restores the original blue Padrão minimalista styling, including its native controls, while retaining neon clan themes.
 
 ## Load in Chrome
 
@@ -27,7 +28,7 @@ The extension only matches the game page and requests the storage permission for
 - Confirm horizontal and vertical scrollbars use the minimal style, especially the skills row and the expanded Pokémon list.
 - In the gear menu select **Malefic**. Check the purple frames, iconography, green HP and stat accents, Hunt Analyzer at the upper right, chat at the lower left, and that all controls still work. Dragged widget positions from earlier versions take precedence; double-click a dotted drag control to reset its widget position.
 - Switch through **Seavell**, **Volcanic**, **Orebound**, **Wingeon**, **Naturia**, **GardeStrike**, **Psycraft**, and **Rainbolt**. Check the profile, menu, Hunt Analyzer, skills, chat, Auto Helper, and native shortcuts in each. Verify that the selected theme remains after refreshing the tab.
-- Check that the neon gradient follows rounded panel corners in every theme, including **Padrão minimalista** and **Malefic**, and that the chat, Auto Helper, mail, shortcuts, and expanded panels stay legible.
+- Check that the neon gradient follows rounded panel corners in the clan themes and that the chat, Auto Helper, mail, shortcuts, and expanded panels stay legible. **Padrão minimalista** should retain its original blue styling.
 - Confirm skill cooldown values appear and update using the game's own cooldown display.
 - Click **Zerar** in Hunt Analyzer; the native reset and confirmation run without showing a second analyzer. The ↗ control switches to the native analyzer; minimizing it restores the compact one.
 - Confirm target, Boss, and Hunt Analyzer values continue updating during play.
