@@ -10,4 +10,4 @@ Molduras SVG transparentes desenhadas para o conceito em `../referencias/hud-mal
 | `skills.svg` | Barra de habilidades | 720 × 86 |
 | `chat.svg` | Chat recolhido | 190 × 48 |
 
-`preview.png` mostra as cinco molduras em seus tamanhos de desenho. Antes de aplicar no jogo, cada componente precisa ter uma única fonte de DOM; a moldura é uma camada decorativa (`pointer-events: none`) no componente existente, e não um novo painel sobre o original. Não estique o SVG inteiro para outra proporção: use o tamanho indicado ou ajuste o desenho/recorte por região.
+`preview.png` mostra as cinco molduras em seus tamanhos de desenho. A extensão aplica cada SVG como camada decorativa (`pointer-events: none`) no componente funcional e controla a visibilidade do painel original correspondente. O chat completo, o Auto Helper e os atalhos continuam controles do jogo com cores do tema. Evite esticar o SVG para outra proporção: use o tamanho indicado ou ajuste o desenho/recorte por região.

@@ -6,15 +6,10 @@
 
   const primaryDefinitions = [
     { type: 'client', key: 'inventory', label: 'Bolsa' },
-    { type: 'client', key: 'profile', label: 'Perfil' },
     { type: 'client', key: 'map', label: 'Mapa' },
     { type: 'client', key: 'auto-helper', label: 'Auto Helper' },
     { type: 'client', key: 'hunt-analyzer', label: 'Hunt' },
     { type: 'system', key: 'diamond-shop', label: 'Diamantes' },
-    { type: 'client', key: 'health', label: 'Centro' },
-    { type: 'system', key: 'pokedex', label: 'Pokédex' },
-    { type: 'system', key: 'captures', label: 'Capturas' },
-    { type: 'client', key: 'player-market', label: 'Market' }
   ];
 
   const icons = {

@@ -113,15 +113,25 @@
       return true;
     },
     resetHunt: function () {
-      const root = dom.query(selectors.hunt.root);
-      const currentRoot = dom.query(selectors.hunt.root) || root || global.document;
+      const currentRoot = dom.query(selectors.hunt.root) || global.document;
       const more = dom.query('#ha-btnMore');
       if (more && more.getAttribute('aria-expanded') !== 'true') more.click();
       const element = findHuntResetControl(currentRoot);
       if (!element || disabled(element)) return false;
       element.click();
-      const confirm = dom.query('#ha-cYes');
-      if (confirm && !disabled(confirm)) confirm.click();
+      // Confirmation is sometimes inserted on the next task by the game.
+      let attempts = 0;
+      const confirmReset = function () {
+        const confirm = dom.query('#ha-cYes');
+        if (confirm && !disabled(confirm)) {
+          confirm.click();
+          return;
+        }
+        if (++attempts < 20 && typeof global.setTimeout === 'function') {
+          global.setTimeout(confirmReset, 100);
+        }
+      };
+      confirmReset();
       return true;
     },
     toggleHuntDetails: function () {
@@ -159,6 +169,7 @@
         }
         html.classList.add('pch-chat-expanded');
       }
+      if (app.modules.nativePanels) app.modules.nativePanels.sync();
       return true;
     }
   };

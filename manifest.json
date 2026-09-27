@@ -1,9 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Poké Idle Clan HUD",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "A compact, clan-themed HUD for Poké Idle Online.",
   "permissions": ["storage"],
+  "web_accessible_resources": [
+    {
+      "resources": ["design/malefic/*.svg"],
+      "matches": ["https://pokeidle.online/*"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": ["https://pokeidle.online/game/*"],

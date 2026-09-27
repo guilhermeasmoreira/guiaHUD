@@ -20,7 +20,6 @@
 
     function update(state) {
       const chat = state.chat || {};
-      if (chat.minimized) global.document.documentElement.classList.remove('pch-chat-expanded');
       button.hidden = !chat.available || global.document.documentElement.classList.contains('pch-chat-expanded');
       dom.setText(status, chat.onlineCount ? '• ' + chat.onlineCount + ' ONLINE' : '• GERAL', '• GERAL');
       return Boolean(chat.available);

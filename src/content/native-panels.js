@@ -2,6 +2,57 @@
   const app = global.PokeClanHUD = global.PokeClanHUD || {};
   app.modules = app.modules || {};
   let timer = null;
+  const suppressed = new Map();
+
+  // The game writes inline display styles while changing panels. Keep their
+  // original value so disabling the extension returns control to the game.
+  function hide(element) {
+    if (!element || !element.isConnected) return;
+    if (!suppressed.has(element)) {
+      suppressed.set(element, {
+        value: element.style.getPropertyValue('display'),
+        priority: element.style.getPropertyPriority('display')
+      });
+    }
+    if (element.style.getPropertyValue('display') !== 'none' ||
+        element.style.getPropertyPriority('display') !== 'important') {
+      element.style.setProperty('display', 'none', 'important');
+    }
+  }
+
+  function reveal(element) {
+    const original = suppressed.get(element);
+    if (!original) return;
+    if (original.value) element.style.setProperty('display', original.value, original.priority);
+    else element.style.removeProperty('display');
+    suppressed.delete(element);
+  }
+
+  function sync() {
+    const html = global.document.documentElement;
+    const enabled = html.classList.contains('poke-clan-hud-enabled');
+    const mappings = [
+      ['pch-player-ready', '#pokemon-team-bar'],
+      ['pch-target-ready', '#reference-hud [data-rh-panel="target"], #target-card'],
+      ['pch-boss-ready', '#shiny-global-next', 'pch-boss-expanded'],
+      ['pch-menu-ready', '#pio-main-menu'],
+      ['pch-skills-ready', '#pokemon-skills-window'],
+      ['pch-hunt-ready', '#ha-panel', 'pch-hunt-expanded'],
+      ['pch-chat-ready', '#game-chat', 'pch-chat-expanded']
+    ];
+    const shouldHide = new Set();
+    mappings.forEach(function ([ready, selector, expanded]) {
+      if (!enabled || !html.classList.contains(ready) ||
+          expanded && html.classList.contains(expanded)) return;
+      global.document.querySelectorAll(selector).forEach(function (element) {
+        shouldHide.add(element);
+      });
+    });
+    suppressed.forEach(function (_, element) {
+      if (!shouldHide.has(element)) reveal(element);
+    });
+    shouldHide.forEach(hide);
+  }
 
   function frameFor(element) {
     let candidate = element;
@@ -45,13 +96,14 @@
   function start() {
     if (timer) return;
     annotate();
-    timer = global.setInterval(annotate, 3000);
+    timer = global.setInterval(function () { annotate(); sync(); }, 500);
   }
 
   function stop() {
     if (timer) global.clearInterval(timer);
     timer = null;
+    suppressed.forEach(function (_, element) { reveal(element); });
   }
 
-  app.modules.nativePanels = { start, stop };
+  app.modules.nativePanels = { start, stop, sync };
 })(globalThis);

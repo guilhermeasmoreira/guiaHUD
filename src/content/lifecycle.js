@@ -31,6 +31,11 @@
     if (!active || !event.target || !event.target.closest) return;
     if (event.target.closest('#minimize-hunt-analyzer')) {
       global.document.documentElement.classList.remove('pch-hunt-expanded');
+      global.setTimeout(app.modules.nativePanels.sync, 0);
+    }
+    if (event.target.closest('#minimize-chat')) {
+      global.document.documentElement.classList.remove('pch-chat-expanded');
+      global.setTimeout(app.modules.nativePanels.sync, 0);
     }
   }
 
@@ -54,6 +59,7 @@
     Object.keys(flags).forEach(function (name) {
       html.classList.toggle(name, Boolean(flags[name]));
     });
+    app.modules.nativePanels.sync();
   }
 
   function applyTheme() {
@@ -110,6 +116,7 @@
     applyTheme();
     app.modules.settingsStorage.save(settings);
     if (hud && currentState) applyReadiness(hud.update(currentState, settings));
+    app.modules.nativePanels.sync();
   }
 
   function enable() {
