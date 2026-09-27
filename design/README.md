@@ -11,3 +11,5 @@ Estas três imagens são a direção visual de Fogo, Malefic e Gelo. Os três te
 | Dragão | Sem imagem de referência | Índigo escuro, contornos esmeralda e pequenos acentos dourados. |
 
 As imagens mostram o conjunto completo de perfil e alvo, menu, boss, Hunt Analyzer, habilidades e chat. Use a mesma linguagem visual entre esses componentes em cada tema. Alguns controles ao redor do jogo pertencem ao próprio Poké Idle e não são recriados pela extensão.
+
+Os símbolos vetoriais dos clans, derivados de outra referência visual, estão em [icons/README.md](icons/README.md). Os cinco temas clan ativos usam seus símbolos no perfil e na barra de habilidades.

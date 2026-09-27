@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Poké Idle Clan HUD",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A compact, clan-themed HUD for Poké Idle Online.",
   "permissions": ["storage"],
   "content_scripts": [
@@ -28,6 +28,7 @@
         "src/settings/defaults.js",
         "src/settings/storage.js",
         "src/hud/icons.js",
+        "src/hud/clan-icons.js",
         "src/settings/panel.js",
         "src/hud/profile-target.js",
         "src/hud/boss-pill.js",

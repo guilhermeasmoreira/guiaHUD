@@ -5,6 +5,7 @@ Visual references for Fogo, Malefic, and Gelo are saved in [design/README.md](de
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
 Version 0.7.0 adds Gelo, Fogo, Pedra, and Dragão as CSS themes. The compact HUD remains functional across themes; the chat, Auto Helper, and known native controls receive matching colors.
+Clan symbols are original inline SVGs in the profile and skills bar; reusable exports for ten referenced clans plus Gelo are in [design/icons](design/icons/README.md).
 
 ## Load in Chrome
 

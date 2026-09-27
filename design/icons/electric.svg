@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="electric">
+  <defs><linearGradient id="color" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff294"/><stop offset="1" stop-color="#ffc327"/></linearGradient></defs>
+  <path d="M37 3 11 36h20l-5 25 27-34H34L37 3Z" fill="url(#color)" stroke="#50300c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

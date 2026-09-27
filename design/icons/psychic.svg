@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="psychic">
+  <defs><linearGradient id="color" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5c5ff"/><stop offset="1" stop-color="#be71ed"/></linearGradient></defs>
+  <path d="M3 33c8-12 17-18 29-18s21 6 29 18c-8 12-17 18-29 18S11 45 3 33Z" fill="url(#color)" stroke="#34204e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M32 20a13 13 0 1 1 0 26 13 13 0 0 1 0-26Z" fill="#34204e" stroke="#34204e" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M36 27a6 6 0 1 1-8 7 7 7 0 0 0 8-7Z" fill="#f5c5ff" stroke="#34204e" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

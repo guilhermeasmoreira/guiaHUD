@@ -59,16 +59,20 @@
   display: none;
 }
 
-#poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"]) .pch-profile-card::after {
+#poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"]) .pch-profile-card > .pch-clan-icon {
   position: absolute;
-  top: 11px;
-  left: 13px;
+  top: 13px;
+  left: 10px;
+  width: 32px;
+  height: 32px;
   color: var(--pch-primary);
-  content: var(--pch-emblem);
-  font-size: 27px;
-  line-height: 1;
-  text-shadow: 0 0 8px var(--pch-glow);
-  pointer-events: none;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="ice"] .pch-clan-icon-ice,
+#poke-clan-hud-root .pch-shell[data-theme="fire"] .pch-clan-icon-fire,
+#poke-clan-hud-root .pch-shell[data-theme="stone"] .pch-clan-icon-stone,
+#poke-clan-hud-root .pch-shell[data-theme="dragon"] .pch-clan-icon-dragon {
+  display: block;
 }
 
 #poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"]) .pch-target-line {
@@ -150,15 +154,13 @@
   display: none;
 }
 
-#poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"]) .pch-skills-bar::after {
+#poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"]) .pch-skills-bar > .pch-clan-icon {
   position: absolute;
-  top: 14px;
-  left: 9px;
+  top: 13px;
+  left: 7px;
+  width: 24px;
+  height: 24px;
   color: var(--pch-primary);
-  content: var(--pch-emblem);
-  font-size: 20px;
-  line-height: 1;
-  pointer-events: none;
 }
 
 #poke-clan-hud-root .pch-shell:is([data-theme="ice"], [data-theme="fire"], [data-theme="stone"], [data-theme="dragon"]) .pch-skill-button {

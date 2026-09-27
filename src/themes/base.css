@@ -30,6 +30,15 @@
   display: none;
 }
 
+#poke-clan-hud-root .pch-clan-icon {
+  display: none;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  filter: drop-shadow(0 0 4px currentColor);
+  pointer-events: none;
+}
+
 #poke-clan-hud-root button,
 #poke-clan-hud-enable,
 #poke-clan-hud-root select {
