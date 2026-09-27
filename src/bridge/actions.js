@@ -65,9 +65,11 @@
   const actions = {
     openMenuAction: function (type, key) {
       if (type === 'client' && key === 'hunt-analyzer') {
-        const opened = clientAction(key);
-        if (opened) global.document.documentElement.classList.add('pch-hunt-expanded');
-        return opened;
+        const html = global.document.documentElement;
+        if (!dom.query(selectors.hunt.root)) return false;
+        html.classList.remove('pch-hunt-expanded');
+        if (app.modules.nativePanels) app.modules.nativePanels.sync();
+        return true;
       }
       if (type === 'client' && key === 'auto-helper') {
         const helper = dom.query(selectors.helper.root);

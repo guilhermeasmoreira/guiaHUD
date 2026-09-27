@@ -305,4 +305,7 @@ test('Hunt details opens the native panel while reset keeps the compact panel', 
   assert.equal(actions.toggleHuntDetails(), true);
   assert.deepEqual(clicks, { team: 1, huntRestore: 1, reset: 1 });
   assert.equal(htmlClasses.has('pch-hunt-expanded'), true);
+  assert.equal(actions.openMenuAction('client', 'hunt-analyzer'), true);
+  assert.equal(htmlClasses.has('pch-hunt-expanded'), false);
+  assert.deepEqual(clicks, { team: 1, huntRestore: 1, reset: 1 });
 });

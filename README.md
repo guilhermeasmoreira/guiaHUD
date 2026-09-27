@@ -4,7 +4,7 @@ Visual references for Fogo, Malefic, and Gelo are saved in [design/README.md](de
 
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
-Version 0.6.0 applies the Malefic vector frames and restores the game's panel styles when the extension is disabled. Compact panels suppress their native counterparts; opening full chat or Hunt Analyzer details shows the game's original functional panel with Malefic colors.
+Version 0.6.1 loads the Malefic vector frames by extension URL and keeps the compact Hunt Analyzer when reopened from the menu. Compact panels suppress their native counterparts; opening full chat or Hunt Analyzer details shows the game's original functional panel with Malefic colors.
 
 ## Load in Chrome
 

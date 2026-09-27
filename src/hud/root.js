@@ -7,6 +7,17 @@
     const host = dom.create('div');
     host.id = 'poke-clan-hud-root';
     const shell = dom.create('div', 'pch-shell');
+    // Content-script CSS URLs can be resolved against the game document.
+    // Use extension URLs so the packaged artwork loads on every game route.
+    if (global.chrome && global.chrome.runtime && global.chrome.runtime.getURL) {
+      [
+        ['profile', 'perfil'], ['menu', 'menu'], ['hunt', 'hunt'],
+        ['skills', 'skills'], ['chat', 'chat']
+      ].forEach(function ([name, file]) {
+        shell.style.setProperty('--pch-frame-' + name,
+          'url("' + global.chrome.runtime.getURL('design/malefic/' + file + '.svg') + '")');
+      });
+    }
 
     const topLeft = dom.create('div', 'pch-top-left');
     const profileSlot = dom.create('div', 'pch-profile-slot');

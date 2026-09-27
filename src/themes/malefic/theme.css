@@ -33,9 +33,9 @@
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-skills-bar,
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-chat-pill {
   position: relative;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
+  border: 1px solid #311944;
+  border-radius: 4px;
+  background: #0c0a16;
   box-shadow: none;
   backdrop-filter: none;
   filter: drop-shadow(0 2px 4px #05020ccc);
@@ -70,7 +70,7 @@
   padding: 15px 14px 10px 64px;
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-profile-card::before {
-  background-image: url("../../../design/malefic/perfil.svg");
+  background-image: var(--pch-frame-profile, none);
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-profile-card > .pch-icon-crest {
   display: none;
@@ -138,7 +138,7 @@
   gap: 1px;
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-main-menu::before {
-  background-image: url("../../../design/malefic/menu.svg");
+  background-image: var(--pch-frame-menu, none);
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-menu-primary {
   min-width: 0;
@@ -187,7 +187,7 @@
   padding: 34px 18px 16px;
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-hunt-card::before {
-  background-image: url("../../../design/malefic/hunt.svg");
+  background-image: var(--pch-frame-hunt, none);
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-hunt-title {
   color: #d276f8;
@@ -234,7 +234,7 @@
   padding: 15px 24px 15px 76px;
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-skills-bar::before {
-  background-image: url("../../../design/malefic/skills.svg");
+  background-image: var(--pch-frame-skills, none);
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-skills-bar > .pch-icon-skills {
   display: none;
@@ -273,7 +273,7 @@
   gap: 4px;
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-chat-pill::before {
-  background-image: url("../../../design/malefic/chat.svg");
+  background-image: var(--pch-frame-chat, none);
 }
 #poke-clan-hud-root .pch-shell[data-theme="malefic"] .pch-chat-pill > .pch-icon-chat {
   display: none;
