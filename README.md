@@ -5,7 +5,7 @@ Visual references for Volcanic, Malefic, and Seavell are saved in [design/README
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
 Version 0.8.0 adds Naturia (Planta/Inseto), GardeStrike (Lutador), Psycraft (Psíquico), and Rainbolt (Elétrico). The former Gelo, Fogo, Pedra, and Dragão themes are now displayed as Seavell, Volcanic, Orebound, and Wingeon. Their internal IDs remain unchanged so saved preferences continue working. The compact HUD remains functional across themes; the chat, Auto Helper, and known native controls receive matching colors.
-Clan symbols are original inline SVGs in the profile and skills bar; reusable exports for ten referenced clans plus Gelo are in [design/icons](design/icons/README.md).
+Version 0.8.1 unifies the clan symbols as thin outline SVGs inspired by the compact Seavell snowflake. The same themed symbol appears in the profile and skills bar. Reusable exports are in [design/icons](design/icons/README.md).
 
 ## Load in Chrome
 

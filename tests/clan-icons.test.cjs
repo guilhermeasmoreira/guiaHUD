@@ -12,6 +12,8 @@ test('all eleven clan symbols have standalone vector exports', () => {
   for (const name of names) {
     const svg = fs.readFileSync(path.join(__dirname, '../design/icons', name + '.svg'), 'utf8');
     assert.match(svg, /viewBox="0 0 64 64"/);
+    assert.match(svg, /fill="none"/);
+    assert.match(svg, /stroke="#[0-9a-f]{6}"/);
     assert.ok(svg.includes(definitions[name].paths[0]));
   }
   assert.notEqual(definitions.dragon.paths[0], definitions.psychic.paths[0]);
@@ -34,6 +36,8 @@ test('theme icons are constructed inline without external image requests', () =>
   const icon = context.PokeClanHUD.modules.clanIcons.create('dragon');
   assert.equal(icon.nodeName, 'svg');
   assert.equal(icon.attributes.viewBox, '0 0 64 64');
-  assert.equal(icon.children.length, definitions.dragon.paths.length + 1);
+  assert.equal(icon.attributes.fill, 'none');
+  assert.equal(icon.attributes.stroke, 'currentColor');
+  assert.equal(icon.children.length, definitions.dragon.paths.length);
   assert.equal(icon.attributes.href, undefined);
 });

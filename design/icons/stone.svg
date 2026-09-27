@@ -1,7 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="stone">
-  <defs><linearGradient id="color" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d4d8ee"/><stop offset="1" stop-color="#777e9f"/></linearGradient></defs>
-  <path d="M8 14 14 7h11l5 7-4 5h-8l-4 8 7 8-5 6-11-12-1-8 4-7Zm48 0-6-7H39l-5 7 4 5h8l4 8-7 8 5 6 11-12 1-8-4-7Z" fill="url(#color)" stroke="#1c2435" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M17 9h8l3 4H15l2-4Zm22 0h8l3 4H36l3-4Z" fill="#d4d8ee" stroke="#1c2435" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M18 28h28L32 52 18 28Z" fill="url(#color)" stroke="#1c2435" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M15 47 24 39l5 5-8 9h22l-8-9 5-5 9 8-6 12H21l-6-12Z" fill="#d4d8ee" stroke="#1c2435" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="stone" fill="none" stroke="#aab1ce" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M13 16 21 8h22l8 8-4 13-15 25-15-25-4-13Z"/>
+  <path d="M13 16h38M17 29h30M21 8l-4 21 15 25 15-25-4-21"/>
 </svg>
