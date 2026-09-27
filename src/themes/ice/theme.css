@@ -1,0 +1,33 @@
+/* Frosted blue and crystalline cyan from design/referencias/hud-gelo.webp. */
+#poke-clan-hud-root .pch-shell[data-theme="ice"] {
+  --pch-primary: #82dfff;
+  --pch-accent-light: #ddf8ff;
+  --pch-positive: #65e9d1;
+  --pch-positive-dark: #35a9c8;
+  --pch-edge: #65c7f3;
+  --pch-edge-soft: #326e90;
+  --pch-edge-shadow: #204462;
+  --pch-glow: #46c9f46b;
+  --pch-panel-bg: linear-gradient(180deg, rgba(10, 40, 69, .97), rgba(3, 17, 37, .97));
+  --pch-panel-solid: #071a30;
+  --pch-control-bg: #0b2a45;
+  --pch-hover-bg: #69d8ff28;
+  --pch-muted: #bbd8e8;
+  --pch-notice: #f2e28a;
+  --pch-emblem: "❄";
+}
+
+html.poke-clan-hud-enabled.pch-theme-ice {
+  --pch-native-accent: #65c7f3;
+  --pch-native-glow: #46c9f46b;
+  --pch-native-surface: #071a30;
+  --pch-native-head: #0c2c4b;
+  --pch-native-control: #113451;
+  --pch-native-divider: #357390;
+  --pch-native-text: #edfbff;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="ice"] .pch-hunt-title,
+#poke-clan-hud-root .pch-shell[data-theme="ice"] .pch-boss-label {
+  color: #a7ecff;
+}

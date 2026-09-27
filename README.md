@@ -1,10 +1,10 @@
 # Poké Idle Clan HUD
 
-Visual references for Fogo, Malefic, and Gelo are saved in [design/README.md](design/README.md). Malefic is available in settings; Fogo and Gelo remain design references.
+Visual references for Fogo, Malefic, and Gelo are saved in [design/README.md](design/README.md). The settings menu offers Padrão minimalista, Malefic, Gelo, Fogo, Pedra, and Dragão.
 
 Chrome Manifest V3 extension that presents the compact **Padrão minimalista** HUD for Poké Idle Online. It reads values from the game's existing DOM and forwards actions to original controls.
 
-Version 0.6.2 restores the Malefic CSS appearance used before vector frames, while keeping duplicate-panel suppression, the compact Hunt Analyzer when reopened from the menu, and the themed native chat and Auto Helper.
+Version 0.7.0 adds Gelo, Fogo, Pedra, and Dragão as CSS themes. The compact HUD remains functional across themes; the chat, Auto Helper, and known native controls receive matching colors.
 
 ## Load in Chrome
 
@@ -22,6 +22,7 @@ The extension only matches the game page and requests the storage permission for
 - Confirm the original trainer/team panel is hidden. Click the trainer name in the compact profile, check the minimal Pokémon list and sprites, select another Pokémon, then confirm the list closes and the active name updates.
 - Confirm horizontal and vertical scrollbars use the minimal style, especially the skills row and the expanded Pokémon list.
 - In the gear menu select **Malefic**. Check the purple frames, iconography, green HP and stat accents, Hunt Analyzer at the upper right, chat at the lower left, and that all controls still work. Dragged widget positions from earlier versions take precedence; double-click a dotted drag control to reset its widget position.
+- Switch through **Gelo**, **Fogo**, **Pedra**, and **Dragão**. Check the profile, menu, Hunt Analyzer, skills, chat, Auto Helper, and native shortcuts in each. Verify that the selected theme remains after refreshing the tab.
 - Confirm skill cooldown values appear and update using the game's own cooldown display.
 - Click **Zerar** in Hunt Analyzer; the native reset and confirmation run without showing a second analyzer. The ↗ control switches to the native analyzer; minimizing it restores the compact one.
 - Confirm target, Boss, and Hunt Analyzer values continue updating during play.
@@ -32,7 +33,7 @@ The extension only matches the game page and requests the storage permission for
 - src/state: normalized state store.
 - src/bridge: clicks original game controls for menu, skills, boss, and Hunt Analyzer actions.
 - src/hud: compact profile/target, boss, analyzer, menu, and skills components.
-- src/themes: shared layout, Padrão minimalista, and Malefic themes.
+- src/themes: shared layout, Padrão minimalista, Malefic, and four elemental CSS themes.
 - src/settings: extension-owned preferences and enable/disable controls.
 - tests: parser and adapter tests using a small fixture-like DOM.
 

@@ -11,7 +11,9 @@
     return new Promise(function (resolve) {
       global.chrome.storage.local.get(key, function (result) {
         const loaded = Object.assign({}, defaults, result && result[key] || {});
-        if (loaded.theme === 'ice') loaded.theme = 'minimal';
+        if (!['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon'].includes(loaded.theme)) {
+          loaded.theme = 'minimal';
+        }
         resolve(loaded);
       });
     });

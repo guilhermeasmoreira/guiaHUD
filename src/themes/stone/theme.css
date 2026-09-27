@@ -1,0 +1,33 @@
+/* Basalt, slate and a small mineral-gold highlight. */
+#poke-clan-hud-root .pch-shell[data-theme="stone"] {
+  --pch-primary: #d6b679;
+  --pch-accent-light: #f5ddb0;
+  --pch-positive: #a9d59b;
+  --pch-positive-dark: #649975;
+  --pch-edge: #9a896c;
+  --pch-edge-soft: #59564c;
+  --pch-edge-shadow: #39352c;
+  --pch-glow: #d1ab6150;
+  --pch-panel-bg: linear-gradient(180deg, rgba(39, 39, 38, .98), rgba(19, 22, 24, .98));
+  --pch-panel-solid: #1b1e1f;
+  --pch-control-bg: #30312f;
+  --pch-hover-bg: #d5b77d26;
+  --pch-muted: #bdbbb2;
+  --pch-notice: #e5bb72;
+  --pch-emblem: "◆";
+}
+
+html.poke-clan-hud-enabled.pch-theme-stone {
+  --pch-native-accent: #a69679;
+  --pch-native-glow: #d1ab6150;
+  --pch-native-surface: #1b1e1f;
+  --pch-native-head: #30312e;
+  --pch-native-control: #373936;
+  --pch-native-divider: #665d4c;
+  --pch-native-text: #f5f0e5;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="stone"] .pch-hunt-title,
+#poke-clan-hud-root .pch-shell[data-theme="stone"] .pch-boss-label {
+  color: #e8cd92;
+}

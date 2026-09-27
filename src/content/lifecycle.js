@@ -7,6 +7,9 @@
     'pch-theme-minimal',
     'pch-theme-malefic',
     'pch-theme-ice',
+    'pch-theme-fire',
+    'pch-theme-stone',
+    'pch-theme-dragon',
     'pch-player-ready',
     'pch-chat-ready',
     'pch-chat-expanded',
@@ -64,9 +67,10 @@
 
   function applyTheme() {
     const theme = settings && settings.theme || 'minimal';
-    global.document.documentElement.classList.remove('pch-theme-ice');
-    global.document.documentElement.classList.toggle('pch-theme-minimal', theme === 'minimal' || theme === 'ice');
-    global.document.documentElement.classList.toggle('pch-theme-malefic', theme === 'malefic');
+    ['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon'].forEach(function (name) {
+      global.document.documentElement.classList.toggle('pch-theme-' + name,
+        name === theme || name === 'minimal' && !['malefic', 'ice', 'fire', 'stone', 'dragon'].includes(theme));
+    });
   }
 
   function render() {

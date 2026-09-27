@@ -1,0 +1,33 @@
+/* Ember orange and red from design/referencias/hud-fogo.webp. */
+#poke-clan-hud-root .pch-shell[data-theme="fire"] {
+  --pch-primary: #ff9d4f;
+  --pch-accent-light: #ffe2a3;
+  --pch-positive: #ffc66f;
+  --pch-positive-dark: #ef6435;
+  --pch-edge: #e8653f;
+  --pch-edge-soft: #833c2a;
+  --pch-edge-shadow: #49221b;
+  --pch-glow: #f25a2970;
+  --pch-panel-bg: linear-gradient(180deg, rgba(38, 15, 12, .98), rgba(15, 9, 11, .98));
+  --pch-panel-solid: #1a0e0d;
+  --pch-control-bg: #291411;
+  --pch-hover-bg: #ff80442b;
+  --pch-muted: #d4b7a6;
+  --pch-notice: #ffcf76;
+  --pch-emblem: "✷";
+}
+
+html.poke-clan-hud-enabled.pch-theme-fire {
+  --pch-native-accent: #e8653f;
+  --pch-native-glow: #f25a2970;
+  --pch-native-surface: #1a0e0d;
+  --pch-native-head: #2a1310;
+  --pch-native-control: #361912;
+  --pch-native-divider: #87442e;
+  --pch-native-text: #fff0dd;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="fire"] .pch-hunt-title,
+#poke-clan-hud-root .pch-shell[data-theme="fire"] .pch-boss-label {
+  color: #ffb069;
+}

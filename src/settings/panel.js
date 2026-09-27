@@ -31,6 +31,16 @@
     const malefic = dom.create('option', '', 'Malefic');
     malefic.value = 'malefic';
     theme.append(malefic);
+    [
+      ['ice', 'Gelo'],
+      ['fire', 'Fogo'],
+      ['stone', 'Pedra'],
+      ['dragon', 'Dragão']
+    ].forEach(function ([value, label]) {
+      const option = dom.create('option', '', label);
+      option.value = value;
+      theme.append(option);
+    });
     themeLabel.append(themeText, theme);
 
     const compactLabel = dom.create('label', 'pch-setting-row');
@@ -50,7 +60,7 @@
     let settings = Object.assign({}, initialSettings);
     function sync(nextSettings) {
       settings = Object.assign({}, settings, nextSettings || {});
-      theme.value = settings.theme === 'ice' ? 'minimal' : (settings.theme || 'minimal');
+      theme.value = settings.theme || 'minimal';
       compact.checked = settings.compact !== false;
     }
 
