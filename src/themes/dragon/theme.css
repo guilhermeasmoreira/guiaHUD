@@ -1,32 +1,32 @@
-/* Deep indigo, emerald and restrained gold for the Dragon theme. */
+/* Wingeon: graphite surfaces with silver edges and white highlights. */
 #poke-clan-hud-root .pch-shell[data-theme="dragon"] {
-  --pch-primary: #86deba;
-  --pch-accent-light: #d4ffe8;
-  --pch-positive: #a5e98f;
-  --pch-positive-dark: #3ea985;
-  --pch-edge: #55967e;
-  --pch-edge-soft: #395c65;
-  --pch-edge-shadow: #24394d;
-  --pch-glow: #4ac79a5c;
-  --pch-panel-bg: linear-gradient(180deg, rgba(18, 30, 51, .98), rgba(8, 18, 33, .98));
-  --pch-panel-solid: #101d31;
-  --pch-control-bg: #1a3240;
-  --pch-hover-bg: #70dcb42b;
-  --pch-muted: #b3cad0;
-  --pch-notice: #f0ca79;
+  --pch-primary: #edf0f5;
+  --pch-accent-light: #ffffff;
+  --pch-positive: #c5cdd9;
+  --pch-positive-dark: #909aaa;
+  --pch-edge: #b5bfce;
+  --pch-edge-soft: #697586;
+  --pch-edge-shadow: #343d49;
+  --pch-glow: #cbd4e35c;
+  --pch-panel-bg: linear-gradient(180deg, rgba(35, 39, 48, .98), rgba(13, 16, 23, .98));
+  --pch-panel-solid: #191d25;
+  --pch-control-bg: #2a303a;
+  --pch-hover-bg: #dce4f12b;
+  --pch-muted: #c2c9d3;
+  --pch-notice: #f3f5f8;
 }
 
 html.poke-clan-hud-enabled.pch-theme-dragon {
-  --pch-native-accent: #55967e;
-  --pch-native-glow: #4ac79a5c;
-  --pch-native-surface: #101d31;
-  --pch-native-head: #1b3146;
-  --pch-native-control: #203d4a;
-  --pch-native-divider: #3e726f;
-  --pch-native-text: #edfff5;
+  --pch-native-accent: #bac4d2;
+  --pch-native-glow: #cbd4e35c;
+  --pch-native-surface: #191d25;
+  --pch-native-head: #292e38;
+  --pch-native-control: #303640;
+  --pch-native-divider: #727e8d;
+  --pch-native-text: #f7f8fa;
 }
 
 #poke-clan-hud-root .pch-shell[data-theme="dragon"] .pch-hunt-title,
 #poke-clan-hud-root .pch-shell[data-theme="dragon"] .pch-boss-label {
-  color: #b2f2d2;
+  color: #f4f6fa;
 }

@@ -10,6 +10,7 @@ Version 0.8.2 adds thin neon gradient borders to the clan themes, with rounded c
 Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directly in clan themes, suppresses their generated blue frames, and shortens the four new theme labels in the selector.
 Version 0.8.4 gives the Mail control's theme rule priority over the game's own blue background and border declarations.
 Version 0.8.5 restores the original blue Padrão minimalista styling, including its native controls, while retaining neon clan themes.
+Version 0.8.6 gives Wingeon a silver and white palette and a compact eight-point star inspired by the supplied emblem, including the icon in the profile and skills bar.
 
 ## Load in Chrome
 

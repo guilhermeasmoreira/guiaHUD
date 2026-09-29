@@ -8,7 +8,7 @@ Estas três imagens são a direção visual de Volcanic (Fogo), Malefic e Seavel
 | Malefic | [HUD malefic](referencias/hud-malefic.webp) | Fundo preto arroxeado, bordas violeta, ícones sombrios e detalhes verdes pontuais. |
 | Seavell | [HUD de gelo](referencias/hud-gelo.webp) | Fundo azul escuro, molduras cristalinas azul e ciano, brilho frio e detalhes de floco de neve. |
 | Orebound | Sem imagem de referência | Basalto e ardósia, contornos de mineral e detalhes dourados discretos. |
-| Wingeon | Sem imagem de referência | Índigo escuro, contornos esmeralda e pequenos acentos dourados. |
+| Wingeon | Emblema enviado pelo usuário | Fundo grafite, bordas prateadas, detalhes brancos e estrela de oito pontas. |
 | Naturia | Ícone de planta/inseto | Verde de floresta, contornos foliares e acentos vivos. |
 | GardeStrike | Ícone de lutador | Couro escuro, laranja de combate e detalhes de bronze. |
 | Psycraft | Ícone psíquico | Violeta escuro, brilho magenta e acentos mentais. |
