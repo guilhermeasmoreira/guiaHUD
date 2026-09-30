@@ -166,16 +166,17 @@ test('menu adapter discovers actions exposed outside the top menu root', functio
 test('manifest keeps the game match and permissions narrow', function () {
   const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'manifest.json'), 'utf8'));
   assert.deepEqual(manifest.permissions, ['storage']);
-  assert.deepEqual(manifest.content_scripts[0].matches, ['https://pokeidle.online/game/*']);
-  const scripts = manifest.content_scripts[0].js;
+  const hud = manifest.content_scripts.find((entry) => entry.run_at === 'document_idle');
+  assert.deepEqual(hud.matches, ['https://pokeidle.online/game/*']);
+  const scripts = hud.js;
   assert.ok(scripts.indexOf('src/adapter/selectors.js') < scripts.indexOf('src/adapter/index.js'));
   assert.ok(scripts.indexOf('src/hud/icons.js') < scripts.indexOf('src/hud/main-menu.js'));
   assert.ok(scripts.indexOf('src/content/lifecycle.js') < scripts.indexOf('src/content/bootstrap.js'));
-  assert.ok(manifest.content_scripts[0].css.includes('src/themes/malefic/theme.css'));
+  assert.ok(hud.css.includes('src/themes/malefic/theme.css'));
   scripts.forEach(function (script) {
     assert.equal(fs.existsSync(path.join(__dirname, '..', script)), true, script + ' is missing');
   });
-  manifest.content_scripts[0].css.forEach(function (style) {
+  hud.css.forEach(function (style) {
     assert.equal(fs.existsSync(path.join(__dirname, '..', style)), true, style + ' is missing');
   });
 });

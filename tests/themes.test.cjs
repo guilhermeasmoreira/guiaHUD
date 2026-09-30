@@ -48,7 +48,7 @@ test('theme switches update the document class without leaving the prior theme a
 
 test('every selectable theme has a packaged stylesheet', () => {
   const manifest = require('../manifest.json');
-  const css = manifest.content_scripts[0].css;
+  const css = manifest.content_scripts.find((entry) => entry.run_at === 'document_idle').css;
   for (const theme of ['ice', 'fire', 'stone', 'dragon', 'naturia', 'gardestrike', 'psycraft', 'rainbolt']) {
     const file = `src/themes/${theme}/theme.css`;
     assert.ok(css.includes(file), `${theme} missing from manifest`);

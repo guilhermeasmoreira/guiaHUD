@@ -11,6 +11,23 @@ Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directl
 Version 0.8.4 gives the Mail control's theme rule priority over the game's own blue background and border declarations.
 Version 0.8.5 restores the original blue Padrão minimalista styling, including its native controls, while retaining neon clan themes.
 Version 0.8.6 gives Wingeon a silver and white palette and a compact eight-point star inspired by the supplied emblem, including the icon in the profile and skills bar.
+Version 0.8.7 adds a 15-second, boot-only Renderer Hook Probe in the page's MAIN world. It observes globals, RAF callbacks, script resources, and canvas context creation without altering the game loop.
+
+## Renderer Hook Probe (diagnóstico)
+
+After pulling this version, reload the unpacked extension in `chrome://extensions/`, open the game's DevTools Console, and **reload the game tab** so the probe runs at `document_start`. Wait at least 15 seconds after the page begins loading. In the Console run:
+
+```js
+__GUIA_RENDER_PROBE__.summary()
+__GUIA_RENDER_PROBE__.raf()
+__GUIA_RENDER_PROBE__.suspicious()
+__GUIA_RENDER_PROBE__.gameFrameSource()
+__GUIA_RENDER_PROBE__.download()
+```
+
+Send the downloaded `guiahud-render-probe.json` and the output of `summary()`. If the frame is captured, `gameFrame()` returns its real function reference for local inspection. The full source is only exposed on explicit request through `gameFrameSource()` and is not included in the downloaded JSON. `summary().rendererCandidates` lists global object paths with a directly accessible `.render()` method. A candidate path is not proof that it belongs to the hunt renderer; inspect it before proposing a hook.
+
+`gameFrameCaptured: true` means a RAF callback containing both `updateWithMovementGuard` and `continuousHuntClient.render` was scheduled through the intercepted method. A repeated `gameFrameCalls` count and `hasRecursiveRAFText` indicate it schedules itself, but replacing the outer RAF callback cannot selectively omit closed-over rendering calls while retaining simulation. If no renderer candidate is exposed, inspect public factories or shared prototypes next. Only then consider a narrow canvas-level diagnostic as a fallback; the probe never blocks canvas calls. Resources report filenames without URL query strings; newly created globals and function previews contain names/code only, not game object values or account state.
 
 ## Load in Chrome
 
