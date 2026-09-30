@@ -11,7 +11,7 @@ test('probe starts in MAIN world, captures a frame, and restores original method
   const probe = manifest.content_scripts.find((entry) => entry.world === 'MAIN');
   assert.deepEqual(probe, {
     matches: ['https://pokeidle.online/game/*'],
-    js: ['src/renderer-hook-probe.js'],
+    js: ['src/renderer-hook-probe.js', 'src/private-client-capture-probe.js'],
     run_at: 'document_start',
     world: 'MAIN'
   });

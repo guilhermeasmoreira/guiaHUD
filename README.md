@@ -12,6 +12,21 @@ Version 0.8.4 gives the Mail control's theme rule priority over the game's own b
 Version 0.8.5 restores the original blue Padrão minimalista styling, including its native controls, while retaining neon clan themes.
 Version 0.8.6 gives Wingeon a silver and white palette and a compact eight-point star inspired by the supplied emblem, including the icon in the profile and skills bar.
 Version 0.8.7 adds a 15-second, boot-only Renderer Hook Probe in the page's MAIN world. It observes globals, RAF callbacks, script resources, and canvas context creation without altering the game loop.
+Version 0.8.8 adds a separate Private Client Capture Probe to test a temporary `Object.prototype.lastRenderAt` accessor during boot and a reversible wrapper around the captured client's `render()` only.
+
+## Private Client Capture Probe v2 (diagnóstico)
+
+Recarregue a extensão em `chrome://extensions/`, depois recarregue a aba do jogo. O probe roda no MAIN world em `document_start` e remove o accessor do prototype após capturar o cliente ou depois de 15 segundos. No Console, execute:
+
+```js
+__GUIA_CLIENT_PROBE__.status()
+__GUIA_CLIENT_PROBE__.methods()
+__GUIA_CLIENT_PROBE__.renderSource()
+```
+
+Se `captured: true`, `prototypeTrapRemoved: true` e `renderHookInstalled: true`, registre HP, XP, derrotados e cooldowns; execute `__GUIA_CLIENT_PROBE__.pause()`, observe por 30 segundos, depois `__GUIA_CLIENT_PROBE__.resume()`. Compare os mesmos dados e veja se o mapa congela e volta, se a guiaHUD continua atualizando e se surgem erros ou requests `client-render-diagnostic`. Finalmente execute `__GUIA_CLIENT_PROBE__.restore()` para restaurar o método original e garantir a flag de pausa em `false`. `client()` devolve a referência real somente no Console; evite copiar o objeto inteiro. Envie apenas o resultado de `status()` antes da pausa, durante a pausa, após o resume e após o restore, além das observações. Não há download de dados da conta no v2.
+
+Esse teste envolve **somente** `continuousHuntClient.render()` quando a validação de estrutura do cliente é satisfeita. Ele não altera `frame`, `present`, `owns`, os métodos de canvas, o RAF nem `presentHdFrame()`. Se `hdWebglReady` for `true`, o caminho HD/WebGL continuará visível e exigirá investigação separada. `captured: false` com `reason: "capture-timeout"` significa apenas que a escrita esperada não foi observada durante a janela de 15 segundos desse boot.
 
 ## Renderer Hook Probe (diagnóstico)
 
