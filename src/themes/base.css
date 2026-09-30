@@ -6,7 +6,8 @@
 #poke-clan-hud-root {
   position: fixed;
   inset: 0;
-  z-index: 2147483000;
+  /* Above the world canvas; below the game's windows and modal backdrops. */
+  z-index: 900;
   pointer-events: none;
   isolation: isolate;
   color: var(--pch-text, #edf7ff);
@@ -894,7 +895,7 @@ html.poke-clan-hud-enabled:not(.pch-theme-minimal) nav.rh-mini[data-rh-panel="qu
   position: fixed;
   right: 12px;
   bottom: 12px;
-  z-index: 2147483647;
+  z-index: 900;
   background: var(--pch-enable-bg, #082238);
   box-shadow: 0 5px 20px rgba(0, 0, 0, .35);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
