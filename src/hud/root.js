@@ -65,6 +65,7 @@
     return {
       host: host,
       update: update,
+      setRenderAvailable: settingsPanel.setRenderAvailable,
       destroy: function () {
         settingsPanel.destroy();
         host.remove();

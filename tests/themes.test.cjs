@@ -10,6 +10,7 @@ function load(file, context) {
 
 test('theme switches update the document class without leaving the prior theme active', () => {
   const classes = new Set();
+  const renderEvents = [];
   let handlers;
   const html = {
     classList: {
@@ -20,7 +21,7 @@ test('theme switches update the document class without leaving the prior theme a
     }
   };
   const modules = {
-    settingsDefaults: { enabled: true, theme: 'minimal', compact: true },
+    settingsDefaults: { enabled: true, theme: 'minimal', compact: true, economyMode: false },
     settingsStorage: { save: () => Promise.resolve() },
     adapter: { createAdapter: () => ({ read: () => ({}), observe: () => {}, destroy: () => {} }) },
     store: { createStore: () => ({ getState: () => ({}), subscribe: () => {}, setState: () => {} }) },
@@ -32,11 +33,14 @@ test('theme switches update the document class without leaving the prior theme a
   };
   const context = vm.createContext({
     document: { documentElement: html, addEventListener: () => {}, removeEventListener: () => {} },
-    PokeClanHUD: { modules }
+    PokeClanHUD: { modules },
+    CustomEvent: class { constructor(type, options) { this.type = type; this.detail = options.detail; } },
+    dispatchEvent: (event) => renderEvents.push(event)
   });
   context.globalThis = context;
   load('src/content/lifecycle.js', context);
   context.PokeClanHUD.modules.lifecycle.enable();
+  assert.equal(renderEvents.at(-1).detail.paused, false);
   const themes = ['ice', 'fire', 'stone', 'dragon', 'naturia', 'gardestrike', 'psycraft', 'rainbolt', 'malefic', 'minimal'];
   for (const theme of themes) {
     handlers.onChange({ theme });
@@ -44,6 +48,9 @@ test('theme switches update the document class without leaving the prior theme a
       .filter((name) => classes.has('pch-theme-' + name));
     assert.deepEqual(active, [theme]);
   }
+  handlers.onChange({ economyMode: true });
+  assert.equal(renderEvents.at(-1).type, 'guiaHUD:render-control');
+  assert.equal(renderEvents.at(-1).detail.paused, true);
 });
 
 test('every selectable theme has a packaged stylesheet', () => {

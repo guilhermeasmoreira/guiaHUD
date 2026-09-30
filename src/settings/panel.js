@@ -53,19 +53,41 @@
     compact.type = 'checkbox';
     compactLabel.append(compactText, compact);
 
+    const economyLabel = dom.create('label', 'pch-setting-row');
+    const economyText = dom.create('span', '', 'Modo Econômico');
+    const economy = dom.create('input', 'pch-checkbox');
+    economy.type = 'checkbox';
+    economy.setAttribute('aria-label', 'Modo Econômico');
+    economy.setAttribute('aria-describedby', 'pch-economy-description');
+    economyLabel.append(economyText, economy);
+    const economyDescription = dom.create('p', 'pch-settings-note',
+      'Reduz o uso de CPU/GPU congelando a renderização do mapa enquanto a hunt continua funcionando.');
+    economyDescription.id = 'pch-economy-description';
+
     const note = dom.create('p', 'pch-settings-note', 'Arraste os controles pontilhados para posicionar os elementos. As posições ficam salvas neste navegador.');
     const disable = dom.create('button', 'pch-danger-button', 'Desativar HUD');
     disable.type = 'button';
 
-    panel.append(heading, themeLabel, compactLabel, note, disable);
+    panel.append(heading, themeLabel, compactLabel, economyLabel, economyDescription, note, disable);
     backdrop.append(panel);
     parent.append(backdrop);
 
     let settings = Object.assign({}, initialSettings);
+    let economyAvailable = false;
     function sync(nextSettings) {
       settings = Object.assign({}, settings, nextSettings || {});
       theme.value = settings.theme || 'minimal';
       compact.checked = settings.compact !== false;
+      economy.checked = economyAvailable && settings.economyMode === true;
+    }
+
+    function setRenderAvailable(available) {
+      economyAvailable = available === true;
+      economy.disabled = !economyAvailable;
+      economyDescription.textContent = economyAvailable
+        ? 'Reduz o uso de CPU/GPU congelando a renderização do mapa enquanto a hunt continua funcionando.'
+        : 'Modo Econômico indisponível nesta versão do jogo.';
+      sync();
     }
 
     function setOpen(open) {
@@ -89,15 +111,22 @@
       settings.compact = compact.checked;
       if (handlers && handlers.onChange) handlers.onChange(Object.assign({}, settings));
     });
+    economy.addEventListener('change', function () {
+      if (!economyAvailable) return;
+      settings.economyMode = economy.checked;
+      if (handlers && handlers.onChange) handlers.onChange(Object.assign({}, settings));
+    });
     disable.addEventListener('click', function () {
       if (handlers && handlers.onDisable) handlers.onDisable();
     });
     sync(settings);
+    setRenderAvailable(false);
 
     return {
       open: function () { setOpen(true); },
       close: function () { setOpen(false); },
       update: sync,
+      setRenderAvailable: setRenderAvailable,
       destroy: function () { global.document.removeEventListener('keydown', onKeydown); }
     };
   }

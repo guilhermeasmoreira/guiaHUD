@@ -15,6 +15,7 @@
           'naturia', 'gardestrike', 'psycraft', 'rainbolt'].includes(loaded.theme)) {
           loaded.theme = 'minimal';
         }
+        loaded.economyMode = loaded.economyMode === true;
         resolve(loaded);
       });
     });

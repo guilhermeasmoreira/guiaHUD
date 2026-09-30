@@ -5,6 +5,7 @@
   app.modules.settingsDefaults = {
     enabled: true,
     theme: 'minimal',
-    compact: true
+    compact: true,
+    economyMode: false
   };
 })(globalThis);

@@ -11,38 +11,13 @@ Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directl
 Version 0.8.4 gives the Mail control's theme rule priority over the game's own blue background and border declarations.
 Version 0.8.5 restores the original blue Padrão minimalista styling, including its native controls, while retaining neon clan themes.
 Version 0.8.6 gives Wingeon a silver and white palette and a compact eight-point star inspired by the supplied emblem, including the icon in the profile and skills bar.
-Version 0.8.7 adds a 15-second, boot-only Renderer Hook Probe in the page's MAIN world. It observes globals, RAF callbacks, script resources, and canvas context creation without altering the game loop.
-Version 0.8.8 adds a separate Private Client Capture Probe to test a temporary `Object.prototype.lastRenderAt` accessor during boot and a reversible wrapper around the captured client's `render()` only.
+Version 0.9.0 replaces both temporary probes with a normal-hunt render control and a persisted Modo Econômico toggle.
 
-## Private Client Capture Probe v2 (diagnóstico)
+## Modo Econômico
 
-Recarregue a extensão em `chrome://extensions/`, depois recarregue a aba do jogo. O probe roda no MAIN world em `document_start` e remove o accessor do prototype após capturar o cliente ou depois de 15 segundos. No Console, execute:
+Recarregue a extensão em `chrome://extensions/` e atualize a aba do jogo. Nas configurações da guiaHUD, ative **Modo Econômico**. O último frame do mapa fica congelado sem ocultar ou modificar o canvas; a simulação, o Analyzer e a HUD devem continuar. Desative o toggle para retomar a imagem. Se a versão do jogo não expuser `PokeIdleHuntPresentation.HuntPresentation.prototype.render`, a opção aparece indisponível. O estado inicial é desligado quando não existe preferência salva.
 
-```js
-__GUIA_CLIENT_PROBE__.status()
-__GUIA_CLIENT_PROBE__.methods()
-__GUIA_CLIENT_PROBE__.renderSource()
-```
-
-Se `captured: true`, `prototypeTrapRemoved: true` e `renderHookInstalled: true`, registre HP, XP, derrotados e cooldowns; execute `__GUIA_CLIENT_PROBE__.pause()`, observe por 30 segundos, depois `__GUIA_CLIENT_PROBE__.resume()`. Compare os mesmos dados e veja se o mapa congela e volta, se a guiaHUD continua atualizando e se surgem erros ou requests `client-render-diagnostic`. Finalmente execute `__GUIA_CLIENT_PROBE__.restore()` para restaurar o método original e garantir a flag de pausa em `false`. `client()` devolve a referência real somente no Console; evite copiar o objeto inteiro. Envie apenas o resultado de `status()` antes da pausa, durante a pausa, após o resume e após o restore, além das observações. Não há download de dados da conta no v2.
-
-Esse teste envolve **somente** `continuousHuntClient.render()` quando a validação de estrutura do cliente é satisfeita. Ele não altera `frame`, `present`, `owns`, os métodos de canvas, o RAF nem `presentHdFrame()`. Se `hdWebglReady` for `true`, o caminho HD/WebGL continuará visível e exigirá investigação separada. `captured: false` com `reason: "capture-timeout"` significa apenas que a escrita esperada não foi observada durante a janela de 15 segundos desse boot.
-
-## Renderer Hook Probe (diagnóstico)
-
-After pulling this version, reload the unpacked extension in `chrome://extensions/`, open the game's DevTools Console, and **reload the game tab** so the probe runs at `document_start`. Wait at least 15 seconds after the page begins loading. In the Console run:
-
-```js
-__GUIA_RENDER_PROBE__.summary()
-__GUIA_RENDER_PROBE__.raf()
-__GUIA_RENDER_PROBE__.suspicious()
-__GUIA_RENDER_PROBE__.gameFrameSource()
-__GUIA_RENDER_PROBE__.download()
-```
-
-Send the downloaded `guiahud-render-probe.json` and the output of `summary()`. If the frame is captured, `gameFrame()` returns its real function reference for local inspection. The full source is only exposed on explicit request through `gameFrameSource()` and is not included in the downloaded JSON. `summary().rendererCandidates` lists global object paths with a directly accessible `.render()` method. A candidate path is not proof that it belongs to the hunt renderer; inspect it before proposing a hook.
-
-`gameFrameCaptured: true` means a RAF callback containing both `updateWithMovementGuard` and `continuousHuntClient.render` was scheduled through the intercepted method. A repeated `gameFrameCalls` count and `hasRecursiveRAFText` indicate it schedules itself, but replacing the outer RAF callback cannot selectively omit closed-over rendering calls while retaining simulation. If no renderer candidate is exposed, inspect public factories or shared prototypes next. Only then consider a narrow canvas-level diagnostic as a fallback; the probe never blocks canvas calls. Resources report filenames without URL query strings; newly created globals and function previews contain names/code only, not game object values or account state.
+No Console da página, `__GUIA_RENDER_CONTROL__.status()` mostra `installed`, `paused`, `calls`, `skipped`, `hookIntact` e `hdModern`. Durante o modo ativo, `skipped` deve aumentar. Esse primeiro controle cobre apenas a apresentação da hunt normal; `presentHdFrame()` e a opção HD Modern do jogo permanecem independentes. Verifique por pelo menos um minuto se derrotas, XP, HP, cooldowns, capturas e Analyzer continuam avançando, se o mapa volta após desativar e se não há erros ou requests `client-render-diagnostic` novos.
 
 ## Load in Chrome
 

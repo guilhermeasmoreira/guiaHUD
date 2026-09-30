@@ -33,6 +33,22 @@
   let restoreButton = null;
   let currentState = null;
   let active = false;
+  let renderAvailable = false;
+
+  function sendRenderControl(paused) {
+    if (typeof global.CustomEvent !== 'function' || typeof global.dispatchEvent !== 'function') return;
+    global.dispatchEvent(new global.CustomEvent('guiaHUD:render-control', {
+      detail: { paused: paused === true }
+    }));
+  }
+
+  function onRenderStatus(event) {
+    const detail = event && event.detail;
+    if (!detail || typeof detail.installed !== 'boolean' ||
+      typeof detail.hookIntact !== 'boolean') return;
+    renderAvailable = detail.installed && detail.hookIntact;
+    if (hud && hud.setRenderAvailable) hud.setRenderAvailable(renderAvailable);
+  }
 
   function onNativeHuntClick(event) {
     if (!active || !event.target || !event.target.closest) return;
@@ -107,6 +123,7 @@
 
   function disable() {
     active = false;
+    sendRenderControl(false);
     app.modules.nativePanels.stop();
     if (adapter) adapter.destroy();
     adapter = null;
@@ -124,6 +141,7 @@
   function updateSettings(nextSettings) {
     settings = Object.assign({}, settings, nextSettings || {});
     applyTheme();
+    sendRenderControl(active && settings.economyMode === true);
     app.modules.settingsStorage.save(settings);
     if (hud && currentState) applyReadiness(hud.update(currentState, settings));
     app.modules.nativePanels.sync();
@@ -148,6 +166,7 @@
       }
 
       global.document.documentElement.classList.add('poke-clan-hud-enabled');
+      if (hud.setRenderAvailable) hud.setRenderAvailable(renderAvailable);
       app.modules.nativePanels.start();
       global.document.addEventListener('click', onNativeHuntClick);
       applyTheme();
@@ -157,8 +176,10 @@
         if (store) store.setState(nextState);
       });
       app.modules.settingsStorage.save(settings);
+      sendRenderControl(settings.economyMode === true);
     } catch (error) {
       active = false;
+      sendRenderControl(false);
       app.modules.nativePanels.stop();
       if (adapter) adapter.destroy();
       adapter = null;
@@ -191,9 +212,13 @@
   }
 
   function start() {
+    global.addEventListener('guiaHUD:render-status', onRenderStatus);
     app.modules.settingsStorage.load().then(function (loaded) {
       settings = loaded;
-      if (settings.enabled === false) showRestoreButton();
+      if (settings.enabled === false) {
+        sendRenderControl(false);
+        showRestoreButton();
+      }
       else enable();
     }).catch(function (error) {
       global.console.error('[Poké Idle Clan HUD] Não foi possível carregar as configurações.', error);
