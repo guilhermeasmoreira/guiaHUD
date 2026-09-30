@@ -11,11 +11,11 @@ Version 0.8.3 targets the game's fixed Mail and Quick Shortcuts controls directl
 Version 0.8.4 gives the Mail control's theme rule priority over the game's own blue background and border declarations.
 Version 0.8.5 restores the original blue Padrão minimalista styling, including its native controls, while retaining neon clan themes.
 Version 0.8.6 gives Wingeon a silver and white palette and a compact eight-point star inspired by the supplied emblem, including the icon in the profile and skills bar.
-Version 0.9.0 replaces both temporary probes with a normal-hunt render control and a persisted Modo Econômico toggle.
+Version 0.9.1 adds the two-card Modo Econômico screen, reduces adapter layout reads, places game modals above the HUD, and moves Treinador before Bolsa in the top menu. Privacy and Chrome Web Store preparation are documented in [PRIVACY.md](PRIVACY.md) and [STORE_SUBMISSION.md](STORE_SUBMISSION.md).
 
 ## Modo Econômico
 
-Recarregue a extensão em `chrome://extensions/` e atualize a aba do jogo. Nas configurações da guiaHUD, ative **Modo Econômico**. O último frame do mapa fica congelado sem ocultar ou modificar o canvas; a simulação, o Analyzer e a HUD devem continuar. Desative o toggle para retomar a imagem. Se a versão do jogo não expuser `PokeIdleHuntPresentation.HuntPresentation.prototype.render`, a opção aparece indisponível. O estado inicial é desligado quando não existe preferência salva.
+Recarregue a extensão em `chrome://extensions/` e atualize a aba do jogo. Nas configurações da guiaHUD, ative **Modo Econômico**. O desenho da hunt para e a guiaHUD cobre o último frame com uma tela preta e dois cards; o canvas não é ocultado ou modificado. A simulação, o Analyzer e a HUD devem continuar. Desative o toggle para retomar a imagem. Se a versão do jogo não expuser `PokeIdleHuntPresentation.HuntPresentation.prototype.render`, a opção aparece indisponível. O estado inicial é desligado quando não existe preferência salva.
 
 No Console da página, `__GUIA_RENDER_CONTROL__.status()` mostra `installed`, `paused`, `calls`, `skipped`, `hookIntact` e `hdModern`. Durante o modo ativo, `skipped` deve aumentar. Esse primeiro controle cobre apenas a apresentação da hunt normal; `presentHdFrame()` e a opção HD Modern do jogo permanecem independentes. Verifique por pelo menos um minuto se derrotas, XP, HP, cooldowns, capturas e Analyzer continuam avançando, se o mapa volta após desativar e se não há erros ou requests `client-render-diagnostic` novos.
 
@@ -31,6 +31,7 @@ The extension only matches the game page and requests the storage permission for
 ## Manual regression checklist
 
 - Confirm the top menu becomes a compact command bar and **Helper** opens the game's original Auto Helper.
+- Confirm **Treinador** is first, before **Bolsa**, and opens the game's native profile; Capturas remains in **Mais**. Map and store windows should appear above the HUD.
 - Confirm the compact chat control opens and closes the original themed chat without leaving a duplicate control.
 - Confirm the original trainer/team panel is hidden. Click the trainer name in the compact profile, check the minimal Pokémon list and sprites, select another Pokémon, then confirm the list closes and the active name updates.
 - Confirm horizontal and vertical scrollbars use the minimal style, especially the skills row and the expanded Pokémon list.
@@ -56,3 +57,5 @@ The extension only matches the game page and requests the storage permission for
 Run npm test with Node.js. The adapter is also available in the DevTools console when the content-script execution context is selected as PokeClanHUD; PokeClanHUD.debug() reports which game roots were detected and PokeClanHUD.refresh() refreshes the displayed state.
 
 Live regression still needs to be checked in the running game, especially menu action names and the game's expanded Hunt Analyzer and Boss behavior.
+
+For a Chrome Web Store package run `python3 scripts/package-extension.py`. It includes only files referenced by the manifest, with `manifest.json` at ZIP root. The promotional image stays outside that ZIP. See [STORE_SUBMISSION.md](STORE_SUBMISSION.md) for the remaining live screenshot and dashboard steps.

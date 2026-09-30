@@ -182,7 +182,7 @@ test('manifest keeps the game match and permissions narrow', function () {
 });
 
 test('action bridge forwards commands to the original game buttons', function () {
-  const clicks = { inventory: 0, move: 0, more: 0, reset: 0, confirm: 0, boss: 0 };
+  const clicks = { inventory: 0, trainer: 0, move: 0, more: 0, reset: 0, confirm: 0, boss: 0 };
   const classes = new Set();
   const classList = {
     contains: function (name) { return classes.has(name); },
@@ -196,6 +196,8 @@ test('action bridge forwards commands to the original game buttons', function ()
     attributes: { 'data-client-action': 'inventory' }
   });
   inventory.click = function () { clicks.inventory += 1; };
+  const trainer = element('Perfil', { attributes: { 'data-client-action': 'skills' } });
+  trainer.click = function () { clicks.trainer += 1; };
   const move = element('', { attributes: { 'data-move-key': '0:bite' } });
   move.click = function () { clicks.move += 1; };
   const reset = element('');
@@ -207,7 +209,7 @@ test('action bridge forwards commands to the original game buttons', function ()
   const boss = element('');
   boss.click = function () { clicks.boss += 1; };
   const menuRoot = element('', {
-    lists: { '[data-client-action]': [inventory], '[data-system-open]': [] }
+    lists: { '[data-client-action]': [inventory, trainer], '[data-system-open]': [] }
   });
   const elements = new Map([
     ['#pio-main-menu', menuRoot],
@@ -230,10 +232,11 @@ test('action bridge forwards commands to the original game buttons', function ()
 
   const actions = context.PokeClanHUD.modules.actions;
   assert.equal(actions.openMenuAction('client', 'inventory'), true);
+  assert.equal(actions.openMenuAction('client', 'skills'), true);
   assert.equal(actions.activateMove('0:bite'), true);
   assert.equal(actions.resetHunt(), true);
   assert.equal(actions.toggleBoss(), true);
-  assert.deepEqual(clicks, { inventory: 1, move: 1, more: 1, reset: 1, confirm: 1, boss: 1 });
+  assert.deepEqual(clicks, { inventory: 1, trainer: 1, move: 1, more: 1, reset: 1, confirm: 1, boss: 1 });
   assert.equal(classes.has('pch-hunt-expanded'), false);
   assert.equal(classes.has('pch-boss-expanded'), true);
 });

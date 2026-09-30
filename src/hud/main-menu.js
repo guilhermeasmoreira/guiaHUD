@@ -5,21 +5,20 @@
   const iconFactory = app.modules.icons;
 
   const primaryDefinitions = [
+    { type: 'client', key: 'skills', label: 'Treinador' },
     { type: 'client', key: 'inventory', label: 'Bolsa' },
-    { type: 'client', key: 'profile', label: 'Perfil' },
     { type: 'client', key: 'map', label: 'Mapa' },
     { type: 'client', key: 'auto-helper', label: 'Auto Helper' },
     { type: 'client', key: 'hunt-analyzer', label: 'Hunt' },
     { type: 'system', key: 'diamond-shop', label: 'Diamantes' },
     { type: 'client', key: 'health', label: 'Centro' },
     { type: 'system', key: 'pokedex', label: 'Pokédex' },
-    { type: 'system', key: 'captures', label: 'Capturas' },
     { type: 'client', key: 'player-market', label: 'Market' }
   ];
 
   const icons = {
     inventory: '▣',
-    profile: '◎',
+    skills: '◎',
     map: '⌖',
     'auto-helper': '◇',
     'hunt-analyzer': '◷',
@@ -62,7 +61,7 @@
     const icon = dom.create('span', 'pch-menu-icon', icons[action.key] || '·');
     icon.setAttribute('aria-hidden', 'true');
     const themeIcon = {
-      inventory: 'inventory', profile: 'profile', map: 'map',
+      inventory: 'inventory', skills: 'profile', map: 'map',
       'auto-helper': 'helper', 'hunt-analyzer': 'hunt', 'diamond-shop': 'diamond',
       health: 'health', pokedex: 'pokedex', captures: 'captures', 'player-market': 'market'
     }[action.key];
@@ -115,7 +114,9 @@
       primaryDefinitions.forEach(function (definition) {
         const item = byId.get(definition.type + ':' + definition.key);
         if (!item) return;
-        const action = Object.assign({}, item, { label: item.label || definition.label });
+        const action = Object.assign({}, item, {
+          label: definition.key === 'skills' ? definition.label : item.label || definition.label
+        });
         const button = actionButton(action, true, definition.label);
         primary.append(button);
       });
