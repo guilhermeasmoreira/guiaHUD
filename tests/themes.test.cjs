@@ -11,6 +11,7 @@ function load(file, context) {
 test('theme switches update the document class without leaving the prior theme active', () => {
   const classes = new Set();
   const renderEvents = [];
+  const economyVisibility = [];
   let handlers;
   const html = {
     classList: {
@@ -27,7 +28,8 @@ test('theme switches update the document class without leaving the prior theme a
     store: { createStore: () => ({ getState: () => ({}), subscribe: () => {}, setState: () => {} }) },
     hudRoot: { mount: (_state, _settings, _actions, nextHandlers) => {
       handlers = nextHandlers;
-      return { host: { isConnected: true }, update: () => ({}), destroy: () => {} };
+      return { host: { isConnected: true }, update: () => ({}), destroy: () => {},
+        setEconomyActive: (paused) => economyVisibility.push(paused) };
     } },
     nativePanels: { start: () => {}, stop: () => {}, sync: () => {} }
   };
@@ -51,6 +53,7 @@ test('theme switches update the document class without leaving the prior theme a
   handlers.onChange({ economyMode: true });
   assert.equal(renderEvents.at(-1).type, 'guiaHUD:render-control');
   assert.equal(renderEvents.at(-1).detail.paused, true);
+  assert.equal(economyVisibility.at(-1), false);
 });
 
 test('every selectable theme has a packaged stylesheet', () => {

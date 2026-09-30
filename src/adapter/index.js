@@ -71,6 +71,9 @@
     const legacyFill = dom.query(selectors.target.legacyHpFill);
     const fill = primaryFill || legacyFill;
     const infoLevel = parse.parseLevel(legacyInfo);
+    const targetRoot = dom.query(selectors.target.root) || dom.query(selectors.target.legacyRoot);
+    const targetImage = targetRoot && targetRoot.querySelector &&
+      targetRoot.querySelector('img[data-pokemon-sprite], img.pokemon-sprite, img[data-rh-sprite]');
 
     return {
       visible: Boolean(name),
@@ -78,7 +81,8 @@
       level: parse.parseInteger(primaryLevel) || infoLevel,
       hp: hp.hp,
       maxHp: hp.maxHp,
-      hpPercent: fill ? parse.parsePercent(fill.style.width) : null
+      hpPercent: fill ? parse.parsePercent(fill.style.width) : null,
+      sprite: targetImage ? targetImage.currentSrc || targetImage.src || null : null
     };
   }
 
@@ -137,14 +141,9 @@
 
     const candidates = [];
     overlays.forEach(function (overlay) {
-      candidates.push(overlay.textContent, overlay.innerText);
+      candidates.push(overlay.textContent);
       ['data-cooldown', 'data-cooldown-seconds', 'data-remaining', 'aria-label', 'title']
         .forEach(function (attribute) { candidates.push(overlay.getAttribute(attribute)); });
-      if (global.getComputedStyle) {
-        ['::before', '::after'].forEach(function (pseudo) {
-          try { candidates.push(global.getComputedStyle(overlay, pseudo).content); } catch (_) {}
-        });
-      }
     });
 
     ['data-cooldown', 'data-cooldown-seconds', 'data-cd', 'data-remaining', 'aria-label', 'title']
@@ -156,6 +155,18 @@
     for (const candidate of candidates) {
       const parsed = cooldownText(candidate);
       if (parsed) return parsed;
+    }
+    // Pseudo-element styles can force layout. Consult them only for legacy cooldowns
+    // that expose no usable text or attributes.
+    if (global.getComputedStyle) {
+      for (const overlay of overlays) {
+        for (const pseudo of ['::before', '::after']) {
+          try {
+            const parsed = cooldownText(global.getComputedStyle(overlay, pseudo).content);
+            if (parsed) return parsed;
+          } catch (_) {}
+        }
+      }
     }
     return null;
   }
@@ -304,16 +315,15 @@
     let localObserver = null;
     let currentRoots = [];
     let callback = null;
-    let scheduled = false;
+    let scheduled = null;
+    let rootScheduled = null;
 
     function emit() {
-      if (scheduled) return;
-      scheduled = true;
-      const schedule = global.requestAnimationFrame || function (fn) { return global.setTimeout(fn, 0); };
-      schedule(function () {
-        scheduled = false;
+      if (scheduled !== null) return;
+      scheduled = global.setTimeout(function () {
+        scheduled = null;
         if (callback) callback(read());
-      });
+      }, 100);
     }
 
     function sameRoots(next) {
@@ -325,7 +335,7 @@
     function rebindRoots() {
       const next = observedRoots();
       if (sameRoots(next)) return false;
-      currentRoots = next;
+      currentRoots = Array.from(new Set(next));
       if (localObserver) localObserver.disconnect();
       if (localObserver) {
         currentRoots.forEach(function (root) {
@@ -349,7 +359,11 @@
       localObserver = new global.MutationObserver(emit);
       rebindRoots();
       rootObserver = new global.MutationObserver(function () {
-        if (rebindRoots()) emit();
+        if (rootScheduled !== null) return;
+        rootScheduled = global.setTimeout(function () {
+          rootScheduled = null;
+          if (rebindRoots()) emit();
+        }, 250);
       });
       rootObserver.observe(global.document.documentElement, { childList: true, subtree: true });
       emit();
@@ -359,6 +373,10 @@
     function stop() {
       if (rootObserver) rootObserver.disconnect();
       if (localObserver) localObserver.disconnect();
+      if (scheduled !== null) global.clearTimeout(scheduled);
+      if (rootScheduled !== null) global.clearTimeout(rootScheduled);
+      scheduled = null;
+      rootScheduled = null;
       rootObserver = null;
       localObserver = null;
       currentRoots = [];

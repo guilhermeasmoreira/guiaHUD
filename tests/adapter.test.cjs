@@ -105,7 +105,7 @@ test('adapter normalizes live player, target, hunt, boss, skills, and menu value
   };
   const context = vm.createContext({
     document: document,
-    getComputedStyle: function () { return { display: 'block', visibility: 'visible' }; }
+    getComputedStyle: function () { throw new Error('Cooldown attribute must avoid computed style reads'); }
   });
   context.globalThis = context;
 

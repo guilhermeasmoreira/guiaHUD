@@ -34,6 +34,7 @@
   let currentState = null;
   let active = false;
   let renderAvailable = false;
+  let renderPaused = false;
 
   function sendRenderControl(paused) {
     if (typeof global.CustomEvent !== 'function' || typeof global.dispatchEvent !== 'function') return;
@@ -47,7 +48,9 @@
     if (!detail || typeof detail.installed !== 'boolean' ||
       typeof detail.hookIntact !== 'boolean') return;
     renderAvailable = detail.installed && detail.hookIntact;
+    renderPaused = active && detail.paused === true && renderAvailable;
     if (hud && hud.setRenderAvailable) hud.setRenderAvailable(renderAvailable);
+    if (hud && hud.setEconomyActive) hud.setEconomyActive(renderPaused);
   }
 
   function onNativeHuntClick(event) {
@@ -123,6 +126,7 @@
 
   function disable() {
     active = false;
+    renderPaused = false;
     sendRenderControl(false);
     app.modules.nativePanels.stop();
     if (adapter) adapter.destroy();
@@ -167,6 +171,7 @@
 
       global.document.documentElement.classList.add('poke-clan-hud-enabled');
       if (hud.setRenderAvailable) hud.setRenderAvailable(renderAvailable);
+      if (hud.setEconomyActive) hud.setEconomyActive(renderPaused);
       app.modules.nativePanels.start();
       global.document.addEventListener('click', onNativeHuntClick);
       applyTheme();
@@ -179,6 +184,7 @@
       sendRenderControl(settings.economyMode === true);
     } catch (error) {
       active = false;
+      renderPaused = false;
       sendRenderControl(false);
       app.modules.nativePanels.stop();
       if (adapter) adapter.destroy();
