@@ -5,6 +5,7 @@
   const storageKey = 'pokeClanHudLayout';
 
   function storageGet(callback) {
+    if (app.modules.userScriptStorage) return callback(app.modules.userScriptStorage.get(storageKey) || {});
     if (!global.chrome || !global.chrome.storage || !global.chrome.storage.local) return callback({});
     global.chrome.storage.local.get(storageKey, function (result) {
       callback(result && result[storageKey] || {});
@@ -12,6 +13,7 @@
   }
 
   function storageSet(layout) {
+    if (app.modules.userScriptStorage) return app.modules.userScriptStorage.set(storageKey, layout);
     if (!global.chrome || !global.chrome.storage || !global.chrome.storage.local) return;
     global.chrome.storage.local.set({ [storageKey]: layout });
   }

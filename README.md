@@ -28,6 +28,14 @@ No Console da página, `__GUIA_RENDER_CONTROL__.status()` mostra `installed`, `p
 
 The extension only matches the game page and requests the storage permission for its own settings. After pulling an update, click **Reload** on the extension in `chrome://extensions/`, then refresh the game tab.
 
+## Usar com Tampermonkey
+
+O arquivo pronto é [userscript/guiaHUD.user.js](userscript/guiaHUD.user.js). Instale Tampermonkey no navegador e, no painel dele, escolha **Criar novo script**. Apague o modelo, cole o conteúdo completo desse arquivo e salve com Ctrl+S. No Chrome recente, abra os detalhes da extensão Tampermonkey em `chrome://extensions/` e habilite **Permitir scripts de usuário**; se esse controle não aparecer, habilite **Modo do desenvolvedor** na página de extensões. Abra ou recarregue `https://pokeidle.online/game/` e confira que a guiaHUD apareceu. Desative a extensão guiaHUD instalada separadamente antes de testar o userscript para evitar duas interfaces.
+
+O userscript roda no contexto da página em `document-start`, necessário para instalar o mesmo hook do Modo Econômico. Tema, modo compacto, Modo Econômico e posições arrastadas ficam no `localStorage` desse site com prefixo `guiaHUD.userscript.`; as preferências da extensão Chrome não são importadas automaticamente. Com a HUD carregada, abra a engrenagem e configure o tema. Para conferir o hook no Console: `__GUIA_RENDER_CONTROL__.status()`.
+
+Após modificar `src/`, `manifest.json` ou o CSS, rode `npm run build:userscript` e versione também o arquivo gerado. O build copia os módulos na ordem do manifest e incorpora todos os estilos, sem dependências de CDN. `python3 scripts/build-userscript.py --check` verifica se o arquivo gerado está atualizado. Atualizações via URL do repositório dependem de incrementar a versão do manifest e refazer o build.
+
 ## Manual regression checklist
 
 - Confirm the top menu becomes a compact command bar and **Helper** opens the game's original Auto Helper.

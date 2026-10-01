@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "private": true,
   "scripts": {
+    "build:userscript": "python3 scripts/build-userscript.py",
     "test": "node --test tests/*.test.cjs"
   }
 }
