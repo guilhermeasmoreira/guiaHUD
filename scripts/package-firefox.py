@@ -41,3 +41,17 @@ with zipfile.ZipFile(output) as package:
     assert packaged_manifest['content_scripts'] == json.loads((ROOT / 'manifest.json').read_text(encoding='utf-8'))['content_scripts']
 
 print(f'{output}: {len(files) + 1} runtime files, {output.stat().st_size} bytes')
+
+# AMO reviewers can reproduce the generated manifest from this source archive.
+source_files = files | {
+    'manifest.json', 'scripts/package-firefox.py', 'README.md',
+    'FIREFOX_REVIEW_BUILD.md', 'PRIVACY.md',
+}
+source_output = ROOT / 'dist' / f"guiaHUD-firefox-source-{manifest['version']}.zip"
+with zipfile.ZipFile(source_output, 'w', compression=zipfile.ZIP_DEFLATED) as package:
+    for name in sorted(source_files):
+        package.write(ROOT / name, arcname=name)
+with zipfile.ZipFile(source_output) as package:
+    assert set(package.namelist()) == source_files
+    assert package.testzip() is None
+print(f'{source_output}: {len(source_files)} source files, {source_output.stat().st_size} bytes')
