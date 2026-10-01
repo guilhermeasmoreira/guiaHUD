@@ -11,13 +11,13 @@ From the directory containing this file, run:
 python3 scripts/package-firefox.py
 ```
 
-The result `dist/guiaHUD-firefox-0.9.1.zip` is the add-on uploaded to AMO.
+The result `dist/guiaHUD-firefox-0.9.2.zip` is the add-on uploaded to AMO.
 The script reads `manifest.json` and packages the listed scripts, styles and
 icons without changing them. It adds only `browser_specific_settings.gecko`
 to the generated Firefox manifest: a stable add-on ID, Firefox minimum 140,
 and `data_collection_permissions.required: ["none"]`.
 
-The second output, `dist/guiaHUD-firefox-source-0.9.1.zip`, is this source
+The second output, `dist/guiaHUD-firefox-source-0.9.2.zip`, is this source
 archive. ZIP entry timestamps are not fixed; compare file contents when
 checking the reproduced build. The generated `manifest.json` content and all
 runtime source files should match exactly.

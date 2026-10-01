@@ -19,6 +19,27 @@
   --pch-enable-bg: #082238;
 }
 
+#poke-clan-hud-root .pch-shell[data-theme="minimal"] .pch-main-menu {
+  width: max-content;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="minimal"] .pch-menu-primary {
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="minimal"] .pch-menu-action {
+  flex: 0 0 auto;
+}
+
+#poke-clan-hud-root .pch-shell[data-theme="minimal"] .pch-menu-more {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+}
+
 html.poke-clan-hud-enabled.pch-theme-minimal,
 html.poke-clan-hud-enabled.pch-theme-minimal * {
   scrollbar-width: thin;

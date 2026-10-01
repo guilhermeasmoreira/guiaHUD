@@ -1,6 +1,6 @@
 {
   "name": "pokeidle-clan-hud",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "private": true,
   "scripts": {
     "build:userscript": "python3 scripts/build-userscript.py",
