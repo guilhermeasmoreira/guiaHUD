@@ -36,6 +36,12 @@ O userscript roda no contexto da página em `document-start`, necessário para i
 
 Após modificar `src/`, `manifest.json` ou o CSS, rode `npm run build:userscript` e versione também o arquivo gerado. O build copia os módulos na ordem do manifest e incorpora todos os estilos, sem dependências de CDN. `python3 scripts/build-userscript.py --check` verifica se o arquivo gerado está atualizado. Atualizações via URL do repositório dependem de incrementar a versão do manifest e refazer o build.
 
+## Publicar no Firefox Add-ons
+
+Execute `python3 scripts/package-firefox.py` e envie `dist/guiaHUD-firefox-0.9.1.zip` em [addons.mozilla.org/developers/](https://addons.mozilla.org/developers/), escolhendo **On this site** para a listagem pública. O ZIP do Firefox conserva a ordem e os arquivos de runtime do Chrome, mas inclui um ID Firefox estável, versão mínima 140 e a declaração de que a guiaHUD não coleta nem transmite dados. O pacote da Chrome Web Store permanece separado.
+
+Antes da submissão, no Firefox abra `about:debugging` → **Este Firefox** → **Carregar extensão temporária**, escolha o ZIP do Firefox e teste a HUD em `https://pokeidle.online/game/`. Verifique temas, persistência, menu, chat, Analyzer, painéis nativos e o Modo Econômico pausando e retomando a apresentação da hunt. A instalação temporária termina quando o Firefox fecha; para distribuir a extensão, envie o ZIP ao Firefox Add-ons para assinatura. Use a [política de privacidade](PRIVACY.md) na ficha e descreva ao revisor que a extensão lê a interface do jogo localmente e só funciona após acessar a página do jogo.
+
 ## Manual regression checklist
 
 - Confirm the top menu becomes a compact command bar and **Helper** opens the game's original Auto Helper.

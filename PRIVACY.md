@@ -12,7 +12,7 @@ Os botões da HUD acionam controles já presentes no jogo. O Modo Econômico sol
 
 ## Armazenamento
 
-A extensão usa `chrome.storage.local` para guardar suas próprias preferências, como tema, modo compacto, estado da HUD, preferência do Modo Econômico e posições dos elementos arrastáveis. Esses dados permanecem no perfil local do Chrome até o usuário removê-los ou desinstalar a extensão. A guiaHUD não salva inventário, credenciais, tokens de acesso ou histórico de chat.
+A extensão para Chrome ou Firefox usa `chrome.storage.local` para guardar suas próprias preferências, como tema, modo compacto, estado da HUD, preferência do Modo Econômico e posições dos elementos arrastáveis. Esses dados permanecem no perfil local do navegador até o usuário removê-los ou desinstalar a extensão. A versão Tampermonkey guarda essas preferências separadamente no armazenamento local do site. A guiaHUD não salva inventário, credenciais, tokens de acesso ou histórico de chat.
 
 ## Compartilhamento
 
@@ -20,4 +20,4 @@ O código da guiaHUD não envia as informações lidas nem as preferências arma
 
 ## Controle e contato
 
-O usuário pode desativar a HUD no painel de configurações. Para remover as preferências salvas, pode limpar os dados da extensão no Chrome ou desinstalá-la. Dúvidas sobre esta política podem ser abertas em [Issues da guiaHUD](https://github.com/guilhermeasmoreira/guiaHUD/issues).
+O usuário pode desativar a HUD no painel de configurações. Para remover as preferências salvas, pode limpar os dados da extensão no navegador ou desinstalá-la. Na versão Tampermonkey, também pode limpar os dados do site. Dúvidas sobre esta política podem ser abertas em [Issues da guiaHUD](https://github.com/guilhermeasmoreira/guiaHUD/issues).
