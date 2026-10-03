@@ -47,7 +47,7 @@ source_files = files | {
     'manifest.json', 'scripts/package-firefox.py', 'README.md',
     'FIREFOX_REVIEW_BUILD.md', 'PRIVACY.md', 'scripts/build-ranking-assets.py',
 }
-source_files.update(str(p.relative_to(ROOT)) for p in (ROOT / 'src/assets/themes/wingeon/ranking').glob('*.svg'))
+source_files.update(str(p.relative_to(ROOT)) for p in (ROOT / 'src/assets/themes/wingeon/ranking').iterdir() if p.suffix in {'.svg', '.webp'})
 source_output = ROOT / 'dist' / f"guiaHUD-firefox-source-{manifest['version']}.zip"
 with zipfile.ZipFile(source_output, 'w', compression=zipfile.ZIP_DEFLATED) as package:
     for name in sorted(source_files):

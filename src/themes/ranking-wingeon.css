@@ -14,3 +14,105 @@
   --gh-rk-accent: #70bbed;
   --gh-rk-accent-2: #b9e8ff;
 }
+
+/* Illustrated assets carry the architecture; every foreground datum stays native. */
+.rankings-window.gh-ranking-theme-wingeon .rk-header {
+  min-height: 126px;
+  background-size: auto 280px, auto !important;
+}
+.rankings-window.gh-ranking-theme-wingeon .rk-brand-crown { display: none; }
+.rankings-window.gh-ranking-theme-wingeon .rk-title {
+  padding: 4px 12px 4px 0;
+  text-shadow: 0 2px 5px #000;
+}
+.rankings-window.gh-ranking-theme-wingeon .rk-title p { max-width: 530px; }
+
+@media (min-width: 761px) {
+  .rankings-window.gh-ranking-theme-wingeon #ranking-podium {
+    display: block;
+    height: clamp(330px, 32vw, 414px);
+    min-height: 0;
+    padding: 0;
+    background-size: 100% 100% !important;
+    background-position: center !important;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card {
+    position: absolute;
+    top: 0;
+    width: 24% !important;
+    height: 100%;
+    max-height: none;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card.rk-metal-2 { left: 8.5%; }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card.rk-metal-1 { left: 36%; width: 28% !important; }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card.rk-metal-3 { left: 67.5%; }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card::before,
+  .rankings-window.gh-ranking-theme-wingeon .rk-card::after { content: none !important; }
+  .rankings-window.gh-ranking-theme-wingeon .rk-medal {
+    position: absolute;
+    inset: 7% 0 auto;
+    flex-direction: column;
+    gap: 3px;
+    text-shadow: 0 2px 4px #000;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card .rk-badge {
+    background: #07162acf;
+    box-shadow: 0 0 18px #a8d6ff55, inset 0 0 0 3px #061422;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card.rk-metal-1 .rk-badge {
+    color: #ffe5a8;
+    box-shadow: 0 0 24px #ffcc7266, inset 0 0 0 3px #33281d;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card-main { display: contents !important; }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card .rk-pedestal {
+    position: absolute;
+    inset: auto 0 41.5%;
+    height: 112px;
+    padding: 0;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card .rk-card-info {
+    position: absolute;
+    top: 61%;
+    left: 3%;
+    right: 3%;
+    height: 21%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5px !important;
+    background: none !important;
+    text-shadow: 0 2px 3px #000;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card-info h3,
+  .rankings-window.gh-ranking-theme-wingeon .rk-card-info p { margin: 0; }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card .rk-name {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: clamp(13px, 1.3vw, 18px);
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card .rk-score { font-size: clamp(13px, 1.55vw, 21px); }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card-info > .rk-you {
+    top: -17px;
+    right: 8%;
+    text-shadow: none;
+  }
+  .rankings-window.gh-ranking-theme-wingeon .rk-card-team {
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+    border-radius: 6px;
+    background: #04111db8;
+  }
+}
+@media (max-width: 760px) {
+  .rankings-window.gh-ranking-theme-wingeon .rk-header { background-size: auto 190px, auto !important; }
+  /* Compact cards keep live labels readable instead of squeezing the scene. */
+  .rankings-window.gh-ranking-theme-wingeon #ranking-podium {
+    background: linear-gradient(#08182bb3, #08182be8), var(--gh-rk-hall-art) center / cover !important;
+  }
+}

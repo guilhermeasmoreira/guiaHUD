@@ -78,6 +78,7 @@ For a Chrome Web Store package run `python3 scripts/package-extension.py`. It in
 
 O tema Wingeon aplica uma skin ao ranking nativo: dragão prateado, fundo de
 catedral, asas do campeão, pedestais e tabela com destaque do jogador local.
+O cabeçalho e o cenário dos pódios usam ilustrações WebP baseadas no mockup.
 Os canvases, dados e controles originais permanecem no lugar. Outros temas
 mantêm o ranking nativo. O Render Pause não foi alterado.
 

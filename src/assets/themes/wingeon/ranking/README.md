@@ -17,3 +17,23 @@ art tokens under its `.gh-ranking-theme-*` class, and register its CSS in
 No canvas drawing, fetching, node cloning or layout reads are performed by
 this module. Native updates inherit the CSS; newly opened windows are observed.
 Disabling the HUD or switching theme removes only classes added by this module.
+
+## Illustrated revision
+
+`header-illustrated.webp` and `hall-illustrated.webp` replace the flat vector
+header and hall on desktop. Generated with the built-in image tool using the
+user's mockup as reference; optimized to WebP (about 142 KiB total).
+Production prompts: a silver-white crystalline dragon looking left on the
+right of a quiet navy header; and a navy crystal cathedral with three EMPTY
+silver/gold/bronze podiums, silver wings framing the champion. Both explicitly
+exclude all text, avatars, numbers, controls and game data.
+
+The scene's platform centers are at 20.5%, 50%, 79.5%; live avatar feet align
+at 58.5% of scene height and text overlays the fronts from 61% to 82%.
+These placement rules live in `ranking-wingeon.css`. Keep these anchors when
+replacing the art, or adjust them together. Small screens use compact native
+cards with the same illustration as subdued backdrop for readability.
+
+After replacing a WebP, run `npm run build:ranking` and
+`npm run build:userscript`. CSS embeds the images so no network request or
+web-accessible-resource permission is necessary.
