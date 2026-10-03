@@ -1,23 +1,31 @@
 {
   "manifest_version": 3,
   "name": "guiaHUD — HUD para PokeIdle",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "description": "HUD compacta com temas, atalhos e modo econômico para PokeIdle Online. Projeto independente.",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://pokeidle.online/game/*"],
-      "js": ["src/render-control.js"],
+      "matches": [
+        "https://pokeidle.online/game/*"
+      ],
+      "js": [
+        "src/render-control.js"
+      ],
       "run_at": "document_start",
       "world": "MAIN"
     },
     {
-      "matches": ["https://pokeidle.online/game/*"],
+      "matches": [
+        "https://pokeidle.online/game/*"
+      ],
       "run_at": "document_idle",
       "css": [
         "src/themes/base.css",
@@ -31,7 +39,10 @@
         "src/themes/naturia/theme.css",
         "src/themes/gardestrike/theme.css",
         "src/themes/psycraft/theme.css",
-        "src/themes/rainbolt/theme.css"
+        "src/themes/rainbolt/theme.css",
+        "src/themes/ranking-premium.css",
+        "src/themes/ranking-wingeon-assets.css",
+        "src/themes/ranking-wingeon.css"
       ],
       "js": [
         "src/utils/dom.js",
@@ -54,6 +65,7 @@
         "src/hud/draggable.js",
         "src/hud/root.js",
         "src/content/native-panels.js",
+        "src/hud/ranking-premium.js",
         "src/content/lifecycle.js",
         "src/content/bootstrap.js"
       ]

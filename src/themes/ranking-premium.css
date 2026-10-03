@@ -1,0 +1,400 @@
+/* Native ranking skin. No data, controls, canvases or native order are replaced. */
+html.poke-clan-hud-enabled .rankings-window.gh-ranking-premium {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: min(1240px, calc(100vw - 32px));
+  max-width: calc(100vw - 24px) !important;
+  max-height: calc(100vh - 24px) !important;
+  max-height: min(940px, calc(100dvh - 24px)) !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 1px solid var(--gh-rk-border) !important;
+  border-radius: 16px !important;
+  color: var(--gh-rk-text);
+  background: var(--gh-rk-bg) !important;
+  box-shadow: 0 24px 70px #0009, 0 0 0 3px #020c16, inset 0 0 0 1px #d3edff1a !important;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gh-rk-accent) var(--gh-rk-bg);
+}
+.rankings-window.gh-ranking-premium *,
+.rankings-window.gh-ranking-premium *::before,
+.rankings-window.gh-ranking-premium *::after { box-sizing: border-box; }
+.rankings-window.gh-ranking-premium [hidden],
+.rankings-window.gh-ranking-premium[hidden] { display: none !important; }
+.rankings-window.gh-ranking-premium button,
+.rankings-window.gh-ranking-premium input,
+.rankings-window.gh-ranking-premium select { font: inherit; }
+.rankings-window.gh-ranking-premium :is(button, input, select):focus-visible {
+  outline: 2px solid var(--gh-rk-accent-2);
+  outline-offset: 2px;
+}
+.rankings-window.gh-ranking-premium .rk-header {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 18px;
+  min-height: 112px;
+  padding: 18px 100px 18px 28px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--gh-rk-border) !important;
+  isolation: isolate;
+  background: var(--gh-rk-header-art) right center / auto 220px no-repeat, linear-gradient(115deg, var(--gh-rk-surface), var(--gh-rk-bg)) !important;
+}
+.rankings-window.gh-ranking-premium .rk-brand-crown {
+  width: 70px;
+  height: 76px;
+  flex: 0 0 70px;
+  font-size: 0 !important;
+  background: var(--gh-rk-emblem) center / contain no-repeat;
+}
+.rankings-window.gh-ranking-premium .rk-title { min-width: 0; position: relative; }
+.rankings-window.gh-ranking-premium .rk-title small {
+  color: var(--gh-rk-accent-2);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .18em;
+}
+.rankings-window.gh-ranking-premium .rk-title small::after { content: var(--gh-rk-theme-label, ''); }
+.rankings-window.gh-ranking-premium .rk-title h2 {
+  margin: 2px 0;
+  color: var(--gh-rk-text);
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.12;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-shadow: 0 2px 0 #3a567d, 0 0 20px #a6d8ff30;
+}
+.rankings-window.gh-ranking-premium .rk-title p {
+  max-width: 640px;
+  margin: 6px 0 0;
+  color: var(--gh-rk-text-muted);
+  font-size: 12px;
+}
+.rankings-window.gh-ranking-premium .rk-close,
+.rankings-window.gh-ranking-premium .mobile-window-reset {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--gh-rk-border);
+  border-radius: 7px;
+  background: var(--gh-rk-bg);
+  color: var(--gh-rk-text);
+  font-size: 24px;
+  cursor: pointer;
+}
+.rankings-window.gh-ranking-premium .mobile-window-reset { right: 58px; font-size: 18px; }
+.rankings-window.gh-ranking-premium .rk-controls {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--gh-rk-surface);
+  border-bottom: 1px solid var(--gh-rk-border);
+}
+.rankings-window.gh-ranking-premium .rk-tabs {
+  display: flex;
+  flex: 1 1 480px;
+  min-width: 0;
+  gap: 2px;
+}
+.rankings-window.gh-ranking-premium .rk-tabs button {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--gh-rk-text-muted);
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.rankings-window.gh-ranking-premium .rk-tabs button[aria-selected="true"],
+.rankings-window.gh-ranking-premium .rk-tabs button.active {
+  border-color: var(--gh-rk-border);
+  background: linear-gradient(180deg, #20466e, #102b46);
+  box-shadow: inset 0 -2px var(--gh-rk-accent);
+  color: var(--gh-rk-text);
+}
+.rankings-window.gh-ranking-premium .rk-selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+.rankings-window.gh-ranking-premium .rk-selects label {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--gh-rk-text-muted); font-size: 10px;
+}
+.rankings-window.gh-ranking-premium select,
+.rankings-window.gh-ranking-premium input[type="search"] {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--gh-rk-border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  background: var(--gh-rk-bg);
+  color: var(--gh-rk-text);
+  color-scheme: dark;
+}
+.rankings-window.gh-ranking-premium #rk-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: 0 18px 14px;
+}
+.rankings-window.gh-ranking-premium #ranking-podium {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  align-items: end;
+  gap: 12px;
+  min-height: 340px;
+  margin: 0 -18px;
+  padding: 22px 40px 14px;
+  isolation: isolate;
+  background: var(--gh-rk-hall-art) center bottom / cover no-repeat, var(--gh-rk-bg) !important;
+  border-bottom: 1px solid var(--gh-rk-border);
+}
+.rankings-window.gh-ranking-premium #ranking-podium:empty { display: none; }
+.rankings-window.gh-ranking-premium .rk-card {
+  --gh-rk-metal: var(--gh-rk-silver);
+  --gh-rk-plinth: var(--gh-rk-podium-silver);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  text-align: center;
+  transform: none !important;
+  isolation: isolate;
+}
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-2 { grid-column: 1; grid-row: 1; }
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-1 {
+  grid-column: 2; grid-row: 1;
+  --gh-rk-metal: var(--gh-rk-gold);
+  --gh-rk-plinth: var(--gh-rk-podium-gold);
+}
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-3 {
+  grid-column: 3; grid-row: 1;
+  --gh-rk-metal: var(--gh-rk-bronze);
+  --gh-rk-plinth: var(--gh-rk-podium-bronze);
+}
+/* Remove native card ornaments; decorations belong to our skin while active. */
+.rankings-window.gh-ranking-premium .rk-card::after { content: none !important; }
+.rankings-window.gh-ranking-premium .rk-card::before {
+  content: '';
+  position: absolute;
+  inset: 40px 0 84px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 85%, #81cfff35, transparent 65%);
+}
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-1::before {
+  inset: 28px -12% 105px;
+  background: var(--gh-rk-wings) center bottom / contain no-repeat, radial-gradient(ellipse at 50% 80%, #f2d08b28, transparent 65%);
+}
+.rankings-window.gh-ranking-premium .rk-medal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 42px;
+  margin: 0 0 2px;
+  padding: 0;
+  color: var(--gh-rk-metal);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.rankings-window.gh-ranking-premium .rk-card .rk-badge {
+  display: flex; align-items: center; justify-content: center;
+  min-width: 38px; height: 38px; padding: 0 7px;
+  color: var(--gh-rk-metal);
+  border: 1px solid var(--gh-rk-metal);
+  border-radius: 7px 7px 15px 15px;
+  background: linear-gradient(135deg, #243e58, #061321);
+  font-size: 25px;
+  line-height: 1;
+  box-shadow: inset 0 0 0 3px #061422, 0 3px 12px #0005;
+}
+.rankings-window.gh-ranking-premium .rk-card .rk-badge i { font-style: normal; font-size: 18px; }
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-1 .rk-medal { min-height: 54px; }
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-1 .rk-badge { min-width: 54px; height: 48px; font-size: 31px; }
+.rankings-window.gh-ranking-premium .rk-card-main {
+  display: flex !important; flex-direction: column; align-items: stretch;
+  gap: 0 !important; padding: 0 !important; min-width: 0;
+}
+.rankings-window.gh-ranking-premium .rk-pedestal {
+  position: relative;
+  display: flex; align-items: end; justify-content: center;
+  min-width: 0; width: 100%; height: 105px;
+  padding: 0 0 2px; margin: 0;
+  border: 0; border-radius: 0;
+  background: none !important; box-shadow: none !important;
+}
+.rankings-window.gh-ranking-premium .rk-pedestal::before,
+.rankings-window.gh-ranking-premium .rk-pedestal::after { content: none !important; }
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-1 .rk-pedestal { height: 129px; }
+.rankings-window.gh-ranking-premium .rk-pedestal .rk-visual {
+  position: relative; display: grid; place-items: end center;
+  width: 112px !important; height: 112px !important;
+  border: 0 !important; background: none !important;
+  overflow: visible; margin: 0; padding: 0;
+  transform: none !important; z-index: 1;
+}
+.rankings-window.gh-ranking-premium .rk-pedestal canvas {
+  display: block; width: 112px !important; height: 112px !important;
+  max-width: 100%; object-fit: contain; image-rendering: pixelated;
+}
+.rankings-window.gh-ranking-premium .rk-card-info {
+  position: relative; min-width: 0; min-height: 116px;
+  padding: 17px 22px 18px !important;
+  background: var(--gh-rk-plinth) center / 100% 100% no-repeat !important;
+  color: var(--gh-rk-text);
+  border: 0 !important; border-radius: 0 !important;
+}
+.rankings-window.gh-ranking-premium .rk-card.rk-metal-1 .rk-card-info { min-height: 126px; padding-top: 18px !important; }
+.rankings-window.gh-ranking-premium .rk-card-info h3,
+.rankings-window.gh-ranking-premium .rk-card-info p { margin: 0 0 3px; }
+.rankings-window.gh-ranking-premium .rk-card-info p { font-size: 11px; color: var(--gh-rk-text-muted); }
+.rankings-window.gh-ranking-premium .rk-name {
+  padding: 0; border: 0; background: transparent; color: inherit;
+  font-weight: 750; cursor: pointer; max-width: 100%; overflow-wrap: anywhere;
+}
+.rankings-window.gh-ranking-premium .rk-card .rk-name { color: var(--gh-rk-metal); font-size: 17px; }
+.rankings-window.gh-ranking-premium .rk-card .rk-score {
+  display: block; max-width: 100%; font-size: clamp(14px, 1.65vw, 21px);
+  font-weight: 800; font-variant-numeric: tabular-nums; overflow-wrap: anywhere;
+  color: var(--gh-rk-metal);
+}
+.rankings-window.gh-ranking-premium .rk-card-info > small { display: block; font-size: 10px; color: var(--gh-rk-text-muted); }
+.rankings-window.gh-ranking-premium .rk-you {
+  display: inline-block; border-radius: 4px; padding: 1px 5px;
+  background: var(--gh-rk-you); color: #03233a;
+  font-size: 9px; font-style: normal; font-weight: 850; letter-spacing: .05em;
+}
+.rankings-window.gh-ranking-premium .rk-card-info > .rk-you { position: absolute; right: 19px; top: 4px; }
+.rankings-window.gh-ranking-premium .rk-card-team {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 3px; min-height: 28px; padding: 3px 8px; margin: 0;
+  border: 0 !important; background: #05132188; border-radius: 0 0 8px 8px;
+}
+.rankings-window.gh-ranking-premium .rk-card-team .rk-slot {
+  width: 26px; height: 26px; min-width: 0; padding: 0;
+  border: 1px solid #8db9dd28; border-radius: 4px; background: #14243877;
+}
+.rankings-window.gh-ranking-premium .rk-card-team canvas { width: 24px; height: 24px; image-rendering: pixelated; }
+.rankings-window.gh-ranking-premium .rk-slot.rk-active { border-color: var(--gh-rk-accent); }
+.rankings-window.gh-ranking-premium .rk-searchbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 14px 0 10px; margin: 0;
+}
+.rankings-window.gh-ranking-premium #ranking-note { margin: 0; color: var(--gh-rk-text-muted); font-size: 11px; }
+.rankings-window.gh-ranking-premium .rk-search { display: flex; gap: 7px; align-items: center; max-width: 100%; }
+.rankings-window.gh-ranking-premium #ranking-list { overflow-x: auto; border: 1px solid var(--gh-rk-border); border-radius: 9px; }
+.rankings-window.gh-ranking-premium .rk-table {
+  width: 100%; min-width: 680px; margin: 0; border-spacing: 0; border-collapse: separate;
+  background: var(--gh-rk-surface);
+  color: var(--gh-rk-text); font-size: 12px;
+}
+.rankings-window.gh-ranking-premium .rk-table th {
+  padding: 11px 12px; text-align: left; color: var(--gh-rk-accent-2);
+  background: #091b2c; border-bottom: 1px solid var(--gh-rk-border);
+  font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: .06em;
+}
+.rankings-window.gh-ranking-premium .rk-table td {
+  padding: 7px 12px; border: 0; border-bottom: 1px solid #86bde217;
+  background: transparent; vertical-align: middle;
+}
+.rankings-window.gh-ranking-premium .rk-table tbody tr { background: transparent; }
+.rankings-window.gh-ranking-premium .rk-table tbody tr:nth-child(even) { background: var(--gh-rk-surface-2); }
+.rankings-window.gh-ranking-premium .rk-table tbody tr:hover { background: #163653; }
+.rankings-window.gh-ranking-premium .rk-table tr.rk-self { background: #164770; box-shadow: inset 3px 0 var(--gh-rk-you); }
+.rankings-window.gh-ranking-premium .rk-player { display: flex; align-items: center; gap: 10px; }
+.rankings-window.gh-ranking-premium .rk-table-value { color: var(--gh-rk-text); font-variant-numeric: tabular-nums; }
+.rankings-window.gh-ranking-premium .rk-row-team { display: flex; gap: 2px; }
+.rankings-window.gh-ranking-premium .rk-row-team .rk-slot { display: inline-flex; width: 24px; height: 24px; }
+.rankings-window.gh-ranking-premium .rk-row-team canvas { width: 24px; height: 24px; image-rendering: pixelated; }
+.rankings-window.gh-ranking-premium .rk-profile {
+  padding: 5px 8px; border: 1px solid #69b8e736; border-radius: 5px;
+  color: var(--gh-rk-accent-2); background: transparent; white-space: nowrap; cursor: pointer;
+}
+.rankings-window.gh-ranking-premium .rk-footer {
+  display: flex; flex: 0 0 auto; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 10px; padding: 12px 18px;
+  border-top: 1px solid var(--gh-rk-border); background: var(--gh-rk-bg);
+  color: var(--gh-rk-text-muted); font-size: 11px;
+}
+.rankings-window.gh-ranking-premium #ranking-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.rankings-window.gh-ranking-premium .rk-footer button {
+  min-width: 30px; min-height: 32px; padding: 4px 8px;
+  border: 1px solid var(--gh-rk-border); border-radius: 5px;
+  background: var(--gh-rk-surface); color: var(--gh-rk-text); cursor: pointer;
+}
+.rankings-window.gh-ranking-premium #ranking-pagination [aria-current="page"] {
+  color: #041628; border-color: var(--gh-rk-accent-2);
+  background: linear-gradient(#ccedff, #79b7ee); font-weight: 800;
+}
+.rankings-window.gh-ranking-premium button:disabled { opacity: .4; cursor: default; }
+.rankings-window.gh-ranking-premium .rk-status-wrap { display: flex; align-items: center; gap: 8px; }
+.rankings-window.gh-ranking-premium :is(.rk-profile, .rk-close, .mobile-window-reset):hover { background: #244564; color: #fff; }
+.rankings-window.gh-ranking-premium .rk-name:hover { text-decoration: underline; }
+.rankings-window.gh-ranking-premium #rk-error { padding: 14px; color: #ffbec9; }
+@media (max-width: 760px) {
+  .rankings-window.gh-ranking-premium .rk-header { min-height: 88px; padding: 12px 94px 12px 16px !important; background-size: auto 130px, auto !important; }
+  .rankings-window.gh-ranking-premium .rk-brand-crown { display: none; }
+  .rankings-window.gh-ranking-premium .rk-title p { font-size: 10px; }
+  .rankings-window.gh-ranking-premium .rk-tabs { flex-basis: 100%; }
+  .rankings-window.gh-ranking-premium #ranking-podium { padding: 14px 10px 10px; gap: 4px; min-height: 270px; }
+  .rankings-window.gh-ranking-premium .rk-card-info { padding: 16px 10px !important; min-height: 110px; }
+  .rankings-window.gh-ranking-premium .rk-card .rk-name { font-size: 12px; }
+  .rankings-window.gh-ranking-premium .rk-medal { gap: 4px; font-size: 7px; letter-spacing: 0; }
+  .rankings-window.gh-ranking-premium .rk-pedestal,
+  .rankings-window.gh-ranking-premium .rk-card.rk-metal-1 .rk-pedestal { height: 88px; }
+  .rankings-window.gh-ranking-premium .rk-pedestal .rk-visual,
+  .rankings-window.gh-ranking-premium .rk-pedestal canvas { width: 88px !important; height: 88px !important; }
+  .rankings-window.gh-ranking-premium .rk-card.rk-metal-1::before { inset-inline: -2%; }
+}
+@media (max-width: 480px) {
+  .rankings-window.gh-ranking-premium .rk-title h2 { font-size: 21px; }
+  .rankings-window.gh-ranking-premium .rk-title small { font-size: 8px; letter-spacing: .06em; }
+  .rankings-window.gh-ranking-premium .rk-title p { display: none; }
+  .rankings-window.gh-ranking-premium .rk-controls { padding: 8px; }
+  .rankings-window.gh-ranking-premium .rk-tabs button { padding: 5px 3px; font-size: 9px; }
+  .rankings-window.gh-ranking-premium .rk-medal > span:not(.rk-badge) { display: none; }
+  .rankings-window.gh-ranking-premium .rk-card .rk-score { font-size: 12px; }
+  .rankings-window.gh-ranking-premium .rk-card-info { padding-inline: 5px !important; }
+  .rankings-window.gh-ranking-premium .rk-card-info > .rk-you { position: static; }
+  .rankings-window.gh-ranking-premium .rk-card-team { padding-inline: 0; }
+  .rankings-window.gh-ranking-premium .rk-card-team .rk-slot,
+  .rankings-window.gh-ranking-premium .rk-card-team canvas { width: 20px; height: 20px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rankings-window.gh-ranking-premium .rk-profile { transition: background-color 120ms ease; }
+}

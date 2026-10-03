@@ -1,0 +1,16 @@
+.rankings-window.gh-ranking-premium.gh-ranking-theme-wingeon {
+  --gh-rk-theme-label: " / WINGEON";
+  --gh-rk-bg: #061220;
+  --gh-rk-surface: #0b2034;
+  --gh-rk-surface-2: #10273c;
+  --gh-rk-border: #7cafce69;
+  --gh-rk-glow: #8ecfff30;
+  --gh-rk-text: #edf6ff;
+  --gh-rk-text-muted: #adc5da;
+  --gh-rk-gold: #ffe0a0;
+  --gh-rk-silver: #c0e1ff;
+  --gh-rk-bronze: #edbea8;
+  --gh-rk-you: #69cfff;
+  --gh-rk-accent: #70bbed;
+  --gh-rk-accent-2: #b9e8ff;
+}

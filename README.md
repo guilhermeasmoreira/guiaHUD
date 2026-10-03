@@ -38,7 +38,7 @@ Após modificar `src/`, `manifest.json` ou o CSS, rode `npm run build:userscript
 
 ## Publicar no Firefox Add-ons
 
-Execute `python3 scripts/package-firefox.py` e envie `dist/guiaHUD-firefox-0.9.2.zip` em [addons.mozilla.org/developers/](https://addons.mozilla.org/developers/), escolhendo **On this site** para a listagem pública. Quando o painel solicitar código-fonte, envie `dist/guiaHUD-firefox-source-0.9.2.zip` e consulte [FIREFOX_REVIEW_BUILD.md](FIREFOX_REVIEW_BUILD.md) para as instruções de reprodução do build. O ZIP do Firefox conserva a ordem e os arquivos de runtime do Chrome, mas inclui um ID Firefox estável, versão mínima 140 e a declaração de que a guiaHUD não coleta nem transmite dados. O pacote da Chrome Web Store permanece separado.
+Execute `python3 scripts/package-firefox.py` e envie `dist/guiaHUD-firefox-0.10.0.zip` em [addons.mozilla.org/developers/](https://addons.mozilla.org/developers/), escolhendo **On this site** para a listagem pública. Quando o painel solicitar código-fonte, envie `dist/guiaHUD-firefox-source-0.10.0.zip` e consulte [FIREFOX_REVIEW_BUILD.md](FIREFOX_REVIEW_BUILD.md) para as instruções de reprodução do build. O ZIP do Firefox conserva a ordem e os arquivos de runtime do Chrome, mas inclui um ID Firefox estável, versão mínima 140 e a declaração de que a guiaHUD não coleta nem transmite dados. O pacote da Chrome Web Store permanece separado.
 
 Antes da submissão, no Firefox abra `about:debugging` → **Este Firefox** → **Carregar extensão temporária**, escolha o ZIP do Firefox e teste a HUD em `https://pokeidle.online/game/`. Verifique temas, persistência, menu, chat, Analyzer, painéis nativos e o Modo Econômico pausando e retomando a apresentação da hunt. A instalação temporária termina quando o Firefox fecha; para distribuir a extensão, envie o ZIP ao Firefox Add-ons para assinatura. Use a [política de privacidade](PRIVACY.md) na ficha e descreva ao revisor que a extensão lê a interface do jogo localmente e só funciona após acessar a página do jogo.
 
@@ -73,3 +73,21 @@ Run npm test with Node.js. The adapter is also available in the DevTools console
 Live regression still needs to be checked in the running game, especially menu action names and the game's expanded Hunt Analyzer and Boss behavior.
 
 For a Chrome Web Store package run `python3 scripts/package-extension.py`. It includes only files referenced by the manifest, with `manifest.json` at ZIP root. The promotional image stays outside that ZIP. See [STORE_SUBMISSION.md](STORE_SUBMISSION.md) for the remaining live screenshot and dashboard steps.
+
+## Ranking premium Wingeon (0.10.0)
+
+O tema Wingeon aplica uma skin ao ranking nativo: dragão prateado, fundo de
+catedral, asas do campeão, pedestais e tabela com destaque do jogador local.
+Os canvases, dados e controles originais permanecem no lugar. Outros temas
+mantêm o ranking nativo. O Render Pause não foi alterado.
+
+Assets editáveis e instruções: [ranking Wingeon](src/assets/themes/wingeon/ranking/README.md).
+Antes de empacotar, execute `npm run build:ranking`, `npm run build:userscript`
+e `npm test`. Gere os ZIPs com os scripts de empacotamento existentes.
+
+Validação no jogo: selecione Wingeon, abra Rankings, teste todas as abas,
+categorias, busca, perfis, paginação, atualizar e fechar/reabrir. Confirme que
+os avatares continuam atualizando e que a tabela tem rolagem em janela pequena.
+Troque de tema ou desligue a guiaHUD para conferir a restauração do ranking.
+A validação automatizada usa DOM simulado; aceite visual e integração com o
+servidor ainda devem ser conferidos no jogo após cada atualização do PokeIdle.

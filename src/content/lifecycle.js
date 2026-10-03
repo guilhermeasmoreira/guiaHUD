@@ -90,6 +90,7 @@
 
   function applyTheme() {
     const theme = settings && settings.theme || 'minimal';
+    if (app.modules.rankingPremium) app.modules.rankingPremium.setTheme(theme);
     const themes = ['minimal', 'malefic', 'ice', 'fire', 'stone', 'dragon',
       'naturia', 'gardestrike', 'psycraft', 'rainbolt'];
     themes.forEach(function (name) {
@@ -126,6 +127,7 @@
 
   function disable() {
     active = false;
+    if (app.modules.rankingPremium) app.modules.rankingPremium.stop();
     renderPaused = false;
     sendRenderControl(false);
     app.modules.nativePanels.stop();
@@ -184,6 +186,7 @@
       sendRenderControl(settings.economyMode === true);
     } catch (error) {
       active = false;
+      if (app.modules.rankingPremium) app.modules.rankingPremium.stop();
       renderPaused = false;
       sendRenderControl(false);
       app.modules.nativePanels.stop();
